@@ -1,0 +1,32 @@
+[
+  {
+    "policy": "lfu",
+    "num_workers": 3,
+    "hit_rate": 0.9473684210526315,
+    "avg_prefill_ms": 32.00608428175512,
+    "avg_total_ms": 853.1069012138208,
+    "avg_p95_ms": 865.5653559835628,
+    "avg_prefill_hit_ms": 30.45332617799027,
+    "avg_prefill_miss_ms": 59.955730149522424,
+    "speedup": 1.968774438598258,
+    "evictions": 0.0,
+    "transfer_ms": 0.0,
+    "saved_ms": 2666.9568836223334,
+    "routing_efficiency": 0.9
+  },
+  {
+    "policy": "lru",
+    "num_workers": 3,
+    "hit_rate": 0.9473684210526315,
+    "avg_prefill_ms": 31.87983650959244,
+    "avg_total_ms": 848.4114561058385,
+    "avg_p95_ms": 865.8419311745092,
+    "avg_prefill_hit_ms": 30.34164776197738,
+    "avg_prefill_miss_ms": 59.56723396666348,
+    "speedup": 1.9632168441857045,
+    "evictions": 0.0,
+    "transfer_ms": 0.0,
+    "saved_ms": 7411.061417777091,
+    "routing_efficiency": 0.9
+  }
+]

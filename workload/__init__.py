@@ -1,0 +1,1 @@
+from workload.loader import WorkloadGenerator, InferenceRequest

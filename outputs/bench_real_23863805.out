@@ -1,0 +1,14 @@
+============================================
+Job started at Mon Apr 13 14:32:55 MDT 2026
+GPUs: 2 available
+0, NVIDIA H100 PCIe, 81559 MiB
+1, NVIDIA H100 PCIe, 81559 MiB
+============================================
+
+=== Single GPU: LRU vs LFU ===
+
+=== Multi GPU (3 workers): LRU vs LFU ===
+
+============================================
+Job finished at Mon Apr 13 14:32:55 MDT 2026
+============================================

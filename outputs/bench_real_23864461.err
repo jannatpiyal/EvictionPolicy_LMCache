@@ -1,0 +1,131 @@
+Skipping import of cpp extensions due to incompatible torch version 2.7.1+cu118 for torchao version 0.15.0             Please see https://github.com/pytorch/ao/issues/2919 for more info
+14:50:11 [INFO] __main__: ============================================================
+14:50:11 [INFO] __main__: KV-Cache Eviction Benchmark — REAL INFERENCE
+14:50:11 [INFO] __main__: ============================================================
+14:50:11 [INFO] __main__: Model: meta-llama/Llama-3.1-8B-Instruct
+14:50:11 [INFO] __main__: Device: cuda
+14:50:11 [INFO] __main__: GPU: NVIDIA H100 PCIe MIG 3g.40gb
+14:50:11 [INFO] __main__: GPU Memory: 39.5 GB
+14:50:11 [INFO] __main__: KV Cache tiers: GPU=512.0MB, CPU=8192MB, Disk=32768MB
+14:50:11 [INFO] __main__: Requests: 100
+14:50:11 [INFO] __main__: Unique prefixes: 10
+14:50:11 [INFO] __main__: Reuse ratio: 0.7
+14:50:11 [INFO] __main__: Policies: ['lru', 'lfu']
+14:50:11 [INFO] __main__: ============================================================
+14:50:11 [INFO] workload.loader: Generated 100 requests with 10 unique prefixes, reuse_ratio=0.7
+14:50:11 [INFO] evaluation.benchmark: Workload: {'total_requests': 100, 'unique_prefixes_seen': 10, 'max_reuse': 36, 'prefix_distribution': {0: 36, 1: 23, 4: 9, 6: 6, 8: 6, 7: 5, 2: 5, 5: 4, 3: 4, 9: 2}}
+14:50:11 [INFO] evaluation.benchmark: 
+============================================================
+14:50:11 [INFO] evaluation.benchmark: POLICY: lru (1 worker(s))
+14:50:11 [INFO] evaluation.benchmark: ============================================================
+14:50:11 [INFO] evaluation.benchmark:   Trial 1/1
+14:50:11 [INFO] worker.inference_worker: Worker 0: Loading meta-llama/Llama-3.1-8B-Instruct on cuda:0...
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:08<00:24,  8.14s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:16<00:16,  8.04s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:23<00:07,  7.91s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:25<00:00,  5.56s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:25<00:00,  6.45s/it]
+14:50:44 [INFO] worker.inference_worker: Worker 0: Model loaded. GPU memory: 14.96 GB
+14:50:48 [INFO] evaluation.benchmark:     [MISS] Req   0: prefill=2525.8ms decode=1103.6ms | How do recommendation systems work?
+14:50:49 [INFO] evaluation.benchmark:     [MISS] Req   1: prefill=  73.8ms decode= 902.6ms | What is dynamic programming? Give me a simple exam
+14:50:50 [INFO] evaluation.benchmark:     [MISS] Req   2: prefill=  78.9ms decode= 987.4ms | What is a linked list and when should I use one?
+14:50:51 [INFO] evaluation.benchmark:     [MISS] Req   3: prefill=  71.4ms decode=1010.7ms | What is gradient descent and how does it work?
+14:50:52 [INFO] evaluation.benchmark:     [MISS] Req   4: prefill=  89.7ms decode= 953.5ms | How does garbage collection work in Java?
+Traceback (most recent call last):
+  File "/gpfs/alpine1/scratch/jana7431/DSProject3/main.py", line 190, in <module>
+    sys.exit(main())
+  File "/gpfs/alpine1/scratch/jana7431/DSProject3/main.py", line 151, in main
+    results = harness.run()
+  File "/gpfs/alpine1/scratch/jana7431/DSProject3/evaluation/benchmark.py", line 123, in run
+    trial = self._run_single_worker_trial(policy_type, workload, trial_id)
+  File "/gpfs/alpine1/scratch/jana7431/DSProject3/evaluation/benchmark.py", line 201, in _run_single_worker_trial
+    result = worker.process_request(
+  File "/gpfs/alpine1/scratch/jana7431/DSProject3/worker/inference_worker.py", line 120, in process_request
+    result = self._process_with_cached_kv(
+  File "/gpfs/alpine1/scratch/jana7431/DSProject3/worker/inference_worker.py", line 182, in _process_with_cached_kv
+    outputs = self.model(
+  File "/scratch/alpine/jana7431/Intune/jana7431-gpt/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/scratch/alpine/jana7431/Intune/jana7431-gpt/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/scratch/alpine/jana7431/Intune/jana7431-gpt/lib/python3.10/site-packages/transformers/utils/generic.py", line 965, in wrapper
+    output = func(self, *args, **kwargs)
+  File "/scratch/alpine/jana7431/Intune/jana7431-gpt/lib/python3.10/site-packages/transformers/utils/deprecation.py", line 172, in wrapped_func
+    return func(*args, **kwargs)
+  File "/scratch/alpine/jana7431/Intune/jana7431-gpt/lib/python3.10/site-packages/transformers/models/llama/modeling_llama.py", line 821, in forward
+    outputs: BaseModelOutputWithPast = self.model(
+  File "/scratch/alpine/jana7431/Intune/jana7431-gpt/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/scratch/alpine/jana7431/Intune/jana7431-gpt/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/scratch/alpine/jana7431/Intune/jana7431-gpt/lib/python3.10/site-packages/transformers/utils/generic.py", line 965, in wrapper
+    output = func(self, *args, **kwargs)
+  File "/scratch/alpine/jana7431/Intune/jana7431-gpt/lib/python3.10/site-packages/transformers/models/llama/modeling_llama.py", line 524, in forward
+    raise ValueError("The `past_key_values` should be either a `Cache` object or `None`.")
+ValueError: The `past_key_values` should be either a `Cache` object or `None`.
+Skipping import of cpp extensions due to incompatible torch version 2.7.1+cu118 for torchao version 0.15.0             Please see https://github.com/pytorch/ao/issues/2919 for more info
+14:52:11 [INFO] __main__: ============================================================
+14:52:11 [INFO] __main__: KV-Cache Eviction Benchmark — REAL INFERENCE
+14:52:11 [INFO] __main__: ============================================================
+14:52:11 [INFO] __main__: Model: meta-llama/Llama-3.1-8B-Instruct
+14:52:11 [INFO] __main__: Device: cuda
+14:52:11 [INFO] __main__: GPU: NVIDIA H100 PCIe MIG 3g.40gb
+14:52:11 [INFO] __main__: GPU Memory: 39.5 GB
+14:52:11 [INFO] __main__: KV Cache tiers: GPU=512.0MB, CPU=8192MB, Disk=32768MB
+14:52:11 [INFO] __main__: Requests: 100
+14:52:11 [INFO] __main__: Unique prefixes: 10
+14:52:11 [INFO] __main__: Reuse ratio: 0.7
+14:52:11 [INFO] __main__: Policies: ['lru', 'lfu']
+14:52:11 [INFO] __main__: ============================================================
+14:52:11 [INFO] workload.loader: Generated 100 requests with 10 unique prefixes, reuse_ratio=0.7
+14:52:11 [INFO] evaluation.benchmark: Workload: {'total_requests': 100, 'unique_prefixes_seen': 10, 'max_reuse': 36, 'prefix_distribution': {0: 36, 1: 23, 4: 9, 6: 6, 8: 6, 7: 5, 2: 5, 5: 4, 3: 4, 9: 2}}
+14:52:11 [INFO] evaluation.benchmark: 
+============================================================
+14:52:11 [INFO] evaluation.benchmark: POLICY: lru (3 worker(s))
+14:52:11 [INFO] evaluation.benchmark: ============================================================
+14:52:11 [INFO] evaluation.benchmark:   Trial 1/1
+14:52:11 [WARNING] controller.cache_controller: Requested 3 workers but only 2 GPUs available. Using 2 workers.
+14:52:11 [INFO] controller.cache_controller: Creating 2 workers across 2 GPUs
+14:52:11 [INFO] worker.inference_worker: Worker 0: Loading meta-llama/Llama-3.1-8B-Instruct on cuda:0...
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:12<00:38, 12.88s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:25<00:24, 12.44s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:35<00:11, 11.74s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:38<00:00,  8.29s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:38<00:00,  9.73s/it]
+14:52:57 [INFO] worker.inference_worker: Worker 0: Model loaded. GPU memory: 14.96 GB
+14:52:57 [INFO] controller.cache_controller:   Worker 0: cuda:0, GPU mem: 14.96 GB
+14:52:57 [INFO] worker.inference_worker: Worker 1: Loading meta-llama/Llama-3.1-8B-Instruct on cuda:1...
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:01<00:05,  1.77s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:03<00:03,  1.66s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:04<00:01,  1.57s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:05<00:00,  1.09s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:05<00:00,  1.29s/it]
+14:53:02 [INFO] worker.inference_worker: Worker 1: Model loaded. GPU memory: 14.96 GB
+14:53:02 [INFO] controller.cache_controller:   Worker 1: cuda:1, GPU mem: 14.96 GB
+14:53:04 [INFO] evaluation.benchmark:     [MISS] W0 Req   0: prefill= 259.7ms decode=1043.0ms | How do recommendation systems work?
+14:53:05 [INFO] evaluation.benchmark:     [MISS] W1 Req   1: prefill= 168.5ms decode= 821.8ms | What is dynamic programming? Give me a simple exam
+14:53:06 [INFO] evaluation.benchmark:     [MISS] W0 Req   2: prefill=  81.7ms decode=1013.6ms | What is a linked list and when should I use one?
+14:53:06 [INFO] evaluation.benchmark:     [MISS] W1 Req   3: prefill=  58.5ms decode= 814.2ms | What is gradient descent and how does it work?
+14:53:08 [INFO] evaluation.benchmark:     [MISS] W0 Req   4: prefill=  78.7ms decode=1018.7ms | How does garbage collection work in Java?
+Traceback (most recent call last):
+  File "/gpfs/alpine1/scratch/jana7431/DSProject3/main.py", line 190, in <module>
+    sys.exit(main())
+  File "/gpfs/alpine1/scratch/jana7431/DSProject3/main.py", line 151, in main
+    results = harness.run()
+  File "/gpfs/alpine1/scratch/jana7431/DSProject3/evaluation/benchmark.py", line 121, in run
+    trial = self._run_multi_worker_trial(policy_type, workload, trial_id)
+  File "/gpfs/alpine1/scratch/jana7431/DSProject3/evaluation/benchmark.py", line 155, in _run_multi_worker_trial
+    result = controller.process_request(request)
+  File "/gpfs/alpine1/scratch/jana7431/DSProject3/controller/cache_controller.py", line 139, in process_request
+    result = worker.process_request(
+  File "/gpfs/alpine1/scratch/jana7431/DSProject3/worker/inference_worker.py", line 120, in process_request
+    result = self._process_with_cached_kv(
+  File "/gpfs/alpine1/scratch/jana7431/DSProject3/worker/inference_worker.py", line 182, in _process_with_cached_kv
+    outputs = self.model(
+  File "/scratch/alpine/jana7431/Intune/jana7431-gpt/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/scratch/alpine/jana7431/Intune/jana7431-gpt/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/scratch/alpine/jana7431/Intune/jana7431-gpt/lib/python3.10/site-packages/transformers/utils/generic.py", line 965, in wrapper
+    output = func(self, *args, **kwargs)
+  File "/scratch/alpine/jana7431/Intune/jana7431-gpt/lib/python3.10/site-packages/transformers/utils/deprecation.py", line 172, in wrapped_func
+    return func(*args, **kwargs)
+  File "/scratch/alpine/jana7431/Intune/jana7431-gpt/lib/python3.10/site-packages/transformers/models/llama/modeling_llama.py", line 821, in forward
+    outputs: BaseModelOutputWithPast = self.model(
+  File "/scratch/alpine/jana7431/Intune/jana7431-gpt/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/scratch/alpine/jana7431/Intune/jana7431-gpt/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/scratch/alpine/jana7431/Intune/jana7431-gpt/lib/python3.10/site-packages/transformers/utils/generic.py", line 965, in wrapper
+    output = func(self, *args, **kwargs)
+  File "/scratch/alpine/jana7431/Intune/jana7431-gpt/lib/python3.10/site-packages/transformers/models/llama/modeling_llama.py", line 524, in forward
+    raise ValueError("The `past_key_values` should be either a `Cache` object or `None`.")
+ValueError: The `past_key_values` should be either a `Cache` object or `None`.

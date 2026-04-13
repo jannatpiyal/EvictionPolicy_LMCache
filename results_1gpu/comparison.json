@@ -1,0 +1,62 @@
+[
+  {
+    "policy": "learned",
+    "num_workers": 1,
+    "hit_rate": 0.9473684210526315,
+    "avg_prefill_ms": 32.45593567231768,
+    "avg_total_ms": 842.3601127621766,
+    "avg_p95_ms": 857.7869100030512,
+    "avg_prefill_hit_ms": 30.889273101153474,
+    "avg_prefill_miss_ms": 60.655861953273416,
+    "speedup": 1.9636545591294083,
+    "evictions": 0.0,
+    "transfer_ms": 0.0,
+    "saved_ms": 2658.440994564444,
+    "routing_efficiency": 0.0
+  },
+  {
+    "policy": "lfu",
+    "num_workers": 1,
+    "hit_rate": 0.9473684210526315,
+    "avg_prefill_ms": 32.5274846688109,
+    "avg_total_ms": 842.6567164151684,
+    "avg_p95_ms": 855.3589393850416,
+    "avg_prefill_hit_ms": 30.96194081267135,
+    "avg_prefill_miss_ms": 60.707274079322815,
+    "speedup": 1.960706353862611,
+    "evictions": 0.0,
+    "transfer_ms": 0.0,
+    "saved_ms": 2679.8333381302655,
+    "routing_efficiency": 0.0
+  },
+  {
+    "policy": "lru",
+    "num_workers": 1,
+    "hit_rate": 0.9473684210526315,
+    "avg_prefill_ms": 32.654506225433,
+    "avg_total_ms": 845.2476975066882,
+    "avg_p95_ms": 856.6908781416714,
+    "avg_prefill_hit_ms": 31.103365666543443,
+    "avg_prefill_miss_ms": 60.575036285445094,
+    "speedup": 1.9475395986037314,
+    "evictions": 0.0,
+    "transfer_ms": 0.0,
+    "saved_ms": 3459.996011806652,
+    "routing_efficiency": 0.0
+  },
+  {
+    "policy": "semantic",
+    "num_workers": 1,
+    "hit_rate": 0.9473684210526315,
+    "avg_prefill_ms": 32.379484414368086,
+    "avg_total_ms": 840.2923444653616,
+    "avg_p95_ms": 855.6501297047362,
+    "avg_prefill_hit_ms": 30.826597567647696,
+    "avg_prefill_miss_ms": 60.33144765533507,
+    "speedup": 1.9571231474034785,
+    "evictions": 0.0,
+    "transfer_ms": 0.0,
+    "saved_ms": 2658.9619973674417,
+    "routing_efficiency": 0.0
+  }
+]

@@ -1,0 +1,13 @@
+
+EnvironmentNameNotFound: Could not find conda environment: jana7431-gpt
+You can list all discoverable environments with `conda info --envs`.
+
+
+Traceback (most recent call last):
+  File "/gpfs/alpine1/scratch/jana7431/DSProject3/main.py", line 21, in <module>
+    import torch
+ModuleNotFoundError: No module named 'torch'
+Traceback (most recent call last):
+  File "/gpfs/alpine1/scratch/jana7431/DSProject3/main.py", line 21, in <module>
+    import torch
+ModuleNotFoundError: No module named 'torch'

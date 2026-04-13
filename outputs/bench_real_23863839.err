@@ -1,0 +1,26 @@
+Skipping import of cpp extensions due to incompatible torch version 2.7.1+cu118 for torchao version 0.15.0             Please see https://github.com/pytorch/ao/issues/2919 for more info
+14:39:04 [INFO] __main__: ============================================================
+14:39:04 [INFO] __main__: KV-Cache Eviction Benchmark — REAL INFERENCE
+14:39:04 [INFO] __main__: ============================================================
+14:39:04 [INFO] __main__: Model: /scratch/alpine/jana7431/Intune/models/Meta-Llama-3.1-8B-Instruct
+14:39:04 [INFO] __main__: Device: cuda
+14:39:04 [INFO] __main__: GPU: NVIDIA H100 PCIe MIG 3g.40gb
+Traceback (most recent call last):
+  File "/gpfs/alpine1/scratch/jana7431/DSProject3/main.py", line 190, in <module>
+    sys.exit(main())
+  File "/gpfs/alpine1/scratch/jana7431/DSProject3/main.py", line 138, in main
+    logger.info(f"GPU Memory: {torch.cuda.get_device_properties(0).total_mem / 1024**3:.1f} GB")
+AttributeError: 'torch._C._CudaDeviceProperties' object has no attribute 'total_mem'. Did you mean: 'total_memory'?
+Skipping import of cpp extensions due to incompatible torch version 2.7.1+cu118 for torchao version 0.15.0             Please see https://github.com/pytorch/ao/issues/2919 for more info
+14:40:19 [INFO] __main__: ============================================================
+14:40:19 [INFO] __main__: KV-Cache Eviction Benchmark — REAL INFERENCE
+14:40:19 [INFO] __main__: ============================================================
+14:40:19 [INFO] __main__: Model: /scratch/alpine/jana7431/Intune/models/Meta-Llama-3.1-8B-Instruct
+14:40:19 [INFO] __main__: Device: cuda
+14:40:19 [INFO] __main__: GPU: NVIDIA H100 PCIe MIG 3g.40gb
+Traceback (most recent call last):
+  File "/gpfs/alpine1/scratch/jana7431/DSProject3/main.py", line 190, in <module>
+    sys.exit(main())
+  File "/gpfs/alpine1/scratch/jana7431/DSProject3/main.py", line 138, in main
+    logger.info(f"GPU Memory: {torch.cuda.get_device_properties(0).total_mem / 1024**3:.1f} GB")
+AttributeError: 'torch._C._CudaDeviceProperties' object has no attribute 'total_mem'. Did you mean: 'total_memory'?

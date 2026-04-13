@@ -1,0 +1,2 @@
+Skipping import of cpp extensions due to incompatible torch version 2.7.1+cu118 for torchao version 0.15.0             Please see https://github.com/pytorch/ao/issues/2919 for more info
+slurmstepd: error: *** JOB 23863853 ON bgpu-g4-u30 CANCELLED AT 2026-04-13T14:43:38 ***
