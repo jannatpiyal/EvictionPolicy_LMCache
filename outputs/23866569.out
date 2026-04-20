@@ -1,0 +1,15 @@
+CUDA Version:
+nvcc: NVIDIA (R) Cuda compiler driver
+Copyright (c) 2005-2022 NVIDIA Corporation
+Built on Wed_Sep_21_10:33:58_PDT_2022
+Cuda compilation tools, release 11.8, V11.8.89
+Build cuda_11.8.r11.8/compiler.31833905_0
+
+============================================
+Job started at Mon Apr 13 17:51:45 MDT 2026
+GPUs: 2 available
+0, NVIDIA H100 PCIe, 81559 MiB
+1, NVIDIA H100 PCIe, 81559 MiB
+============================================
+
+=== Multi GPU (3 workers): LRU vs LFU ===

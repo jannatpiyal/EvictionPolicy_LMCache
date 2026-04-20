@@ -29,26 +29,62 @@ nvidia-smi --query-gpu=index,name,memory.total --format=csv,noheader
 echo "============================================"
 
 # --- Single GPU test ---
-echo ""
-echo "=== Single GPU: LRU vs LFU ==="
-python main.py \
-    --model $MODEL \
-    --num-gpus 1 \
-    --policies lru lfu semantic learned\
-    --requests 100 --prefixes 10 --reuse-ratio 0.7 \
-    --gpu-mb 512 --max-tokens 30 \
-    --output results_1gpu
+#echo ""
+#echo "=== Single GPU: LRU vs LFU ==="
+#python main.py \
+#   --model $MODEL \
+#    --num-gpus 1 \
+#    --policies lru lfu semantic learned\
+#    --requests 100 --prefixes 10 --reuse-ratio 0.7 \
+#    --gpu-mb 512 --max-tokens 30 \
+#    --output results_1gpu
 
 # --- Multi GPU test (3 GPUs) ---
 echo ""
 echo "=== Multi GPU (3 workers): LRU vs LFU ==="
-python main.py \
+#python main.py \
+#    --model $MODEL \
+#    --num-gpus 3 \
+#    --policies lru lfu semantic learned \
+#    --requests 100 --prefixes 10 --reuse-ratio 0.7 \
+#    --gpu-mb 512 --max-tokens 30 \
+#    --output results_3gpu
+
+#python main.py \
+#    --model $MODEL \
+#    --num-gpus 3 \
+#    --policies lru lfu semantic learned \
+#    --documents 40 \
+#    --document-length 10000 \
+#    --rounds 2 \
+#    --hit-ratio 1.0 \
+#    --initial-concurrency 40 \
+#    --gpu-mb 4096 \
+#    --max-tokens 100 \
+#    --output results_3gpu
+
+for ia in 1.0 0.5 0.2 0.1; do
+  qps=$(python - <<'PY'
+import sys
+ia=float(sys.argv[1])
+print(f"{1.0/ia:.2f}")
+PY
+$ia)
+
+  python main.py \
     --model $MODEL \
     --num-gpus 3 \
-    --policies lru lfu \
-    --requests 100 --prefixes 10 --reuse-ratio 0.7 \
-    --gpu-mb 512 --max-tokens 30 \
-    --output results_3gpu
+    --policies lru lfu semantic learned \
+    --documents 40 \
+    --document-length 4000 \
+    --rounds 2 \
+    --hit-ratio 0.5 \
+    --arrival-mode poisson \
+    --interarrival $ia \
+    --gpu-mb 4096 \
+    --max-tokens 100 \
+    --output results_qps_${qps}
+done
 
 echo ""
 echo "============================================"

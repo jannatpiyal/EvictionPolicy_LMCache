@@ -1,6 +1,6 @@
 """
 Configuration for KV-Cache Eviction Policy Framework.
-Real inference mode with Llama 3.1-8B and actual tensor storage.
+LMCache-style long-document multi-round QA workload with real inference mode.
 """
 
 from dataclasses import dataclass, field
@@ -37,13 +37,13 @@ class WorkerConfig:
     """Configuration for a single inference worker."""
     worker_id: int
     gpu_tier: TierConfig = field(default_factory=lambda: TierConfig(
-        tier=StorageTier.GPU, capacity_mb=2048,  # 2GB for KV cache on GPU
+        tier=StorageTier.GPU, capacity_mb=2048,   # 2 GB KV cache on GPU
     ))
     cpu_tier: TierConfig = field(default_factory=lambda: TierConfig(
-        tier=StorageTier.CPU, capacity_mb=8192,  # 8GB in RAM
+        tier=StorageTier.CPU, capacity_mb=8192,   # 8 GB RAM cache
     ))
     disk_tier: TierConfig = field(default_factory=lambda: TierConfig(
-        tier=StorageTier.DISK, capacity_mb=32768,  # 32GB on disk
+        tier=StorageTier.DISK, capacity_mb=32768, # 32 GB disk cache
     ))
 
 
@@ -52,29 +52,71 @@ class ModelConfig:
     """Configuration for the LLM model."""
     model_path: str = "meta-llama/Meta-Llama-3.1-8B-Instruct"
     torch_dtype: str = "float16"
-    max_new_tokens: int = 50
+    max_new_tokens: int = 100
     device: str = "cuda"
+
+    # Optional but useful for long-context experiments
+    max_context_tokens: int = 20000
 
 
 @dataclass
 class ControllerConfig:
     """Configuration for the central cache controller."""
-    num_workers: int = 1  # Number of GPU workers (1 per GPU)
+    num_workers: int = 1
     eviction_policy: EvictionPolicyType = EvictionPolicyType.LRU
-    # For semantic policy
+
+    # Semantic policy knobs
     embedding_model: str = "all-MiniLM-L6-v2"
     similarity_threshold: float = 0.7
+
+    # Optional cache-management behavior
+    pin_warmup_prefixes: bool = False
+    enable_cross_tier_promotion: bool = True
+    enable_cross_tier_demotion: bool = True
 
 
 @dataclass
 class WorkloadConfig:
-    """Configuration for workload generation."""
-    num_requests: int = 100
-    num_unique_prefixes: int = 10
-    prefix_reuse_ratio: float = 0.7
-    zipf_alpha: float = 1.2
-    max_new_tokens: int = 50
+    """
+    Configuration for LMCache-style workload generation.
+
+    This replaces generic 'num_unique_prefixes/prefix_reuse_ratio'
+    with document-centric multi-round QA parameters.
+    """
+
     seed: int = 42
+
+    # Core LMCache-style workload shape
+    num_documents: int = 40
+    document_length_tokens: int = 10_000
+    num_rounds: int = 2                 # round 0 = warmup, round 1 = reuse
+    hit_ratio: float = 1.0              # 1.0 => all docs reused in later rounds
+    max_new_tokens: int = 100
+
+    # Traffic pattern
+    initial_concurrency: int = 40
+    arrival_mode: str = "bursty"        # "bursty" or "poisson"
+    interarrival_mean_sec: float = 0.2
+
+    # Prompt composition
+    include_system_instruction: bool = True
+    question_style: str = "document_qa" # document_qa, summarization, mixed
+
+    # Synthetic corpus controls
+    num_questions_per_document: int = 4
+    allow_partial_reuse: bool = False   # later useful for sensitivity studies
+
+    # Backward compatibility with older code paths
+    num_requests: Optional[int] = None
+    num_unique_prefixes: int = 40
+    prefix_reuse_ratio: float = 1.0
+    zipf_alpha: float = 1.0
+
+    @property
+    def total_requests(self) -> int:
+        if self.num_requests is not None:
+            return self.num_requests
+        return self.num_documents * self.num_rounds
 
 
 @dataclass
@@ -85,8 +127,18 @@ class BenchmarkConfig:
         EvictionPolicyType.LFU,
     ])
     num_trials: int = 1
-    warmup_requests: int = 5
+
+    # Warmup should be larger for long-doc prefix caching
+    warmup_requests: int = 40
+
     output_dir: str = "results"
+
+    # Useful benchmark metrics for LMCache-style evaluation
+    measure_ttft: bool = True
+    measure_itl: bool = True
+    measure_cache_hit_rate: bool = True
+    measure_evictions: bool = True
+    measure_tier_utilization: bool = True
 
 
 @dataclass
@@ -99,8 +151,12 @@ class FrameworkConfig:
     benchmark: BenchmarkConfig = field(default_factory=BenchmarkConfig)
 
     @staticmethod
-    def make_multi_gpu(num_gpus: int, gpu_cache_mb: float = 2048,
-                       cpu_cache_mb: float = 8192, disk_cache_mb: float = 32768):
+    def make_multi_gpu(
+        num_gpus: int,
+        gpu_cache_mb: float = 2048,
+        cpu_cache_mb: float = 8192,
+        disk_cache_mb: float = 32768,
+    ):
         """Helper to create a multi-GPU config."""
         workers = [
             WorkerConfig(

@@ -1,0 +1,401 @@
+Skipping import of cpp extensions due to incompatible torch version 2.7.1+cu118 for torchao version 0.15.0             Please see https://github.com/pytorch/ao/issues/2919 for more info
+18:27:41 [INFO] __main__: ============================================================
+18:27:41 [INFO] __main__: KV-Cache Eviction Benchmark — REAL INFERENCE
+18:27:41 [INFO] __main__: ============================================================
+18:27:41 [INFO] __main__: Model: meta-llama/Llama-3.1-8B-Instruct
+18:27:41 [INFO] __main__: Device: cuda
+18:27:41 [INFO] __main__: GPU: NVIDIA H100 PCIe MIG 3g.40gb
+18:27:41 [INFO] __main__: GPU Memory: 39.5 GB
+18:27:41 [INFO] __main__: KV Cache tiers: GPU=4096.0MB, CPU=8192MB, Disk=32768MB
+18:27:41 [INFO] __main__: Workload type: LMCache-style long-document multi-round QA
+18:27:41 [INFO] __main__: Documents: 40
+18:27:41 [INFO] __main__: Document length: ~10000 tokens
+18:27:41 [INFO] __main__: Rounds: 2
+18:27:41 [INFO] __main__: Hit ratio: 1.00
+18:27:41 [INFO] __main__: Initial concurrency: 40
+18:27:41 [INFO] __main__: Arrival mode: bursty
+18:27:41 [INFO] __main__: Interarrival mean: 0.200s
+18:27:41 [INFO] __main__: Max new tokens: 100
+18:27:41 [INFO] __main__: Estimated total requests: 80
+18:27:41 [INFO] __main__: Policies: ['lru', 'lfu', 'semantic', 'learned']
+18:27:41 [INFO] __main__: ============================================================
+18:27:41 [INFO] workload.loader: Generated workload: 80 requests | 40 docs | 2 rounds | hit_ratio=1.0
+18:27:41 [INFO] evaluation.benchmark: Workload: {'total_requests': 80, 'unique_prefixes': 40, 'reused_prefixes': 40, 'max_reuse': 2, 'round_distribution': {0: 40, 1: 40}}
+18:27:41 [INFO] evaluation.benchmark: 
+============================================================
+18:27:41 [INFO] evaluation.benchmark: POLICY: lru (3 worker(s))
+18:27:41 [INFO] evaluation.benchmark: ============================================================
+18:27:41 [INFO] evaluation.benchmark:   Trial 1/1
+18:27:41 [WARNING] controller.cache_controller: Using only 2 GPUs
+18:27:41 [INFO] worker.inference_worker: Worker 0: Loading model on cuda:0...
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:05<00:15,  5.31s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:10<00:09,  5.00s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:17<00:06,  6.31s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:20<00:00,  4.66s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:20<00:00,  5.03s/it]
+18:28:09 [INFO] worker.inference_worker: Worker 1: Loading model on cuda:1...
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:01<00:05,  1.67s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:03<00:03,  1.63s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:04<00:01,  1.55s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:05<00:00,  1.09s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:05<00:00,  1.28s/it]
+18:28:23 [INFO] evaluation.benchmark:     [MISS] W0 Req   0: prefill=1625.7ms decode=5976.5ms | You are a helpful assistant.  Document: Document 9
+18:28:30 [INFO] evaluation.benchmark:     [MISS] W1 Req   1: prefill= 648.3ms decode=6027.9ms | You are a helpful assistant.  Document: Document 3
+18:28:38 [INFO] evaluation.benchmark:     [MISS] W0 Req   2: prefill=1472.7ms decode=5941.9ms | You are a helpful assistant.  Document: Document 1
+18:28:45 [INFO] evaluation.benchmark:     [MISS] W1 Req   3: prefill= 521.1ms decode=5996.0ms | You are a helpful assistant.  Document: Document 3
+18:28:53 [INFO] evaluation.benchmark:     [MISS] W0 Req   4: prefill=1472.6ms decode=5938.8ms | You are a helpful assistant.  Document: Document 2
+18:29:02 [INFO] evaluation.benchmark:     [MISS] W1 Req   5: prefill= 517.8ms decode=6021.5ms | You are a helpful assistant.  Document: Document 2
+18:29:10 [INFO] evaluation.benchmark:     [MISS] W0 Req   6: prefill=1470.4ms decode=5953.9ms | You are a helpful assistant.  Document: Document 3
+18:29:18 [INFO] evaluation.benchmark:     [MISS] W1 Req   7: prefill= 520.1ms decode=6010.5ms | You are a helpful assistant.  Document: Document 1
+18:29:27 [INFO] evaluation.benchmark:     [MISS] W0 Req   8: prefill=1471.6ms decode=5952.1ms | You are a helpful assistant.  Document: Document 4
+18:29:35 [INFO] evaluation.benchmark:     [MISS] W1 Req   9: prefill= 517.8ms decode=6015.4ms | You are a helpful assistant.  Document: Document 3
+18:29:43 [INFO] evaluation.benchmark:     [MISS] W0 Req  10: prefill=1472.4ms decode=5951.7ms | You are a helpful assistant.  Document: Document 2
+18:29:51 [INFO] evaluation.benchmark:     [MISS] W1 Req  11: prefill= 518.6ms decode=6024.8ms | You are a helpful assistant.  Document: Document 2
+18:30:00 [INFO] evaluation.benchmark:     [MISS] W0 Req  12: prefill=1471.9ms decode=5962.8ms | You are a helpful assistant.  Document: Document 2
+18:30:08 [INFO] evaluation.benchmark:     [MISS] W1 Req  13: prefill= 517.7ms decode=6047.7ms | You are a helpful assistant.  Document: Document 1
+18:30:17 [INFO] evaluation.benchmark:     [MISS] W0 Req  14: prefill=1472.2ms decode=5950.5ms | You are a helpful assistant.  Document: Document 1
+18:30:26 [INFO] evaluation.benchmark:     [MISS] W1 Req  15: prefill= 520.1ms decode=6004.3ms | You are a helpful assistant.  Document: Document 3
+18:30:36 [INFO] evaluation.benchmark:     [MISS] W0 Req  16: prefill=1471.7ms decode=5962.0ms | You are a helpful assistant.  Document: Document 3
+18:30:45 [INFO] evaluation.benchmark:     [MISS] W1 Req  17: prefill= 518.8ms decode=6013.9ms | You are a helpful assistant.  Document: Document 2
+18:30:54 [INFO] evaluation.benchmark:     [MISS] W0 Req  18: prefill=1472.2ms decode=5960.0ms | You are a helpful assistant.  Document: Document 1
+18:31:03 [INFO] evaluation.benchmark:     [MISS] W1 Req  19: prefill= 518.4ms decode=6023.6ms | You are a helpful assistant.  Document: Document 2
+18:31:12 [INFO] evaluation.benchmark:     [MISS] W0 Req  20: prefill=1470.8ms decode=5961.0ms | You are a helpful assistant.  Document: Document 2
+18:31:20 [INFO] evaluation.benchmark:     [MISS] W1 Req  21: prefill= 518.8ms decode=6021.5ms | You are a helpful assistant.  Document: Document 3
+18:31:29 [INFO] evaluation.benchmark:     [MISS] W0 Req  22: prefill=1471.9ms decode=5962.3ms | You are a helpful assistant.  Document: Document 3
+18:31:38 [INFO] evaluation.benchmark:     [MISS] W1 Req  23: prefill= 519.6ms decode=6016.1ms | You are a helpful assistant.  Document: Document 2
+18:31:47 [INFO] evaluation.benchmark:     [MISS] W0 Req  24: prefill=1472.3ms decode=5960.0ms | You are a helpful assistant.  Document: Document 1
+18:31:56 [INFO] evaluation.benchmark:     [MISS] W1 Req  25: prefill= 520.4ms decode=6018.3ms | You are a helpful assistant.  Document: Document 1
+18:32:05 [INFO] evaluation.benchmark:     [MISS] W0 Req  26: prefill=1472.5ms decode=5960.8ms | You are a helpful assistant.  Document: Document 3
+18:32:13 [INFO] evaluation.benchmark:     [MISS] W1 Req  27: prefill= 519.2ms decode=6007.7ms | You are a helpful assistant.  Document: Document 3
+18:32:22 [INFO] evaluation.benchmark:     [MISS] W0 Req  28: prefill=1472.6ms decode=5953.6ms | You are a helpful assistant.  Document: Document 2
+18:32:30 [INFO] evaluation.benchmark:     [MISS] W1 Req  29: prefill= 520.3ms decode=6013.0ms | You are a helpful assistant.  Document: Document 0
+18:32:39 [INFO] evaluation.benchmark:     [MISS] W0 Req  30: prefill=1472.4ms decode=5955.7ms | You are a helpful assistant.  Document: Document 3
+18:32:47 [INFO] evaluation.benchmark:     [MISS] W1 Req  31: prefill= 520.6ms decode=6013.8ms | You are a helpful assistant.  Document: Document 2
+18:32:57 [INFO] evaluation.benchmark:     [MISS] W0 Req  32: prefill=1472.6ms decode=5963.4ms | You are a helpful assistant.  Document: Document 5
+18:33:05 [INFO] evaluation.benchmark:     [MISS] W1 Req  33: prefill= 519.3ms decode=6022.0ms | You are a helpful assistant.  Document: Document 6
+18:33:14 [INFO] evaluation.benchmark:     [MISS] W0 Req  34: prefill=1472.4ms decode=5927.3ms | You are a helpful assistant.  Document: Document 8
+18:33:23 [INFO] evaluation.benchmark:     [MISS] W1 Req  35: prefill= 520.2ms decode=5983.8ms | You are a helpful assistant.  Document: Document 1
+18:33:32 [INFO] evaluation.benchmark:     [MISS] W0 Req  36: prefill=1472.6ms decode=5929.3ms | You are a helpful assistant.  Document: Document 1
+18:33:40 [INFO] evaluation.benchmark:     [MISS] W1 Req  37: prefill= 518.0ms decode=5989.5ms | You are a helpful assistant.  Document: Document 1
+18:33:50 [INFO] evaluation.benchmark:     [MISS] W0 Req  38: prefill=1472.3ms decode=5930.6ms | You are a helpful assistant.  Document: Document 1
+18:33:58 [INFO] evaluation.benchmark:     [MISS] W1 Req  39: prefill= 519.9ms decode=5983.7ms | You are a helpful assistant.  Document: Document 7
+18:34:07 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  40: prefill=  31.4ms decode=5984.7ms | You are a helpful assistant.  Document: Document 3
+18:34:13 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  41: prefill=  76.4ms decode=5928.6ms | You are a helpful assistant.  Document: Document 1
+18:34:21 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  42: prefill=  76.6ms decode=5928.0ms | You are a helpful assistant.  Document: Document 1
+18:34:28 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  43: prefill=  76.5ms decode=5926.7ms | You are a helpful assistant.  Document: Document 5
+18:34:35 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  44: prefill=  76.1ms decode=5928.0ms | You are a helpful assistant.  Document: Document 2
+18:34:43 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  45: prefill=  76.1ms decode=5927.2ms | You are a helpful assistant.  Document: Document 2
+18:34:51 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  46: prefill=  76.6ms decode=5926.9ms | You are a helpful assistant.  Document: Document 3
+18:34:58 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  47: prefill=  33.3ms decode=5985.3ms | You are a helpful assistant.  Document: Document 0
+18:35:05 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  48: prefill=  30.5ms decode=5990.6ms | You are a helpful assistant.  Document: Document 6
+18:35:14 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  49: prefill=  76.1ms decode=5926.6ms | You are a helpful assistant.  Document: Document 3
+18:35:23 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  50: prefill=  76.6ms decode=5926.7ms | You are a helpful assistant.  Document: Document 3
+18:35:34 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  51: prefill=  76.1ms decode=5931.8ms | You are a helpful assistant.  Document: Document 3
+18:35:41 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  52: prefill=  31.0ms decode=5985.6ms | You are a helpful assistant.  Document: Document 1
+18:35:50 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  53: prefill=  32.7ms decode=5992.0ms | You are a helpful assistant.  Document: Document 1
+18:35:58 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  54: prefill=  32.8ms decode=5994.5ms | You are a helpful assistant.  Document: Document 2
+18:36:09 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  55: prefill=  32.5ms decode=5997.4ms | You are a helpful assistant.  Document: Document 1
+18:36:21 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  56: prefill=  32.4ms decode=6013.1ms | You are a helpful assistant.  Document: Document 3
+18:36:33 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  57: prefill=  76.4ms decode=5938.8ms | You are a helpful assistant.  Document: Document 1
+18:36:41 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  58: prefill=  76.4ms decode=5939.3ms | You are a helpful assistant.  Document: Document 3
+18:36:50 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  59: prefill=  32.4ms decode=6005.5ms | You are a helpful assistant.  Document: Document 2
+18:36:59 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  60: prefill=  32.5ms decode=5999.1ms | You are a helpful assistant.  Document: Document 2
+18:37:07 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  61: prefill=  36.7ms decode=5992.3ms | You are a helpful assistant.  Document: Document 1
+18:37:21 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  62: prefill=  32.7ms decode=6002.7ms | You are a helpful assistant.  Document: Document 2
+18:37:34 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  63: prefill=  32.8ms decode=6014.0ms | You are a helpful assistant.  Document: Document 3
+18:37:49 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  64: prefill=  76.7ms decode=5940.3ms | You are a helpful assistant.  Document: Document 2
+18:38:04 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  65: prefill=  76.3ms decode=5940.5ms | You are a helpful assistant.  Document: Document 2
+18:38:16 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  66: prefill=  76.2ms decode=5943.1ms | You are a helpful assistant.  Document: Document 1
+18:38:31 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  67: prefill=  32.7ms decode=5997.9ms | You are a helpful assistant.  Document: Document 2
+18:38:44 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  68: prefill=  76.7ms decode=5939.3ms | You are a helpful assistant.  Document: Document 2
+18:38:56 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  69: prefill=  32.7ms decode=5997.5ms | You are a helpful assistant.  Document: Document 2
+18:39:11 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  70: prefill=  76.2ms decode=5941.7ms | You are a helpful assistant.  Document: Document 4
+18:39:23 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  71: prefill=  32.8ms decode=6009.6ms | You are a helpful assistant.  Document: Document 1
+18:39:38 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  72: prefill=  32.6ms decode=6001.8ms | You are a helpful assistant.  Document: Document 3
+18:39:53 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  73: prefill=  76.2ms decode=5946.4ms | You are a helpful assistant.  Document: Document 9
+18:40:08 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  74: prefill=  76.7ms decode=5944.8ms | You are a helpful assistant.  Document: Document 1
+18:40:20 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  75: prefill=  32.7ms decode=6000.8ms | You are a helpful assistant.  Document: Document 7
+18:40:35 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  76: prefill=  33.2ms decode=6019.3ms | You are a helpful assistant.  Document: Document 3
+18:40:49 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  77: prefill=  77.2ms decode=5952.4ms | You are a helpful assistant.  Document: Document 1
+18:41:04 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  78: prefill=  68.5ms decode=6015.8ms | You are a helpful assistant.  Document: Document 3
+18:41:19 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  79: prefill=  76.1ms decode=5956.8ms | You are a helpful assistant.  Document: Document 8
+18:41:22 [INFO] evaluation.benchmark:     Hit rate: 100.0%, Speedup: 0.0x, Evictions: 135, Routing eff: 50.0%
+18:41:22 [INFO] evaluation.benchmark: 
+============================================================
+18:41:22 [INFO] evaluation.benchmark: POLICY: lfu (3 worker(s))
+18:41:22 [INFO] evaluation.benchmark: ============================================================
+18:41:22 [INFO] evaluation.benchmark:   Trial 1/1
+18:41:22 [WARNING] controller.cache_controller: Using only 2 GPUs
+18:41:22 [INFO] worker.inference_worker: Worker 0: Loading model on cuda:0...
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:01<00:05,  1.85s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:03<00:03,  1.69s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:04<00:01,  1.60s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:05<00:00,  1.10s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:05<00:00,  1.32s/it]
+18:41:28 [INFO] worker.inference_worker: Worker 1: Loading model on cuda:1...
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:01<00:04,  1.52s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:03<00:03,  1.51s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:04<00:01,  1.48s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:04<00:00,  1.03s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:04<00:00,  1.20s/it]
+18:41:40 [INFO] evaluation.benchmark:     [MISS] W0 Req   0: prefill=1471.2ms decode=5943.8ms | You are a helpful assistant.  Document: Document 9
+18:41:48 [INFO] evaluation.benchmark:     [MISS] W1 Req   1: prefill= 519.9ms decode=6015.9ms | You are a helpful assistant.  Document: Document 3
+18:41:55 [INFO] evaluation.benchmark:     [MISS] W0 Req   2: prefill=1472.5ms decode=5975.5ms | You are a helpful assistant.  Document: Document 1
+18:42:03 [INFO] evaluation.benchmark:     [MISS] W1 Req   3: prefill= 519.3ms decode=5988.3ms | You are a helpful assistant.  Document: Document 3
+18:42:11 [INFO] evaluation.benchmark:     [MISS] W0 Req   4: prefill=1472.9ms decode=5928.9ms | You are a helpful assistant.  Document: Document 2
+18:42:20 [INFO] evaluation.benchmark:     [MISS] W1 Req   5: prefill= 518.3ms decode=5985.1ms | You are a helpful assistant.  Document: Document 2
+18:42:28 [INFO] evaluation.benchmark:     [MISS] W0 Req   6: prefill=1472.5ms decode=5931.9ms | You are a helpful assistant.  Document: Document 3
+18:42:36 [INFO] evaluation.benchmark:     [MISS] W1 Req   7: prefill= 518.6ms decode=5990.6ms | You are a helpful assistant.  Document: Document 1
+18:42:45 [INFO] evaluation.benchmark:     [MISS] W0 Req   8: prefill=1472.2ms decode=5933.4ms | You are a helpful assistant.  Document: Document 4
+18:42:53 [INFO] evaluation.benchmark:     [MISS] W1 Req   9: prefill= 519.0ms decode=5989.6ms | You are a helpful assistant.  Document: Document 3
+18:43:02 [INFO] evaluation.benchmark:     [MISS] W0 Req  10: prefill=1472.3ms decode=5929.6ms | You are a helpful assistant.  Document: Document 2
+18:43:10 [INFO] evaluation.benchmark:     [MISS] W1 Req  11: prefill= 518.7ms decode=5989.9ms | You are a helpful assistant.  Document: Document 2
+18:43:18 [INFO] evaluation.benchmark:     [MISS] W0 Req  12: prefill=1471.9ms decode=5936.2ms | You are a helpful assistant.  Document: Document 2
+18:43:26 [INFO] evaluation.benchmark:     [MISS] W1 Req  13: prefill= 519.9ms decode=5992.0ms | You are a helpful assistant.  Document: Document 1
+18:43:36 [INFO] evaluation.benchmark:     [MISS] W0 Req  14: prefill=1472.0ms decode=5936.7ms | You are a helpful assistant.  Document: Document 1
+18:43:45 [INFO] evaluation.benchmark:     [MISS] W1 Req  15: prefill= 522.2ms decode=5990.5ms | You are a helpful assistant.  Document: Document 3
+18:43:54 [INFO] evaluation.benchmark:     [MISS] W0 Req  16: prefill=1472.9ms decode=5942.0ms | You are a helpful assistant.  Document: Document 3
+18:44:03 [INFO] evaluation.benchmark:     [MISS] W1 Req  17: prefill= 520.7ms decode=5998.8ms | You are a helpful assistant.  Document: Document 2
+18:44:13 [INFO] evaluation.benchmark:     [MISS] W0 Req  18: prefill=1473.2ms decode=5940.4ms | You are a helpful assistant.  Document: Document 1
+18:44:21 [INFO] evaluation.benchmark:     [MISS] W1 Req  19: prefill= 519.5ms decode=5998.8ms | You are a helpful assistant.  Document: Document 2
+18:44:31 [INFO] evaluation.benchmark:     [MISS] W0 Req  20: prefill=1472.5ms decode=5943.2ms | You are a helpful assistant.  Document: Document 2
+18:44:40 [INFO] evaluation.benchmark:     [MISS] W1 Req  21: prefill= 519.0ms decode=5997.2ms | You are a helpful assistant.  Document: Document 3
+18:44:49 [INFO] evaluation.benchmark:     [MISS] W0 Req  22: prefill=1473.2ms decode=5953.0ms | You are a helpful assistant.  Document: Document 3
+18:44:58 [INFO] evaluation.benchmark:     [MISS] W1 Req  23: prefill= 520.1ms decode=5994.7ms | You are a helpful assistant.  Document: Document 2
+18:45:08 [INFO] evaluation.benchmark:     [MISS] W0 Req  24: prefill=1473.3ms decode=5945.8ms | You are a helpful assistant.  Document: Document 1
+18:45:17 [INFO] evaluation.benchmark:     [MISS] W1 Req  25: prefill= 520.5ms decode=5996.0ms | You are a helpful assistant.  Document: Document 1
+18:45:27 [INFO] evaluation.benchmark:     [MISS] W0 Req  26: prefill=1473.9ms decode=5940.4ms | You are a helpful assistant.  Document: Document 3
+18:45:36 [INFO] evaluation.benchmark:     [MISS] W1 Req  27: prefill= 520.2ms decode=5997.9ms | You are a helpful assistant.  Document: Document 3
+18:45:46 [INFO] evaluation.benchmark:     [MISS] W0 Req  28: prefill=1477.5ms decode=5938.4ms | You are a helpful assistant.  Document: Document 2
+18:45:54 [INFO] evaluation.benchmark:     [MISS] W1 Req  29: prefill= 521.2ms decode=5994.8ms | You are a helpful assistant.  Document: Document 0
+18:46:04 [INFO] evaluation.benchmark:     [MISS] W0 Req  30: prefill=1472.8ms decode=5940.3ms | You are a helpful assistant.  Document: Document 3
+18:46:13 [INFO] evaluation.benchmark:     [MISS] W1 Req  31: prefill= 521.1ms decode=5996.5ms | You are a helpful assistant.  Document: Document 2
+18:46:22 [INFO] evaluation.benchmark:     [MISS] W0 Req  32: prefill=1473.9ms decode=5939.6ms | You are a helpful assistant.  Document: Document 5
+18:46:31 [INFO] evaluation.benchmark:     [MISS] W1 Req  33: prefill= 520.2ms decode=5996.9ms | You are a helpful assistant.  Document: Document 6
+18:46:40 [INFO] evaluation.benchmark:     [MISS] W0 Req  34: prefill=1474.4ms decode=5941.9ms | You are a helpful assistant.  Document: Document 8
+18:46:49 [INFO] evaluation.benchmark:     [MISS] W1 Req  35: prefill= 519.8ms decode=5996.0ms | You are a helpful assistant.  Document: Document 1
+18:46:59 [INFO] evaluation.benchmark:     [MISS] W0 Req  36: prefill=1473.4ms decode=5933.4ms | You are a helpful assistant.  Document: Document 1
+18:47:08 [INFO] evaluation.benchmark:     [MISS] W1 Req  37: prefill= 518.4ms decode=5998.1ms | You are a helpful assistant.  Document: Document 1
+18:47:17 [INFO] evaluation.benchmark:     [MISS] W0 Req  38: prefill=1473.2ms decode=5938.8ms | You are a helpful assistant.  Document: Document 1
+18:47:26 [INFO] evaluation.benchmark:     [MISS] W1 Req  39: prefill= 520.5ms decode=5999.4ms | You are a helpful assistant.  Document: Document 7
+18:47:35 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  40: prefill=  31.3ms decode=5999.7ms | You are a helpful assistant.  Document: Document 3
+18:47:41 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  41: prefill=  76.7ms decode=5941.0ms | You are a helpful assistant.  Document: Document 1
+18:47:50 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  42: prefill=  76.9ms decode=5960.1ms | You are a helpful assistant.  Document: Document 1
+18:47:57 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  43: prefill=  76.5ms decode=5970.0ms | You are a helpful assistant.  Document: Document 5
+18:48:04 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  44: prefill=  76.5ms decode=5955.5ms | You are a helpful assistant.  Document: Document 2
+18:48:13 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  45: prefill=  76.5ms decode=5956.8ms | You are a helpful assistant.  Document: Document 2
+18:48:21 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  46: prefill=  76.3ms decode=5983.3ms | You are a helpful assistant.  Document: Document 3
+18:48:28 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  47: prefill=  31.8ms decode=6018.6ms | You are a helpful assistant.  Document: Document 0
+18:48:36 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  48: prefill=  30.7ms decode=6024.1ms | You are a helpful assistant.  Document: Document 6
+18:48:44 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  49: prefill=  76.3ms decode=5953.7ms | You are a helpful assistant.  Document: Document 3
+18:48:53 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  50: prefill=  76.6ms decode=5967.3ms | You are a helpful assistant.  Document: Document 3
+18:49:05 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  51: prefill=  75.8ms decode=5955.0ms | You are a helpful assistant.  Document: Document 3
+18:49:12 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  52: prefill=  31.8ms decode=6009.2ms | You are a helpful assistant.  Document: Document 1
+18:49:21 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  53: prefill=  30.8ms decode=6023.1ms | You are a helpful assistant.  Document: Document 1
+18:49:30 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  54: prefill=  31.3ms decode=6016.7ms | You are a helpful assistant.  Document: Document 2
+18:49:38 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  55: prefill=  31.0ms decode=6015.0ms | You are a helpful assistant.  Document: Document 1
+18:49:50 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  56: prefill=  30.7ms decode=6016.4ms | You are a helpful assistant.  Document: Document 3
+18:49:58 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  57: prefill=  76.1ms decode=5969.4ms | You are a helpful assistant.  Document: Document 1
+18:50:07 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  58: prefill=  76.4ms decode=5957.0ms | You are a helpful assistant.  Document: Document 3
+18:50:15 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  59: prefill=  31.3ms decode=6006.7ms | You are a helpful assistant.  Document: Document 2
+18:50:24 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  60: prefill=  30.9ms decode=6014.8ms | You are a helpful assistant.  Document: Document 2
+18:50:33 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  61: prefill=  31.1ms decode=6022.1ms | You are a helpful assistant.  Document: Document 1
+18:50:45 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  62: prefill=  31.0ms decode=6007.0ms | You are a helpful assistant.  Document: Document 2
+18:50:57 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  63: prefill=  30.6ms decode=6005.1ms | You are a helpful assistant.  Document: Document 3
+18:51:11 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  64: prefill=  76.1ms decode=5950.6ms | You are a helpful assistant.  Document: Document 2
+18:51:22 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  65: prefill=  76.2ms decode=5950.4ms | You are a helpful assistant.  Document: Document 2
+18:51:34 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  66: prefill=  76.3ms decode=5957.8ms | You are a helpful assistant.  Document: Document 1
+18:51:45 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  67: prefill=  31.3ms decode=6017.2ms | You are a helpful assistant.  Document: Document 2
+18:51:57 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  68: prefill=  76.1ms decode=5956.5ms | You are a helpful assistant.  Document: Document 2
+18:52:09 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  69: prefill=  38.7ms decode=6008.8ms | You are a helpful assistant.  Document: Document 2
+18:52:20 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  70: prefill=  76.1ms decode=5958.4ms | You are a helpful assistant.  Document: Document 4
+18:52:32 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  71: prefill=  30.6ms decode=6008.6ms | You are a helpful assistant.  Document: Document 1
+18:52:44 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  72: prefill=  30.9ms decode=6010.5ms | You are a helpful assistant.  Document: Document 3
+18:52:56 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  73: prefill=  76.5ms decode=5957.0ms | You are a helpful assistant.  Document: Document 9
+18:53:08 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  74: prefill=  76.2ms decode=5959.3ms | You are a helpful assistant.  Document: Document 1
+18:53:20 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  75: prefill=  31.2ms decode=5994.7ms | You are a helpful assistant.  Document: Document 7
+18:53:32 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  76: prefill=  30.8ms decode=5995.2ms | You are a helpful assistant.  Document: Document 3
+18:53:44 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  77: prefill=  76.4ms decode=5932.9ms | You are a helpful assistant.  Document: Document 1
+18:53:56 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  78: prefill=  30.7ms decode=5992.7ms | You are a helpful assistant.  Document: Document 3
+18:54:08 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  79: prefill=  76.2ms decode=5941.5ms | You are a helpful assistant.  Document: Document 8
+18:54:11 [INFO] evaluation.benchmark:     Hit rate: 100.0%, Speedup: 0.0x, Evictions: 135, Routing eff: 50.0%
+18:54:11 [INFO] evaluation.benchmark: 
+============================================================
+18:54:11 [INFO] evaluation.benchmark: POLICY: semantic (3 worker(s))
+18:54:11 [INFO] evaluation.benchmark: ============================================================
+18:54:11 [INFO] evaluation.benchmark:   Trial 1/1
+18:54:11 [WARNING] controller.cache_controller: Using only 2 GPUs
+18:54:11 [INFO] worker.inference_worker: Worker 0: Loading model on cuda:0...
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:01<00:04,  1.61s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:03<00:03,  1.53s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:04<00:01,  1.49s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:04<00:00,  1.03s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:04<00:00,  1.21s/it]
+18:54:17 [INFO] worker.inference_worker: Worker 1: Loading model on cuda:1...
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:01<00:04,  1.51s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:03<00:02,  1.50s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:04<00:01,  1.47s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:04<00:00,  1.02s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:04<00:00,  1.19s/it]
+18:54:29 [INFO] evaluation.benchmark:     [MISS] W0 Req   0: prefill=1472.1ms decode=5937.4ms | You are a helpful assistant.  Document: Document 9
+18:54:37 [INFO] evaluation.benchmark:     [MISS] W1 Req   1: prefill= 519.5ms decode=5988.2ms | You are a helpful assistant.  Document: Document 3
+18:54:44 [INFO] evaluation.benchmark:     [MISS] W0 Req   2: prefill=1472.5ms decode=5930.9ms | You are a helpful assistant.  Document: Document 1
+18:54:52 [INFO] evaluation.benchmark:     [MISS] W1 Req   3: prefill= 518.3ms decode=6001.6ms | You are a helpful assistant.  Document: Document 3
+18:55:00 [INFO] evaluation.benchmark:     [MISS] W0 Req   4: prefill=1473.6ms decode=5931.4ms | You are a helpful assistant.  Document: Document 2
+18:55:09 [INFO] evaluation.benchmark:     [MISS] W1 Req   5: prefill= 517.6ms decode=5986.6ms | You are a helpful assistant.  Document: Document 2
+18:55:17 [INFO] evaluation.benchmark:     [MISS] W0 Req   6: prefill=1471.8ms decode=5931.9ms | You are a helpful assistant.  Document: Document 3
+18:55:25 [INFO] evaluation.benchmark:     [MISS] W1 Req   7: prefill= 517.5ms decode=5998.7ms | You are a helpful assistant.  Document: Document 1
+18:55:34 [INFO] evaluation.benchmark:     [MISS] W0 Req   8: prefill=1472.1ms decode=5929.7ms | You are a helpful assistant.  Document: Document 4
+18:55:42 [INFO] evaluation.benchmark:     [MISS] W1 Req   9: prefill= 519.4ms decode=5986.4ms | You are a helpful assistant.  Document: Document 3
+18:55:50 [INFO] evaluation.benchmark:     [MISS] W0 Req  10: prefill=1471.5ms decode=5929.7ms | You are a helpful assistant.  Document: Document 2
+18:55:59 [INFO] evaluation.benchmark:     [MISS] W1 Req  11: prefill= 517.9ms decode=5996.5ms | You are a helpful assistant.  Document: Document 2
+18:56:07 [INFO] evaluation.benchmark:     [MISS] W0 Req  12: prefill=1472.6ms decode=5946.3ms | You are a helpful assistant.  Document: Document 2
+18:56:15 [INFO] evaluation.benchmark:     [MISS] W1 Req  13: prefill= 520.3ms decode=5998.0ms | You are a helpful assistant.  Document: Document 1
+18:56:25 [INFO] evaluation.benchmark:     [MISS] W0 Req  14: prefill=1472.2ms decode=5938.9ms | You are a helpful assistant.  Document: Document 1
+18:56:33 [INFO] evaluation.benchmark:     [MISS] W1 Req  15: prefill= 520.1ms decode=6004.4ms | You are a helpful assistant.  Document: Document 3
+18:56:43 [INFO] evaluation.benchmark:     [MISS] W0 Req  16: prefill=1473.1ms decode=5940.4ms | You are a helpful assistant.  Document: Document 3
+18:56:52 [INFO] evaluation.benchmark:     [MISS] W1 Req  17: prefill= 520.7ms decode=6010.3ms | You are a helpful assistant.  Document: Document 2
+18:57:01 [INFO] evaluation.benchmark:     [MISS] W0 Req  18: prefill=1473.5ms decode=5943.9ms | You are a helpful assistant.  Document: Document 1
+18:57:10 [INFO] evaluation.benchmark:     [MISS] W1 Req  19: prefill= 519.4ms decode=5997.3ms | You are a helpful assistant.  Document: Document 2
+18:57:20 [INFO] evaluation.benchmark:     [MISS] W0 Req  20: prefill=1472.4ms decode=5943.6ms | You are a helpful assistant.  Document: Document 2
+18:57:28 [INFO] evaluation.benchmark:     [MISS] W1 Req  21: prefill= 519.0ms decode=5997.6ms | You are a helpful assistant.  Document: Document 3
+18:57:38 [INFO] evaluation.benchmark:     [MISS] W0 Req  22: prefill=1473.0ms decode=5945.3ms | You are a helpful assistant.  Document: Document 3
+18:57:47 [INFO] evaluation.benchmark:     [MISS] W1 Req  23: prefill= 520.7ms decode=5995.3ms | You are a helpful assistant.  Document: Document 2
+18:57:56 [INFO] evaluation.benchmark:     [MISS] W0 Req  24: prefill=1472.8ms decode=5937.2ms | You are a helpful assistant.  Document: Document 1
+18:58:05 [INFO] evaluation.benchmark:     [MISS] W1 Req  25: prefill= 519.3ms decode=5994.7ms | You are a helpful assistant.  Document: Document 1
+18:58:15 [INFO] evaluation.benchmark:     [MISS] W0 Req  26: prefill=1473.0ms decode=5943.5ms | You are a helpful assistant.  Document: Document 3
+18:58:23 [INFO] evaluation.benchmark:     [MISS] W1 Req  27: prefill= 520.6ms decode=5999.3ms | You are a helpful assistant.  Document: Document 3
+18:58:33 [INFO] evaluation.benchmark:     [MISS] W0 Req  28: prefill=1473.3ms decode=5938.9ms | You are a helpful assistant.  Document: Document 2
+18:58:42 [INFO] evaluation.benchmark:     [MISS] W1 Req  29: prefill= 519.5ms decode=5995.2ms | You are a helpful assistant.  Document: Document 0
+18:58:51 [INFO] evaluation.benchmark:     [MISS] W0 Req  30: prefill=1473.6ms decode=5946.7ms | You are a helpful assistant.  Document: Document 3
+18:59:00 [INFO] evaluation.benchmark:     [MISS] W1 Req  31: prefill= 519.9ms decode=5995.7ms | You are a helpful assistant.  Document: Document 2
+18:59:09 [INFO] evaluation.benchmark:     [MISS] W0 Req  32: prefill=1473.5ms decode=5939.7ms | You are a helpful assistant.  Document: Document 5
+18:59:18 [INFO] evaluation.benchmark:     [MISS] W1 Req  33: prefill= 520.7ms decode=6006.3ms | You are a helpful assistant.  Document: Document 6
+18:59:28 [INFO] evaluation.benchmark:     [MISS] W0 Req  34: prefill=1473.3ms decode=5939.7ms | You are a helpful assistant.  Document: Document 8
+18:59:37 [INFO] evaluation.benchmark:     [MISS] W1 Req  35: prefill= 521.7ms decode=5995.6ms | You are a helpful assistant.  Document: Document 1
+18:59:46 [INFO] evaluation.benchmark:     [MISS] W0 Req  36: prefill=1473.2ms decode=5939.3ms | You are a helpful assistant.  Document: Document 1
+18:59:54 [INFO] evaluation.benchmark:     [MISS] W1 Req  37: prefill= 520.5ms decode=5998.9ms | You are a helpful assistant.  Document: Document 1
+19:00:04 [INFO] evaluation.benchmark:     [MISS] W0 Req  38: prefill=1473.7ms decode=5955.4ms | You are a helpful assistant.  Document: Document 1
+19:00:13 [INFO] evaluation.benchmark:     [MISS] W1 Req  39: prefill= 519.3ms decode=6003.2ms | You are a helpful assistant.  Document: Document 7
+19:00:22 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  40: prefill=  30.9ms decode=6028.2ms | You are a helpful assistant.  Document: Document 3
+19:00:28 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  41: prefill=  76.6ms decode=5952.0ms | You are a helpful assistant.  Document: Document 1
+19:00:37 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  42: prefill=  76.4ms decode=5945.8ms | You are a helpful assistant.  Document: Document 1
+19:00:44 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  43: prefill=  76.6ms decode=5972.6ms | You are a helpful assistant.  Document: Document 5
+19:00:51 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  44: prefill=  76.3ms decode=5944.0ms | You are a helpful assistant.  Document: Document 2
+19:01:00 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  45: prefill=  76.2ms decode=5950.0ms | You are a helpful assistant.  Document: Document 2
+19:01:12 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  46: prefill=  76.7ms decode=5956.4ms | You are a helpful assistant.  Document: Document 3
+19:01:20 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  47: prefill=  32.0ms decode=6000.3ms | You are a helpful assistant.  Document: Document 0
+19:01:27 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  48: prefill=  30.9ms decode=6059.5ms | You are a helpful assistant.  Document: Document 6
+19:01:36 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  49: prefill=  76.3ms decode=5939.6ms | You are a helpful assistant.  Document: Document 3
+19:01:45 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  50: prefill=  76.6ms decode=5937.1ms | You are a helpful assistant.  Document: Document 3
+19:01:57 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  51: prefill=  80.1ms decode=5938.6ms | You are a helpful assistant.  Document: Document 3
+19:02:04 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  52: prefill=  31.0ms decode=5995.7ms | You are a helpful assistant.  Document: Document 1
+19:02:13 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  53: prefill=  30.8ms decode=5994.2ms | You are a helpful assistant.  Document: Document 1
+19:02:22 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  54: prefill=  30.8ms decode=5993.8ms | You are a helpful assistant.  Document: Document 2
+19:02:33 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  55: prefill=  30.6ms decode=5994.7ms | You are a helpful assistant.  Document: Document 1
+19:02:45 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  56: prefill=  30.7ms decode=5993.6ms | You are a helpful assistant.  Document: Document 3
+19:02:57 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  57: prefill=  76.7ms decode=5936.0ms | You are a helpful assistant.  Document: Document 1
+19:03:06 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  58: prefill=  76.2ms decode=5908.6ms | You are a helpful assistant.  Document: Document 3
+19:03:14 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  59: prefill=  31.2ms decode=5995.6ms | You are a helpful assistant.  Document: Document 2
+19:03:23 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  60: prefill=  30.6ms decode=5994.8ms | You are a helpful assistant.  Document: Document 2
+19:03:31 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  61: prefill=  30.7ms decode=5999.8ms | You are a helpful assistant.  Document: Document 1
+19:03:44 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  62: prefill=  30.8ms decode=6000.3ms | You are a helpful assistant.  Document: Document 2
+19:03:58 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  63: prefill=  30.5ms decode=6000.3ms | You are a helpful assistant.  Document: Document 3
+19:04:13 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  64: prefill=  76.4ms decode=5943.6ms | You are a helpful assistant.  Document: Document 2
+19:04:28 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  65: prefill=  76.4ms decode=5942.1ms | You are a helpful assistant.  Document: Document 2
+19:04:42 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  66: prefill=  76.0ms decode=5940.7ms | You are a helpful assistant.  Document: Document 1
+19:04:56 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  67: prefill=  30.8ms decode=5998.8ms | You are a helpful assistant.  Document: Document 2
+19:05:09 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  68: prefill=  76.8ms decode=5939.8ms | You are a helpful assistant.  Document: Document 2
+19:05:20 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  69: prefill=  30.4ms decode=6000.9ms | You are a helpful assistant.  Document: Document 2
+19:05:35 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  70: prefill=  76.5ms decode=5940.4ms | You are a helpful assistant.  Document: Document 4
+19:05:47 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  71: prefill=  30.5ms decode=5999.5ms | You are a helpful assistant.  Document: Document 1
+19:06:02 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  72: prefill=  30.6ms decode=6006.6ms | You are a helpful assistant.  Document: Document 3
+19:06:17 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  73: prefill=  76.4ms decode=5940.2ms | You are a helpful assistant.  Document: Document 9
+19:06:28 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  74: prefill=  76.6ms decode=5942.1ms | You are a helpful assistant.  Document: Document 1
+19:06:40 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  75: prefill=  30.4ms decode=6001.6ms | You are a helpful assistant.  Document: Document 7
+19:06:55 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  76: prefill=  31.5ms decode=5999.9ms | You are a helpful assistant.  Document: Document 3
+19:07:07 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  77: prefill=  76.3ms decode=5945.6ms | You are a helpful assistant.  Document: Document 1
+19:07:19 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  78: prefill=  31.1ms decode=5998.7ms | You are a helpful assistant.  Document: Document 3
+19:07:33 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  79: prefill=  76.5ms decode=5944.5ms | You are a helpful assistant.  Document: Document 8
+19:07:37 [INFO] evaluation.benchmark:     Hit rate: 100.0%, Speedup: 0.0x, Evictions: 135, Routing eff: 50.0%
+19:07:37 [INFO] evaluation.benchmark: 
+============================================================
+19:07:37 [INFO] evaluation.benchmark: POLICY: learned (3 worker(s))
+19:07:37 [INFO] evaluation.benchmark: ============================================================
+19:07:37 [INFO] evaluation.benchmark:   Trial 1/1
+19:07:37 [WARNING] controller.cache_controller: Using only 2 GPUs
+19:07:37 [INFO] worker.inference_worker: Worker 0: Loading model on cuda:0...
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:02<00:07,  2.54s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:04<00:03,  1.95s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:05<00:01,  1.76s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:05<00:00,  1.22s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:05<00:00,  1.50s/it]
+19:07:43 [INFO] worker.inference_worker: Worker 1: Loading model on cuda:1...
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:01<00:04,  1.57s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:03<00:03,  1.64s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:04<00:01,  1.59s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:05<00:00,  1.11s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:05<00:00,  1.29s/it]
+19:07:57 [INFO] evaluation.benchmark:     [MISS] W0 Req   0: prefill=1470.2ms decode=5943.4ms | You are a helpful assistant.  Document: Document 9
+19:08:04 [INFO] evaluation.benchmark:     [MISS] W1 Req   1: prefill= 518.5ms decode=5998.9ms | You are a helpful assistant.  Document: Document 3
+19:08:12 [INFO] evaluation.benchmark:     [MISS] W0 Req   2: prefill=1474.7ms decode=5942.9ms | You are a helpful assistant.  Document: Document 1
+19:08:19 [INFO] evaluation.benchmark:     [MISS] W1 Req   3: prefill= 519.8ms decode=6002.2ms | You are a helpful assistant.  Document: Document 3
+19:08:28 [INFO] evaluation.benchmark:     [MISS] W0 Req   4: prefill=1472.9ms decode=5941.7ms | You are a helpful assistant.  Document: Document 2
+19:08:36 [INFO] evaluation.benchmark:     [MISS] W1 Req   5: prefill= 522.1ms decode=5998.6ms | You are a helpful assistant.  Document: Document 2
+19:08:44 [INFO] evaluation.benchmark:     [MISS] W0 Req   6: prefill=1472.9ms decode=5943.4ms | You are a helpful assistant.  Document: Document 3
+19:08:53 [INFO] evaluation.benchmark:     [MISS] W1 Req   7: prefill= 520.8ms decode=6000.7ms | You are a helpful assistant.  Document: Document 1
+19:09:01 [INFO] evaluation.benchmark:     [MISS] W0 Req   8: prefill=1474.5ms decode=5941.6ms | You are a helpful assistant.  Document: Document 4
+19:09:10 [INFO] evaluation.benchmark:     [MISS] W1 Req   9: prefill= 518.0ms decode=5998.3ms | You are a helpful assistant.  Document: Document 3
+19:09:18 [INFO] evaluation.benchmark:     [MISS] W0 Req  10: prefill=1472.8ms decode=5944.6ms | You are a helpful assistant.  Document: Document 2
+19:09:26 [INFO] evaluation.benchmark:     [MISS] W1 Req  11: prefill= 520.4ms decode=5996.0ms | You are a helpful assistant.  Document: Document 2
+19:09:35 [INFO] evaluation.benchmark:     [MISS] W0 Req  12: prefill=1473.7ms decode=5942.5ms | You are a helpful assistant.  Document: Document 2
+19:09:43 [INFO] evaluation.benchmark:     [MISS] W1 Req  13: prefill= 517.6ms decode=6001.1ms | You are a helpful assistant.  Document: Document 1
+19:09:53 [INFO] evaluation.benchmark:     [MISS] W0 Req  14: prefill=1472.6ms decode=5940.0ms | You are a helpful assistant.  Document: Document 1
+19:10:01 [INFO] evaluation.benchmark:     [MISS] W1 Req  15: prefill= 519.6ms decode=5998.3ms | You are a helpful assistant.  Document: Document 3
+19:10:11 [INFO] evaluation.benchmark:     [MISS] W0 Req  16: prefill=1473.1ms decode=5941.0ms | You are a helpful assistant.  Document: Document 3
+19:10:19 [INFO] evaluation.benchmark:     [MISS] W1 Req  17: prefill= 520.6ms decode=6002.8ms | You are a helpful assistant.  Document: Document 2
+19:10:29 [INFO] evaluation.benchmark:     [MISS] W0 Req  18: prefill=1473.3ms decode=5942.7ms | You are a helpful assistant.  Document: Document 1
+19:10:37 [INFO] evaluation.benchmark:     [MISS] W1 Req  19: prefill= 522.3ms decode=5996.0ms | You are a helpful assistant.  Document: Document 2
+19:10:47 [INFO] evaluation.benchmark:     [MISS] W0 Req  20: prefill=1473.3ms decode=5941.6ms | You are a helpful assistant.  Document: Document 2
+19:10:55 [INFO] evaluation.benchmark:     [MISS] W1 Req  21: prefill= 520.5ms decode=5996.6ms | You are a helpful assistant.  Document: Document 3
+19:11:05 [INFO] evaluation.benchmark:     [MISS] W0 Req  22: prefill=1473.6ms decode=5940.2ms | You are a helpful assistant.  Document: Document 3
+19:11:13 [INFO] evaluation.benchmark:     [MISS] W1 Req  23: prefill= 520.9ms decode=5996.6ms | You are a helpful assistant.  Document: Document 2
+19:11:23 [INFO] evaluation.benchmark:     [MISS] W0 Req  24: prefill=1472.9ms decode=5941.8ms | You are a helpful assistant.  Document: Document 1
+19:11:32 [INFO] evaluation.benchmark:     [MISS] W1 Req  25: prefill= 518.9ms decode=5997.2ms | You are a helpful assistant.  Document: Document 1
+19:11:41 [INFO] evaluation.benchmark:     [MISS] W0 Req  26: prefill=1473.9ms decode=5940.4ms | You are a helpful assistant.  Document: Document 3
+19:11:50 [INFO] evaluation.benchmark:     [MISS] W1 Req  27: prefill= 520.2ms decode=5995.0ms | You are a helpful assistant.  Document: Document 3
+19:12:00 [INFO] evaluation.benchmark:     [MISS] W0 Req  28: prefill=1474.0ms decode=5939.3ms | You are a helpful assistant.  Document: Document 2
+19:12:09 [INFO] evaluation.benchmark:     [MISS] W1 Req  29: prefill= 518.5ms decode=6002.2ms | You are a helpful assistant.  Document: Document 0
+19:12:18 [INFO] evaluation.benchmark:     [MISS] W0 Req  30: prefill=1473.1ms decode=5938.7ms | You are a helpful assistant.  Document: Document 3
+19:12:27 [INFO] evaluation.benchmark:     [MISS] W1 Req  31: prefill= 519.0ms decode=5996.2ms | You are a helpful assistant.  Document: Document 2
+19:12:36 [INFO] evaluation.benchmark:     [MISS] W0 Req  32: prefill=1474.4ms decode=5948.1ms | You are a helpful assistant.  Document: Document 5
+19:12:45 [INFO] evaluation.benchmark:     [MISS] W1 Req  33: prefill= 521.7ms decode=5998.0ms | You are a helpful assistant.  Document: Document 6
+19:12:55 [INFO] evaluation.benchmark:     [MISS] W0 Req  34: prefill=1474.0ms decode=5938.5ms | You are a helpful assistant.  Document: Document 8
+19:13:03 [INFO] evaluation.benchmark:     [MISS] W1 Req  35: prefill= 520.5ms decode=6006.4ms | You are a helpful assistant.  Document: Document 1
+19:13:13 [INFO] evaluation.benchmark:     [MISS] W0 Req  36: prefill=1474.2ms decode=5939.6ms | You are a helpful assistant.  Document: Document 1
+19:13:22 [INFO] evaluation.benchmark:     [MISS] W1 Req  37: prefill= 520.8ms decode=6004.2ms | You are a helpful assistant.  Document: Document 1
+19:13:31 [INFO] evaluation.benchmark:     [MISS] W0 Req  38: prefill=1473.4ms decode=5943.1ms | You are a helpful assistant.  Document: Document 1
+19:13:40 [INFO] evaluation.benchmark:     [MISS] W1 Req  39: prefill= 520.0ms decode=5996.9ms | You are a helpful assistant.  Document: Document 7
+19:13:49 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  40: prefill=  31.4ms decode=5999.7ms | You are a helpful assistant.  Document: Document 3
+19:13:55 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  41: prefill=  76.9ms decode=5941.9ms | You are a helpful assistant.  Document: Document 1
+19:14:04 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  42: prefill=  76.2ms decode=5941.4ms | You are a helpful assistant.  Document: Document 1
+19:14:11 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  43: prefill=  75.9ms decode=5940.4ms | You are a helpful assistant.  Document: Document 5
+19:14:18 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  44: prefill=  76.6ms decode=5941.4ms | You are a helpful assistant.  Document: Document 2
+19:14:27 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  45: prefill=  76.3ms decode=5948.5ms | You are a helpful assistant.  Document: Document 2
+19:14:35 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  46: prefill=  76.6ms decode=5941.9ms | You are a helpful assistant.  Document: Document 3
+19:14:43 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  47: prefill=  32.0ms decode=5997.8ms | You are a helpful assistant.  Document: Document 0
+19:14:50 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  48: prefill=  31.2ms decode=6001.9ms | You are a helpful assistant.  Document: Document 6
+19:14:59 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  49: prefill=  76.4ms decode=5941.5ms | You are a helpful assistant.  Document: Document 3
+19:15:07 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  50: prefill=  76.3ms decode=5942.6ms | You are a helpful assistant.  Document: Document 3
+19:15:20 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  51: prefill=  76.3ms decode=5941.2ms | You are a helpful assistant.  Document: Document 3
+19:15:27 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  52: prefill=  31.9ms decode=5999.6ms | You are a helpful assistant.  Document: Document 1
+19:15:36 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  53: prefill=  31.4ms decode=6000.7ms | You are a helpful assistant.  Document: Document 1
+19:15:45 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  54: prefill=  31.6ms decode=6000.6ms | You are a helpful assistant.  Document: Document 2
+19:15:54 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  55: prefill=  37.0ms decode=5993.9ms | You are a helpful assistant.  Document: Document 1
+19:16:06 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  56: prefill=  30.5ms decode=6001.7ms | You are a helpful assistant.  Document: Document 3
+19:16:14 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  57: prefill=  76.1ms decode=5940.4ms | You are a helpful assistant.  Document: Document 1
+19:16:23 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  58: prefill=  76.1ms decode=5942.5ms | You are a helpful assistant.  Document: Document 3
+19:16:32 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  59: prefill=  31.4ms decode=5999.6ms | You are a helpful assistant.  Document: Document 2
+19:16:40 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  60: prefill=  31.1ms decode=6004.4ms | You are a helpful assistant.  Document: Document 2
+19:16:49 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  61: prefill=  30.4ms decode=6000.0ms | You are a helpful assistant.  Document: Document 1
+19:17:02 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  62: prefill=  30.6ms decode=5998.2ms | You are a helpful assistant.  Document: Document 2
+19:17:16 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  63: prefill=  32.7ms decode=5992.9ms | You are a helpful assistant.  Document: Document 3
+19:17:28 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  64: prefill=  76.4ms decode=5941.0ms | You are a helpful assistant.  Document: Document 2
+19:17:40 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  65: prefill=  76.7ms decode=5942.3ms | You are a helpful assistant.  Document: Document 2
+19:17:52 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  66: prefill=  76.4ms decode=5944.7ms | You are a helpful assistant.  Document: Document 1
+19:18:03 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  67: prefill=  31.5ms decode=6013.2ms | You are a helpful assistant.  Document: Document 2
+19:18:15 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  68: prefill=  76.2ms decode=5940.6ms | You are a helpful assistant.  Document: Document 2
+19:18:27 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  69: prefill=  30.8ms decode=5997.9ms | You are a helpful assistant.  Document: Document 2
+19:18:39 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  70: prefill=  76.6ms decode=5945.1ms | You are a helpful assistant.  Document: Document 4
+19:18:51 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  71: prefill=  30.4ms decode=6014.4ms | You are a helpful assistant.  Document: Document 1
+19:19:03 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  72: prefill=  30.5ms decode=6015.0ms | You are a helpful assistant.  Document: Document 3
+19:19:15 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  73: prefill=  76.6ms decode=5941.9ms | You are a helpful assistant.  Document: Document 9
+19:19:27 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  74: prefill=  76.1ms decode=5941.1ms | You are a helpful assistant.  Document: Document 1
+19:19:38 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  75: prefill=  31.3ms decode=5998.0ms | You are a helpful assistant.  Document: Document 7
+19:19:50 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  76: prefill=  30.5ms decode=6013.2ms | You are a helpful assistant.  Document: Document 3
+19:20:03 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  77: prefill=  76.4ms decode=5944.8ms | You are a helpful assistant.  Document: Document 1
+19:20:15 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  78: prefill= 223.0ms decode=5996.6ms | You are a helpful assistant.  Document: Document 3
+19:20:27 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  79: prefill=  76.3ms decode=5940.6ms | You are a helpful assistant.  Document: Document 8
+19:20:31 [INFO] evaluation.benchmark:     Hit rate: 100.0%, Speedup: 0.0x, Evictions: 135, Routing eff: 50.0%
+19:20:31 [INFO] __main__: 
+==========================================================================================
+19:20:31 [INFO] __main__: RESULTS SUMMARY (REAL INFERENCE)
+19:20:31 [INFO] __main__: ==========================================================================================
+19:20:31 [INFO] __main__: Policy      Hit Rate  Prefill(HIT)  Prefill(MISS)  Speedup  Evictions  Transfer(ms)
+19:20:31 [INFO] __main__: ------------------------------------------------------------------------------------------
+19:20:31 [INFO] __main__: learned      100.0%         58.7ms           0.0ms     0.0x        135     229548.6ms
+19:20:31 [INFO] __main__: lfu          100.0%         53.9ms           0.0ms     0.0x        135     226908.2ms
+19:20:31 [INFO] __main__: lru          100.0%         55.4ms           0.0ms     0.0x        135     256145.4ms
+19:20:31 [INFO] __main__: semantic     100.0%         53.7ms           0.0ms     0.0x        135     263073.4ms
+19:20:31 [INFO] __main__: ==========================================================================================
+19:20:31 [INFO] __main__: Benchmark completed in 3169.6s
+19:20:31 [INFO] evaluation.benchmark: Results saved to results_3gpu/
+19:21:08 [INFO] evaluation.visualize: All plots saved to results_3gpu/

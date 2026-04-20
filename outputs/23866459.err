@@ -1,0 +1,9 @@
+Skipping import of cpp extensions due to incompatible torch version 2.7.1+cu118 for torchao version 0.15.0             Please see https://github.com/pytorch/ao/issues/2919 for more info
+usage: main.py [-h] [--model MODEL]
+               [--policies {lru,lfu,semantic,learned} [{lru,lfu,semantic,learned} ...]]
+               [--requests REQUESTS] [--prefixes PREFIXES]
+               [--reuse-ratio REUSE_RATIO] [--gpu-mb GPU_MB] [--cpu-mb CPU_MB]
+               [--disk-mb DISK_MB] [--num-gpus NUM_GPUS]
+               [--max-tokens MAX_TOKENS] [--output OUTPUT] [--quick]
+               [--no-plots] [--seed SEED]
+main.py: error: unrecognized arguments: --documents 40 --document-length 10000 --rounds 2 --hit-ratio 1.0 --initial-concurrency 40

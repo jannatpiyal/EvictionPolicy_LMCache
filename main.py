@@ -3,14 +3,11 @@
 KV-Cache Eviction Policy Benchmark — Real Inference with Llama 3.1-8B
 
 Runs actual LLM inference with real KV tensor caching and tiered storage.
-All tensor transfers between GPU, CPU, and disk are real and timed.
+Configured for LMCache-style long-document multi-round QA workloads.
 
-Usage:
-    python main.py                                    # Default: LRU+LFU, 100 requests
-    python main.py --policies lru lfu learned          # Specific policies
-    python main.py --requests 200 --gpu-mb 512         # More requests, smaller GPU cache
-    python main.py --model /path/to/local/model        # Local model path
-    python main.py --quick                             # Quick test: 20 requests, LRU only
+This version prints both:
+- your existing metrics (hit rate, prefill hit/miss, evictions, transfer)
+- LMCache-style metrics (TTFT, ITL, throughput)
 """
 
 import argparse
@@ -20,11 +17,7 @@ import time
 
 import torch
 
-from config import (
-    FrameworkConfig, ModelConfig, WorkerConfig, TierConfig,
-    ControllerConfig, WorkloadConfig, BenchmarkConfig,
-    EvictionPolicyType, StorageTier,
-)
+from config import FrameworkConfig, EvictionPolicyType
 from evaluation.benchmark import BenchmarkHarness
 from evaluation.visualize import generate_all_plots
 
@@ -44,38 +37,55 @@ POLICY_MAP = {
 
 
 def parse_args():
-    p = argparse.ArgumentParser(description="Real KV-Cache Eviction Benchmark with Llama 8B")
+    p = argparse.ArgumentParser(
+        description="Real KV-Cache Eviction Benchmark with Llama 3.1-8B"
+    )
+
     p.add_argument("--model", type=str, default=None,
-                   help="Model path (default: meta-llama/Meta-Llama-3.1-8B-Instruct)")
+                   help="Model path")
     p.add_argument("--policies", nargs="+", choices=list(POLICY_MAP.keys()), default=None,
-                   help="Policies to evaluate (default: lru, lfu)")
-    p.add_argument("--requests", type=int, default=None,
-                   help="Number of requests (default: 100)")
-    p.add_argument("--prefixes", type=int, default=None,
-                   help="Number of unique prefixes (default: 10)")
-    p.add_argument("--reuse-ratio", type=float, default=None,
-                   help="Prefix reuse ratio (default: 0.7)")
-    p.add_argument("--gpu-mb", type=float, default=None,
-                   help="GPU KV cache capacity in MB per worker (default: 2048)")
-    p.add_argument("--cpu-mb", type=float, default=None,
-                   help="CPU KV cache capacity in MB per worker (default: 8192)")
-    p.add_argument("--disk-mb", type=float, default=None,
-                   help="Disk KV cache capacity in MB per worker (default: 32768)")
+                   help="Policies to evaluate")
     p.add_argument("--num-gpus", type=int, default=None,
-                   help="Number of GPUs/workers (default: 1, auto-detects available)")
-    p.add_argument("--max-tokens", type=int, default=50,
-                   help="Max new tokens per request (default: 50)")
+                   help="Number of GPUs/workers")
+    p.add_argument("--gpu-mb", type=float, default=None,
+                   help="GPU KV cache capacity in MB per worker")
+    p.add_argument("--cpu-mb", type=float, default=None,
+                   help="CPU KV cache capacity in MB per worker")
+    p.add_argument("--disk-mb", type=float, default=None,
+                   help="Disk KV cache capacity in MB per worker")
+
+    p.add_argument("--documents", type=int, default=None,
+                   help="Number of long shared documents")
+    p.add_argument("--document-length", type=int, default=None,
+                   help="Approximate document length in tokens")
+    p.add_argument("--rounds", type=int, default=None,
+                   help="Number of rounds")
+    p.add_argument("--hit-ratio", type=float, default=None,
+                   help="Fraction of reused documents in rounds > 0")
+    p.add_argument("--initial-concurrency", type=int, default=None,
+                   help="Initial concurrent requests/users")
+    p.add_argument("--arrival-mode", choices=["bursty", "poisson"], default=None,
+                   help="Traffic pattern")
+    p.add_argument("--interarrival", type=float, default=None,
+                   help="Mean interarrival time in seconds")
+    p.add_argument("--question-style", choices=["document_qa", "summarization", "mixed"], default=None,
+                   help="Question style for generated requests")
+    p.add_argument("--max-tokens", type=int, default=100,
+                   help="Max new tokens per request")
+
+    p.add_argument("--requests", type=int, default=None,
+                   help="Optional hard cap on total requests")
     p.add_argument("--output", type=str, default="results",
-                   help="Output directory (default: results)")
+                   help="Output directory")
     p.add_argument("--quick", action="store_true",
-                   help="Quick test: 20 requests, LRU only, small cache")
+                   help="Quick test mode")
     p.add_argument("--no-plots", action="store_true")
     p.add_argument("--seed", type=int, default=42)
+
     return p.parse_args()
 
 
 def build_config(args) -> FrameworkConfig:
-    # Determine number of GPUs
     num_gpus = args.num_gpus or 1
     gpu_mb = args.gpu_mb or 2048
     cpu_mb = args.cpu_mb or 8192
@@ -92,96 +102,154 @@ def build_config(args) -> FrameworkConfig:
         if args.disk_mb is not None:
             config.workers[0].disk_tier.capacity_mb = disk_mb
 
-    # Model
     if args.model:
         config.model.model_path = args.model
+    config.model.max_new_tokens = args.max_tokens
 
-    # Quick mode
     if args.quick:
-        config.workload.num_requests = 20
-        config.workload.num_unique_prefixes = 3
-        config.benchmark.num_trials = 1
-        config.benchmark.warmup_requests = 2
-        config.benchmark.policies_to_evaluate = [EvictionPolicyType.LRU]
-        for w in config.workers:
-            w.gpu_tier.capacity_mb = 256
+        config.workload.num_documents = 4
+        config.workload.document_length_tokens = 2000
+        config.workload.num_rounds = 2
+        config.workload.hit_ratio = 1.0
+        config.workload.initial_concurrency = 4
+        config.workload.arrival_mode = "bursty"
+        config.workload.interarrival_mean_sec = 0.1
+        config.workload.max_new_tokens = min(args.max_tokens, 32)
 
-    # CLI overrides
+        config.benchmark.num_trials = 1
+        config.benchmark.warmup_requests = 4
+        config.benchmark.policies_to_evaluate = [EvictionPolicyType.LRU]
+
+        for w in config.workers:
+            w.gpu_tier.capacity_mb = min(w.gpu_tier.capacity_mb, 256)
+
+    if args.documents is not None:
+        config.workload.num_documents = args.documents
+    if args.document_length is not None:
+        config.workload.document_length_tokens = args.document_length
+    if args.rounds is not None:
+        config.workload.num_rounds = args.rounds
+    if args.hit_ratio is not None:
+        config.workload.hit_ratio = args.hit_ratio
+    if args.initial_concurrency is not None:
+        config.workload.initial_concurrency = args.initial_concurrency
+    if args.arrival_mode is not None:
+        config.workload.arrival_mode = args.arrival_mode
+    if args.interarrival is not None:
+        config.workload.interarrival_mean_sec = args.interarrival
+    if args.question_style is not None:
+        config.workload.question_style = args.question_style
     if args.requests is not None:
         config.workload.num_requests = args.requests
-    if args.prefixes is not None:
-        config.workload.num_unique_prefixes = args.prefixes
-    if args.reuse_ratio is not None:
-        config.workload.prefix_reuse_ratio = args.reuse_ratio
-    if args.policies is not None:
-        config.benchmark.policies_to_evaluate = [POLICY_MAP[p] for p in args.policies]
 
     config.workload.max_new_tokens = args.max_tokens
     config.workload.seed = args.seed
+
+    if args.policies is not None:
+        config.benchmark.policies_to_evaluate = [POLICY_MAP[p] for p in args.policies]
+
     config.benchmark.output_dir = args.output
 
+    if config.benchmark.warmup_requests > config.workload.total_requests:
+        config.benchmark.warmup_requests = min(5, config.workload.total_requests)
+
     return config
+
+
+def log_setup(config: FrameworkConfig) -> None:
+    logger.info("=" * 72)
+    logger.info("KV-Cache Eviction Benchmark — REAL INFERENCE")
+    logger.info("=" * 72)
+    logger.info("Model: %s", config.model.model_path)
+    logger.info("Device: %s", config.model.device)
+
+    if torch.cuda.is_available():
+        logger.info("GPU: %s", torch.cuda.get_device_name(0))
+        logger.info(
+            "GPU Memory: %.1f GB",
+            torch.cuda.get_device_properties(0).total_memory / 1024**3,
+        )
+
+    logger.info(
+        "KV Cache tiers: GPU=%sMB, CPU=%sMB, Disk=%sMB",
+        config.workers[0].gpu_tier.capacity_mb,
+        config.workers[0].cpu_tier.capacity_mb,
+        config.workers[0].disk_tier.capacity_mb,
+    )
+
+    logger.info("Workload type: LMCache-style long-document multi-round QA")
+    logger.info("Documents: %s", config.workload.num_documents)
+    logger.info("Document length: ~%s tokens", config.workload.document_length_tokens)
+    logger.info("Rounds: %s", config.workload.num_rounds)
+    logger.info("Hit ratio: %.2f", config.workload.hit_ratio)
+    logger.info("Initial concurrency: %s", config.workload.initial_concurrency)
+    logger.info("Arrival mode: %s", config.workload.arrival_mode)
+    logger.info("Interarrival mean: %.3fs", config.workload.interarrival_mean_sec)
+    logger.info("Max new tokens: %s", config.workload.max_new_tokens)
+    logger.info("Estimated total requests: %s", config.workload.total_requests)
+    logger.info("Policies: %s", [p.value for p in config.benchmark.policies_to_evaluate])
+    logger.info("=" * 72)
+
+
+def print_summary(results, elapsed: float) -> None:
+    comparison = results.get_comparison_table()
+
+    logger.info("\n" + "=" * 120)
+    logger.info("RESULTS SUMMARY")
+    logger.info("=" * 120)
+
+    header = (
+        f"{'Policy':<10} {'HitRate':>8} {'TTFT':>10} {'ITL':>10} "
+        f"{'Req/s':>10} {'Tok/s':>10} {'PF(HIT)':>11} {'PF(MISS)':>12} "
+        f"{'Speedup':>8} {'Evict':>8} {'Xfer(ms)':>10} "
+        f"{'Hits':>6} {'Misses':>8}"
+    )
+    logger.info(header)
+    logger.info("-" * 120)
+
+    for row in comparison:
+        speedup_str = f"{row['speedup']:.2f}" if row["speedup"] is not None else "N/A"
+
+        logger.info(
+            f"{row['policy']:<10} "
+            f"{row['hit_rate']:>7.1%} "
+            f"{row['avg_ttft_ms']:>9.1f} "
+            f"{row['avg_itl_ms']:>9.1f} "
+            f"{row['request_throughput_rps']:>9.2f} "
+            f"{row['output_token_throughput_tps']:>9.2f} "
+            f"{row['avg_prefill_hit_ms']:>10.1f} "
+            f"{row['avg_prefill_miss_ms']:>11.1f} "
+            f"{speedup_str:>8} "
+            f"{row['evictions']:>8.0f} "
+            f"{row['transfer_ms']:>10.1f} "
+            f"{row.get('num_measured_hits', 0):>6.0f} "
+            f"{row.get('num_measured_misses', 0):>8.0f}"
+        )
+
+    logger.info("=" * 120)
+    logger.info("Benchmark completed in %.1fs", elapsed)
 
 
 def main():
     args = parse_args()
     config = build_config(args)
 
-    # Print setup
-    logger.info("=" * 60)
-    logger.info("KV-Cache Eviction Benchmark — REAL INFERENCE")
-    logger.info("=" * 60)
-    logger.info(f"Model: {config.model.model_path}")
-    logger.info(f"Device: {config.model.device}")
-    if torch.cuda.is_available():
-        logger.info(f"GPU: {torch.cuda.get_device_name(0)}")
-        logger.info(f"GPU Memory: {torch.cuda.get_device_properties(0).total_memory / 1024**3:.1f} GB")
-    logger.info(f"KV Cache tiers: GPU={config.workers[0].gpu_tier.capacity_mb}MB, "
-                f"CPU={config.workers[0].cpu_tier.capacity_mb}MB, "
-                f"Disk={config.workers[0].disk_tier.capacity_mb}MB")
-    logger.info(f"Requests: {config.workload.num_requests}")
-    logger.info(f"Unique prefixes: {config.workload.num_unique_prefixes}")
-    logger.info(f"Reuse ratio: {config.workload.prefix_reuse_ratio}")
-    logger.info(f"Policies: {[p.value for p in config.benchmark.policies_to_evaluate]}")
-    logger.info("=" * 60)
+    log_setup(config)
 
-    # Run
     start = time.time()
     harness = BenchmarkHarness(config)
     results = harness.run()
     elapsed = time.time() - start
 
-    # Print summary
-    comparison = results.get_comparison_table()
-    logger.info("\n" + "=" * 80)
-    logger.info("RESULTS SUMMARY (REAL INFERENCE)")
-    logger.info("=" * 80)
-    header = (f"{'Policy':<10} {'Hit Rate':>9} {'Prefill(HIT)':>13} "
-              f"{'Prefill(MISS)':>14} {'Speedup':>8} {'Evictions':>10} "
-              f"{'Transfer(ms)':>13}")
-    logger.info(header)
-    logger.info("-" * 80)
-    for row in comparison:
-        logger.info(
-            f"{row['policy']:<10} "
-            f"{row['hit_rate']:>8.1%} "
-            f"{row['avg_prefill_hit_ms']:>12.1f}ms "
-            f"{row['avg_prefill_miss_ms']:>13.1f}ms "
-            f"{row['speedup']:>7.1f}x "
-            f"{row['evictions']:>10.0f} "
-            f"{row['transfer_ms']:>12.1f}ms"
-        )
-    logger.info("=" * 80)
-    logger.info(f"Benchmark completed in {elapsed:.1f}s")
+    print_summary(results, elapsed)
 
-    # Save
     BenchmarkHarness.save_results(results, config.benchmark.output_dir)
 
     if not args.no_plots:
         try:
             generate_all_plots(results, config.benchmark.output_dir)
         except Exception as e:
-            logger.warning(f"Plot generation failed: {e}")
+            logger.warning("Plot generation failed: %s", e)
 
     return 0
 

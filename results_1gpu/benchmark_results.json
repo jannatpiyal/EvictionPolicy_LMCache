@@ -32,60 +32,60 @@
       "policy": "learned",
       "num_workers": 1,
       "hit_rate": 0.9473684210526315,
-      "avg_prefill_ms": 32.45593567231768,
-      "avg_total_ms": 842.3601127621766,
-      "avg_p95_ms": 857.7869100030512,
-      "avg_prefill_hit_ms": 30.889273101153474,
-      "avg_prefill_miss_ms": 60.655861953273416,
-      "speedup": 1.9636545591294083,
+      "avg_prefill_ms": 32.15729900341677,
+      "avg_total_ms": 830.313778296113,
+      "avg_p95_ms": 844.7846150258556,
+      "avg_prefill_hit_ms": 30.628622556105256,
+      "avg_prefill_miss_ms": 59.67347505502403,
+      "speedup": 1.9482911758671044,
       "evictions": 0.0,
       "transfer_ms": 0.0,
-      "saved_ms": 2658.440994564444,
+      "saved_ms": 2645.2500342857093,
       "routing_efficiency": 0.0
     },
     {
       "policy": "lfu",
       "num_workers": 1,
       "hit_rate": 0.9473684210526315,
-      "avg_prefill_ms": 32.5274846688109,
-      "avg_total_ms": 842.6567164151684,
-      "avg_p95_ms": 855.3589393850416,
-      "avg_prefill_hit_ms": 30.96194081267135,
-      "avg_prefill_miss_ms": 60.707274079322815,
-      "speedup": 1.960706353862611,
+      "avg_prefill_ms": 32.053400392300986,
+      "avg_total_ms": 829.8061023662357,
+      "avg_p95_ms": 842.956605553627,
+      "avg_prefill_hit_ms": 30.53345889266994,
+      "avg_prefill_miss_ms": 59.412347385659814,
+      "speedup": 1.94581123594624,
       "evictions": 0.0,
       "transfer_ms": 0.0,
-      "saved_ms": 2679.8333381302655,
+      "saved_ms": 2593.751797452569,
       "routing_efficiency": 0.0
     },
     {
       "policy": "lru",
       "num_workers": 1,
       "hit_rate": 0.9473684210526315,
-      "avg_prefill_ms": 32.654506225433,
-      "avg_total_ms": 845.2476975066882,
-      "avg_p95_ms": 856.6908781416714,
-      "avg_prefill_hit_ms": 31.103365666543443,
-      "avg_prefill_miss_ms": 60.575036285445094,
-      "speedup": 1.9475395986037314,
+      "avg_prefill_ms": 31.866052648738812,
+      "avg_total_ms": 824.7639583742344,
+      "avg_p95_ms": 842.6946139894426,
+      "avg_prefill_hit_ms": 30.321107652141816,
+      "avg_prefill_miss_ms": 59.67506258748472,
+      "speedup": 1.9681029885881958,
       "evictions": 0.0,
       "transfer_ms": 0.0,
-      "saved_ms": 3459.996011806652,
+      "saved_ms": 3721.6948154382408,
       "routing_efficiency": 0.0
     },
     {
       "policy": "semantic",
       "num_workers": 1,
       "hit_rate": 0.9473684210526315,
-      "avg_prefill_ms": 32.379484414368086,
-      "avg_total_ms": 840.2923444653616,
-      "avg_p95_ms": 855.6501297047362,
-      "avg_prefill_hit_ms": 30.826597567647696,
-      "avg_prefill_miss_ms": 60.33144765533507,
-      "speedup": 1.9571231474034785,
+      "avg_prefill_ms": 32.07430260402984,
+      "avg_total_ms": 829.3936610466948,
+      "avg_p95_ms": 843.1628020713106,
+      "avg_prefill_hit_ms": 30.549056080376936,
+      "avg_prefill_miss_ms": 59.52874002978206,
+      "speedup": 1.948627802874083,
       "evictions": 0.0,
       "transfer_ms": 0.0,
-      "saved_ms": 2658.9619973674417,
+      "saved_ms": 2649.319325108081,
       "routing_efficiency": 0.0
     }
   ],
@@ -98,10 +98,10 @@
       "gpu_hits": 90,
       "cpu_hits": 0,
       "disk_hits": 0,
-      "avg_prefill_ms": 32.654506225433,
-      "avg_total_ms": 845.2476975066882,
-      "p95_total_ms": 856.6908781416714,
-      "prefill_speedup": 1.9475395986037314,
+      "avg_prefill_ms": 31.866052648738812,
+      "avg_total_ms": 824.7639583742344,
+      "p95_total_ms": 842.6946139894426,
+      "prefill_speedup": 1.9681029885881958,
       "total_evictions": 0,
       "total_transfer_ms": 0.0,
       "routing_efficiency": 0.0,
@@ -112,9 +112,9 @@
           "worker_id": 0,
           "cache_hit": false,
           "tier_hit": null,
-          "prefill_ms": 218.11394998803735,
-          "decode_ms": 827.1791320294142,
-          "total_ms": 1045.2930820174515,
+          "prefill_ms": 275.43152985163033,
+          "decode_ms": 813.1169469561428,
+          "total_ms": 1088.548476807773,
           "is_warmup": true
         },
         {
@@ -123,9 +123,9 @@
           "worker_id": 0,
           "cache_hit": false,
           "tier_hit": null,
-          "prefill_ms": 61.04945600964129,
-          "decode_ms": 807.24216112867,
-          "total_ms": 868.2916171383113,
+          "prefill_ms": 59.81182190589607,
+          "decode_ms": 794.9121238198131,
+          "total_ms": 854.7239457257092,
           "is_warmup": true
         },
         {
@@ -134,9 +134,9 @@
           "worker_id": 0,
           "cache_hit": false,
           "tier_hit": null,
-          "prefill_ms": 60.02004910260439,
-          "decode_ms": 812.1074750088155,
-          "total_ms": 872.1275241114199,
+          "prefill_ms": 59.00473170913756,
+          "decode_ms": 797.9970450978726,
+          "total_ms": 857.0017768070102,
           "is_warmup": true
         },
         {
@@ -145,9 +145,9 @@
           "worker_id": 0,
           "cache_hit": false,
           "tier_hit": null,
-          "prefill_ms": 60.987409902736545,
-          "decode_ms": 814.0259389765561,
-          "total_ms": 875.0133488792926,
+          "prefill_ms": 59.98114123940468,
+          "decode_ms": 793.7004598788917,
+          "total_ms": 853.6816011182964,
           "is_warmup": true
         },
         {
@@ -156,9 +156,9 @@
           "worker_id": 0,
           "cache_hit": false,
           "tier_hit": null,
-          "prefill_ms": 60.533745912835,
-          "decode_ms": 812.5288679730147,
-          "total_ms": 873.0626138858497,
+          "prefill_ms": 58.69244202040136,
+          "decode_ms": 807.6423741877079,
+          "total_ms": 866.3348162081093,
           "is_warmup": true
         },
         {
@@ -167,9 +167,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.903867911547422,
-          "decode_ms": 817.2272080555558,
-          "total_ms": 848.1310759671032,
+          "prefill_ms": 30.485838185995817,
+          "decode_ms": 794.078883016482,
+          "total_ms": 824.5647212024778,
           "is_warmup": false
         },
         {
@@ -178,9 +178,9 @@
           "worker_id": 0,
           "cache_hit": false,
           "tier_hit": null,
-          "prefill_ms": 60.45503821223974,
-          "decode_ms": 808.041876880452,
-          "total_ms": 868.4969150926918,
+          "prefill_ms": 59.10012102685869,
+          "decode_ms": 792.995983036235,
+          "total_ms": 852.0961040630937,
           "is_warmup": false
         },
         {
@@ -189,9 +189,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.8497860096395,
-          "decode_ms": 812.9914500750601,
-          "total_ms": 843.8412360846996,
+          "prefill_ms": 30.4067088291049,
+          "decode_ms": 791.4759109262377,
+          "total_ms": 821.8826197553426,
           "is_warmup": false
         },
         {
@@ -200,9 +200,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.053951010107994,
-          "decode_ms": 811.0030540265143,
-          "total_ms": 842.0570050366223,
+          "prefill_ms": 30.45517113059759,
+          "decode_ms": 795.1313469093293,
+          "total_ms": 825.5865180399269,
           "is_warmup": false
         },
         {
@@ -211,9 +211,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.04664687998593,
-          "decode_ms": 810.6864378787577,
-          "total_ms": 841.7330847587436,
+          "prefill_ms": 29.927908210083842,
+          "decode_ms": 790.1416970416903,
+          "total_ms": 820.0696052517742,
           "is_warmup": false
         },
         {
@@ -222,9 +222,9 @@
           "worker_id": 0,
           "cache_hit": false,
           "tier_hit": null,
-          "prefill_ms": 59.670771239325404,
-          "decode_ms": 809.5538150519133,
-          "total_ms": 869.2245862912387,
+          "prefill_ms": 59.42665692418814,
+          "decode_ms": 795.788113027811,
+          "total_ms": 855.2147699519992,
           "is_warmup": false
         },
         {
@@ -233,9 +233,9 @@
           "worker_id": 0,
           "cache_hit": false,
           "tier_hit": null,
-          "prefill_ms": 60.84889988414943,
-          "decode_ms": 813.9303980860859,
-          "total_ms": 874.7792979702353,
+          "prefill_ms": 59.78859891183674,
+          "decode_ms": 791.1875168792903,
+          "total_ms": 850.9761157911271,
           "is_warmup": false
         },
         {
@@ -244,9 +244,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.023022020235658,
-          "decode_ms": 808.128640986979,
-          "total_ms": 839.1516630072147,
+          "prefill_ms": 30.51847987808287,
+          "decode_ms": 795.155260944739,
+          "total_ms": 825.6737408228219,
           "is_warmup": false
         },
         {
@@ -255,9 +255,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.961555894464254,
-          "decode_ms": 808.4108619950712,
-          "total_ms": 839.3724178895354,
+          "prefill_ms": 30.581970000639558,
+          "decode_ms": 789.9154999759048,
+          "total_ms": 820.4974699765444,
           "is_warmup": false
         },
         {
@@ -266,9 +266,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.578188063576818,
-          "decode_ms": 807.5111079961061,
-          "total_ms": 839.089296059683,
+          "prefill_ms": 30.59514402411878,
+          "decode_ms": 792.4716058187187,
+          "total_ms": 823.0667498428375,
           "is_warmup": false
         },
         {
@@ -277,9 +277,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.917484080418944,
-          "decode_ms": 809.6601150464267,
-          "total_ms": 840.5775991268456,
+          "prefill_ms": 29.97213089838624,
+          "decode_ms": 794.1321339458227,
+          "total_ms": 824.104264844209,
           "is_warmup": false
         },
         {
@@ -288,9 +288,9 @@
           "worker_id": 0,
           "cache_hit": false,
           "tier_hit": null,
-          "prefill_ms": 60.893323039636016,
-          "decode_ms": 814.389884006232,
-          "total_ms": 875.283207045868,
+          "prefill_ms": 59.81021886691451,
+          "decode_ms": 791.4740070700645,
+          "total_ms": 851.284225936979,
           "is_warmup": false
         },
         {
@@ -299,9 +299,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.151704024523497,
-          "decode_ms": 811.9865669868886,
-          "total_ms": 843.1382710114121,
+          "prefill_ms": 31.17916500195861,
+          "decode_ms": 791.5204239543527,
+          "total_ms": 822.6995889563113,
           "is_warmup": false
         },
         {
@@ -310,9 +310,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.926549807190895,
-          "decode_ms": 810.6444999575615,
-          "total_ms": 841.5710497647524,
+          "prefill_ms": 30.47619992867112,
+          "decode_ms": 792.5561647862196,
+          "total_ms": 823.0323647148907,
           "is_warmup": false
         },
         {
@@ -321,9 +321,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.030506128445268,
-          "decode_ms": 812.9446720704436,
-          "total_ms": 843.9751781988889,
+          "prefill_ms": 30.3745090495795,
+          "decode_ms": 796.0053130518645,
+          "total_ms": 826.379822101444,
           "is_warmup": false
         },
         {
@@ -332,9 +332,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.022872077301145,
-          "decode_ms": 811.8743160739541,
-          "total_ms": 842.8971881512552,
+          "prefill_ms": 30.34686716273427,
+          "decode_ms": 798.9778819028288,
+          "total_ms": 829.3247490655631,
           "is_warmup": false
         },
         {
@@ -343,9 +343,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.93328303657472,
-          "decode_ms": 815.6271451152861,
-          "total_ms": 846.5604281518608,
+          "prefill_ms": 30.451684026047587,
+          "decode_ms": 789.9439150933176,
+          "total_ms": 820.3955991193652,
           "is_warmup": false
         },
         {
@@ -354,9 +354,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.002213014289737,
-          "decode_ms": 820.6289350055158,
-          "total_ms": 851.6311480198056,
+          "prefill_ms": 29.950619908049703,
+          "decode_ms": 799.9924141913652,
+          "total_ms": 829.943034099415,
           "is_warmup": false
         },
         {
@@ -365,9 +365,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.783634098246694,
-          "decode_ms": 813.3949898183346,
-          "total_ms": 845.1786239165813,
+          "prefill_ms": 30.45733505859971,
+          "decode_ms": 796.5838829986751,
+          "total_ms": 827.0412180572748,
           "is_warmup": false
         },
         {
@@ -376,9 +376,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.247535021975636,
-          "decode_ms": 812.1895699296147,
-          "total_ms": 843.4371049515903,
+          "prefill_ms": 30.386400874704123,
+          "decode_ms": 794.0153039526194,
+          "total_ms": 824.4017048273236,
           "is_warmup": false
         },
         {
@@ -387,9 +387,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.498537864536047,
-          "decode_ms": 812.2357558459044,
-          "total_ms": 843.7342937104404,
+          "prefill_ms": 30.489836120977998,
+          "decode_ms": 791.7464098427445,
+          "total_ms": 822.2362459637225,
           "is_warmup": false
         },
         {
@@ -398,9 +398,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.103383051231503,
-          "decode_ms": 812.5382070429623,
-          "total_ms": 843.6415900941938,
+          "prefill_ms": 30.543847009539604,
+          "decode_ms": 795.3483259771019,
+          "total_ms": 825.8921729866415,
           "is_warmup": false
         },
         {
@@ -409,9 +409,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.40942712686956,
-          "decode_ms": 813.6234399862587,
-          "total_ms": 844.0328671131283,
+          "prefill_ms": 29.77267513051629,
+          "decode_ms": 795.3915670514107,
+          "total_ms": 825.164242181927,
           "is_warmup": false
         },
         {
@@ -420,9 +420,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.020037131384015,
-          "decode_ms": 814.0369390603155,
-          "total_ms": 845.0569761916995,
+          "prefill_ms": 30.546121997758746,
+          "decode_ms": 795.2145328745246,
+          "total_ms": 825.7606548722833,
           "is_warmup": false
         },
         {
@@ -431,9 +431,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.074368860572577,
-          "decode_ms": 813.7724809348583,
-          "total_ms": 844.8468497954309,
+          "prefill_ms": 30.482922913506627,
+          "decode_ms": 792.2465121373534,
+          "total_ms": 822.72943505086,
           "is_warmup": false
         },
         {
@@ -442,9 +442,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.12526494078338,
-          "decode_ms": 811.4455379545689,
-          "total_ms": 842.5708028953522,
+          "prefill_ms": 30.811170814558864,
+          "decode_ms": 794.6703680790961,
+          "total_ms": 825.4815388936549,
           "is_warmup": false
         },
         {
@@ -453,9 +453,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.151844887062907,
-          "decode_ms": 812.3113689944148,
-          "total_ms": 843.4632138814777,
+          "prefill_ms": 30.689713079482317,
+          "decode_ms": 792.623511981219,
+          "total_ms": 823.3132250607014,
           "is_warmup": false
         },
         {
@@ -464,9 +464,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.095368089154363,
-          "decode_ms": 814.3687141127884,
-          "total_ms": 845.4640822019428,
+          "prefill_ms": 30.429081059992313,
+          "decode_ms": 797.972037922591,
+          "total_ms": 828.4011189825833,
           "is_warmup": false
         },
         {
@@ -475,9 +475,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.168536050245166,
-          "decode_ms": 813.4592811111361,
-          "total_ms": 844.6278171613812,
+          "prefill_ms": 30.28947813436389,
+          "decode_ms": 788.9694690238684,
+          "total_ms": 819.2589471582323,
           "is_warmup": false
         },
         {
@@ -486,9 +486,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.119553837925196,
-          "decode_ms": 812.997441040352,
-          "total_ms": 844.1169948782772,
+          "prefill_ms": 29.984664171934128,
+          "decode_ms": 791.9323600362986,
+          "total_ms": 821.9170242082328,
           "is_warmup": false
         },
         {
@@ -497,9 +497,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.483967158943415,
-          "decode_ms": 812.6105631235987,
-          "total_ms": 843.0945302825421,
+          "prefill_ms": 29.56610592082143,
+          "decode_ms": 789.399818982929,
+          "total_ms": 818.9659249037504,
           "is_warmup": false
         },
         {
@@ -508,9 +508,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.15935903042555,
-          "decode_ms": 814.8660198785365,
-          "total_ms": 846.025378908962,
+          "prefill_ms": 30.478894943371415,
+          "decode_ms": 793.0332140531391,
+          "total_ms": 823.5121089965105,
           "is_warmup": false
         },
         {
@@ -519,9 +519,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.05639503337443,
-          "decode_ms": 813.1295298226178,
-          "total_ms": 844.1859248559922,
+          "prefill_ms": 30.501186847686768,
+          "decode_ms": 793.7041579280049,
+          "total_ms": 824.2053447756916,
           "is_warmup": false
         },
         {
@@ -530,9 +530,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.09191218391061,
-          "decode_ms": 811.3030390813947,
-          "total_ms": 842.3949512653053,
+          "prefill_ms": 30.421626986935735,
+          "decode_ms": 795.2370150014758,
+          "total_ms": 825.6586419884115,
           "is_warmup": false
         },
         {
@@ -541,9 +541,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.905250925570726,
-          "decode_ms": 816.4278320036829,
-          "total_ms": 847.3330829292536,
+          "prefill_ms": 30.570206930860877,
+          "decode_ms": 791.7907331138849,
+          "total_ms": 822.3609400447458,
           "is_warmup": false
         },
         {
@@ -552,9 +552,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.00035898387432,
-          "decode_ms": 819.6274589281529,
-          "total_ms": 850.6278179120272,
+          "prefill_ms": 30.526435002684593,
+          "decode_ms": 800.3904630895704,
+          "total_ms": 830.916898092255,
           "is_warmup": false
         },
         {
@@ -563,9 +563,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.026988988742232,
-          "decode_ms": 812.0159530080855,
-          "total_ms": 843.0429419968277,
+          "prefill_ms": 30.496578197926283,
+          "decode_ms": 794.6377370972186,
+          "total_ms": 825.1343152951449,
           "is_warmup": false
         },
         {
@@ -574,9 +574,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.131024938076735,
-          "decode_ms": 812.500825850293,
-          "total_ms": 843.6318507883698,
+          "prefill_ms": 30.52175580523908,
+          "decode_ms": 795.8075399510562,
+          "total_ms": 826.3292957562953,
           "is_warmup": false
         },
         {
@@ -585,9 +585,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.978136928752065,
-          "decode_ms": 812.7828361466527,
-          "total_ms": 843.7609730754048,
+          "prefill_ms": 31.23933798633516,
+          "decode_ms": 792.6395528484136,
+          "total_ms": 823.8788908347487,
           "is_warmup": false
         },
         {
@@ -596,9 +596,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.105628004297614,
-          "decode_ms": 812.7489250618964,
-          "total_ms": 843.8545530661941,
+          "prefill_ms": 30.049957102164626,
+          "decode_ms": 790.421332931146,
+          "total_ms": 820.4712900333107,
           "is_warmup": false
         },
         {
@@ -607,9 +607,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.910470988601446,
-          "decode_ms": 811.2438898533583,
-          "total_ms": 842.1543608419597,
+          "prefill_ms": 30.553184915333986,
+          "decode_ms": 792.2699959017336,
+          "total_ms": 822.8231808170676,
           "is_warmup": false
         },
         {
@@ -618,9 +618,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.994278844445944,
-          "decode_ms": 813.232054002583,
-          "total_ms": 844.226332847029,
+          "prefill_ms": 29.99186795204878,
+          "decode_ms": 792.9931899998337,
+          "total_ms": 822.9850579518825,
           "is_warmup": false
         },
         {
@@ -629,9 +629,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.367060961201787,
-          "decode_ms": 811.8078419938684,
-          "total_ms": 843.1749029550701,
+          "prefill_ms": 30.48238204792142,
+          "decode_ms": 793.0028070695698,
+          "total_ms": 823.4851891174912,
           "is_warmup": false
         },
         {
@@ -640,9 +640,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.987275997176766,
-          "decode_ms": 810.5398039333522,
-          "total_ms": 841.527079930529,
+          "prefill_ms": 31.115635065361857,
+          "decode_ms": 794.022117042914,
+          "total_ms": 825.1377521082759,
           "is_warmup": false
         },
         {
@@ -651,9 +651,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.01106989197433,
-          "decode_ms": 813.1016588304192,
-          "total_ms": 844.1127287223935,
+          "prefill_ms": 30.462584923952818,
+          "decode_ms": 793.5851840302348,
+          "total_ms": 824.0477689541876,
           "is_warmup": false
         },
         {
@@ -662,9 +662,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.000321032479405,
-          "decode_ms": 813.4074949193746,
-          "total_ms": 844.407815951854,
+          "prefill_ms": 29.952403157949448,
+          "decode_ms": 795.3974581323564,
+          "total_ms": 825.3498612903059,
           "is_warmup": false
         },
         {
@@ -673,9 +673,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.387819908559322,
-          "decode_ms": 811.7903899401426,
-          "total_ms": 843.178209848702,
+          "prefill_ms": 30.47859505750239,
+          "decode_ms": 792.0958690810949,
+          "total_ms": 822.5744641385972,
           "is_warmup": false
         },
         {
@@ -684,9 +684,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.9313100297004,
-          "decode_ms": 813.5007610544562,
-          "total_ms": 844.4320710841566,
+          "prefill_ms": 29.913449892774224,
+          "decode_ms": 793.1291339918971,
+          "total_ms": 823.0425838846713,
           "is_warmup": false
         },
         {
@@ -695,9 +695,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.097364146262407,
-          "decode_ms": 813.0588082130998,
-          "total_ms": 844.1561723593622,
+          "prefill_ms": 30.543998116627336,
+          "decode_ms": 793.5871270019561,
+          "total_ms": 824.1311251185834,
           "is_warmup": false
         },
         {
@@ -706,9 +706,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.364030972123146,
-          "decode_ms": 812.3381908517331,
-          "total_ms": 842.7022218238562,
+          "prefill_ms": 29.819652903825045,
+          "decode_ms": 796.4265958871692,
+          "total_ms": 826.2462487909943,
           "is_warmup": false
         },
         {
@@ -717,9 +717,9 @@
           "worker_id": 0,
           "cache_hit": false,
           "tier_hit": null,
-          "prefill_ms": 61.007149051874876,
-          "decode_ms": 810.8630329370499,
-          "total_ms": 871.8701819889247,
+          "prefill_ms": 60.24971720762551,
+          "decode_ms": 791.5367949754,
+          "total_ms": 851.7865121830255,
           "is_warmup": false
         },
         {
@@ -728,9 +728,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.982176074758172,
-          "decode_ms": 815.8151800744236,
-          "total_ms": 846.7973561491817,
+          "prefill_ms": 30.426357174292207,
+          "decode_ms": 800.1193120144308,
+          "total_ms": 830.545669188723,
           "is_warmup": false
         },
         {
@@ -739,9 +739,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.028804136440158,
-          "decode_ms": 813.0762910004705,
-          "total_ms": 844.1050951369107,
+          "prefill_ms": 29.9385879188776,
+          "decode_ms": 793.9142528921366,
+          "total_ms": 823.8528408110142,
           "is_warmup": false
         },
         {
@@ -750,9 +750,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.970974825322628,
-          "decode_ms": 819.3238389212638,
-          "total_ms": 850.2948137465864,
+          "prefill_ms": 29.969776049256325,
+          "decode_ms": 805.3822368383408,
+          "total_ms": 835.3520128875971,
           "is_warmup": false
         },
         {
@@ -761,9 +761,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.848484952002764,
-          "decode_ms": 809.6477428916842,
-          "total_ms": 840.4962278436869,
+          "prefill_ms": 30.683350982144475,
+          "decode_ms": 791.8923951219767,
+          "total_ms": 822.5757461041212,
           "is_warmup": false
         },
         {
@@ -772,9 +772,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.110367039218545,
-          "decode_ms": 811.856894986704,
-          "total_ms": 842.9672620259225,
+          "prefill_ms": 30.0058638677001,
+          "decode_ms": 791.6075978428125,
+          "total_ms": 821.6134617105126,
           "is_warmup": false
         },
         {
@@ -783,9 +783,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.915810959413648,
-          "decode_ms": 813.0481380503625,
-          "total_ms": 843.9639490097761,
+          "prefill_ms": 30.46350716613233,
+          "decode_ms": 795.8351320121437,
+          "total_ms": 826.2986391782761,
           "is_warmup": false
         },
         {
@@ -794,9 +794,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.96712799742818,
-          "decode_ms": 812.4375080224127,
-          "total_ms": 843.4046360198408,
+          "prefill_ms": 30.325005995109677,
+          "decode_ms": 796.563123119995,
+          "total_ms": 826.8881291151047,
           "is_warmup": false
         },
         {
@@ -805,9 +805,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.083377078175545,
-          "decode_ms": 811.8810700252652,
-          "total_ms": 842.9644471034408,
+          "prefill_ms": 30.16912192106247,
+          "decode_ms": 793.1870941538364,
+          "total_ms": 823.3562160748988,
           "is_warmup": false
         },
         {
@@ -816,9 +816,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.263025011867285,
-          "decode_ms": 811.7028339765966,
-          "total_ms": 842.9658589884639,
+          "prefill_ms": 30.399344861507416,
+          "decode_ms": 794.7861771099269,
+          "total_ms": 825.1855219714344,
           "is_warmup": false
         },
         {
@@ -827,9 +827,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.11436520703137,
-          "decode_ms": 812.5820909626782,
-          "total_ms": 843.6964561697096,
+          "prefill_ms": 30.65942507237196,
+          "decode_ms": 786.0587360337377,
+          "total_ms": 816.7181611061096,
           "is_warmup": false
         },
         {
@@ -838,9 +838,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.970674008131027,
-          "decode_ms": 812.2256090864539,
-          "total_ms": 843.1962830945849,
+          "prefill_ms": 29.94840615428984,
+          "decode_ms": 787.311855936423,
+          "total_ms": 817.2602620907128,
           "is_warmup": false
         },
         {
@@ -849,9 +849,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.995041131973267,
-          "decode_ms": 811.3879910670221,
-          "total_ms": 842.3830321989954,
+          "prefill_ms": 30.2828261628747,
+          "decode_ms": 784.3471709638834,
+          "total_ms": 814.6299971267581,
           "is_warmup": false
         },
         {
@@ -860,9 +860,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.41013183631003,
-          "decode_ms": 811.6302469279617,
-          "total_ms": 843.0403787642717,
+          "prefill_ms": 30.524420784786344,
+          "decode_ms": 793.0158309172839,
+          "total_ms": 823.5402517020702,
           "is_warmup": false
         },
         {
@@ -871,9 +871,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.061284942552447,
-          "decode_ms": 814.5020969677716,
-          "total_ms": 845.5633819103241,
+          "prefill_ms": 30.441464856266975,
+          "decode_ms": 792.3294778447598,
+          "total_ms": 822.7709427010268,
           "is_warmup": false
         },
         {
@@ -882,9 +882,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.41275404393673,
-          "decode_ms": 813.6883941479027,
-          "total_ms": 844.1011481918395,
+          "prefill_ms": 29.314592014998198,
+          "decode_ms": 789.3811038229614,
+          "total_ms": 818.6956958379596,
           "is_warmup": false
         },
         {
@@ -893,9 +893,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.96404206007719,
-          "decode_ms": 811.1104881390929,
-          "total_ms": 842.0745301991701,
+          "prefill_ms": 31.021908158436418,
+          "decode_ms": 792.5929147750139,
+          "total_ms": 823.6148229334503,
           "is_warmup": false
         },
         {
@@ -904,9 +904,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.21971315704286,
-          "decode_ms": 811.7478489875793,
-          "total_ms": 842.9675621446222,
+          "prefill_ms": 30.561912106350064,
+          "decode_ms": 791.7343371082097,
+          "total_ms": 822.2962492145598,
           "is_warmup": false
         },
         {
@@ -915,9 +915,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.17052000015974,
-          "decode_ms": 813.1181800272316,
-          "total_ms": 844.2887000273913,
+          "prefill_ms": 30.679393094033003,
+          "decode_ms": 798.6595630645752,
+          "total_ms": 829.3389561586082,
           "is_warmup": false
         },
         {
@@ -926,9 +926,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.232386827468872,
-          "decode_ms": 816.4130358491093,
-          "total_ms": 847.6454226765782,
+          "prefill_ms": 30.689320992678404,
+          "decode_ms": 791.9466069433838,
+          "total_ms": 822.6359279360622,
           "is_warmup": false
         },
         {
@@ -937,9 +937,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.090710079297423,
-          "decode_ms": 810.5855798348784,
-          "total_ms": 841.6762899141759,
+          "prefill_ms": 30.962546123191714,
+          "decode_ms": 797.5691079627723,
+          "total_ms": 828.531654085964,
           "is_warmup": false
         },
         {
@@ -948,9 +948,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 38.80375809967518,
-          "decode_ms": 811.6576690226793,
-          "total_ms": 850.4614271223545,
+          "prefill_ms": 30.57957487180829,
+          "decode_ms": 808.5658240597695,
+          "total_ms": 839.1453989315778,
           "is_warmup": false
         },
         {
@@ -959,9 +959,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.03396389633417,
-          "decode_ms": 812.4578059650958,
-          "total_ms": 843.4917698614299,
+          "prefill_ms": 30.020041158422828,
+          "decode_ms": 785.9538381453604,
+          "total_ms": 815.9738793037832,
           "is_warmup": false
         },
         {
@@ -970,9 +970,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.031698919832706,
-          "decode_ms": 811.5106630139053,
-          "total_ms": 842.542361933738,
+          "prefill_ms": 30.03352601081133,
+          "decode_ms": 786.8742521386594,
+          "total_ms": 816.9077781494707,
           "is_warmup": false
         },
         {
@@ -981,9 +981,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.002304051071405,
-          "decode_ms": 812.9350352101028,
-          "total_ms": 843.9373392611742,
+          "prefill_ms": 29.98349186964333,
+          "decode_ms": 789.6454629953951,
+          "total_ms": 819.6289548650384,
           "is_warmup": false
         },
         {
@@ -992,9 +992,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.22109593823552,
-          "decode_ms": 809.7550261300057,
-          "total_ms": 840.9761220682412,
+          "prefill_ms": 30.57047794573009,
+          "decode_ms": 786.2572299782187,
+          "total_ms": 816.8277079239488,
           "is_warmup": false
         },
         {
@@ -1003,9 +1003,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.254354933276772,
-          "decode_ms": 812.1896809898317,
-          "total_ms": 842.4440359231085,
+          "prefill_ms": 29.621480964124203,
+          "decode_ms": 788.5492669884115,
+          "total_ms": 818.1707479525357,
           "is_warmup": false
         },
         {
@@ -1014,9 +1014,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.985252000391483,
-          "decode_ms": 813.2071481086314,
-          "total_ms": 844.1924001090229,
+          "prefill_ms": 29.977411031723022,
+          "decode_ms": 784.7110170405358,
+          "total_ms": 814.6884280722588,
           "is_warmup": false
         },
         {
@@ -1025,9 +1025,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.941850040107965,
-          "decode_ms": 811.938437866047,
-          "total_ms": 842.880287906155,
+          "prefill_ms": 30.04131093621254,
+          "decode_ms": 783.9319691993296,
+          "total_ms": 813.9732801355422,
           "is_warmup": false
         },
         {
@@ -1036,9 +1036,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.933934962376952,
-          "decode_ms": 810.5642499867827,
-          "total_ms": 841.4981849491596,
+          "prefill_ms": 30.070084845647216,
+          "decode_ms": 788.9748089946806,
+          "total_ms": 819.0448938403279,
           "is_warmup": false
         },
         {
@@ -1047,9 +1047,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.98516189493239,
-          "decode_ms": 812.1084680315107,
-          "total_ms": 843.0936299264431,
+          "prefill_ms": 30.12095089070499,
+          "decode_ms": 784.9248249549419,
+          "total_ms": 815.0457758456469,
           "is_warmup": false
         },
         {
@@ -1058,9 +1058,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.994129134342074,
-          "decode_ms": 813.1354539655149,
-          "total_ms": 844.129583099857,
+          "prefill_ms": 30.01844510436058,
+          "decode_ms": 784.046467859298,
+          "total_ms": 814.0649129636586,
           "is_warmup": false
         },
         {
@@ -1069,9 +1069,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.029905891045928,
-          "decode_ms": 813.0796570330858,
-          "total_ms": 844.1095629241318,
+          "prefill_ms": 29.943883884698153,
+          "decode_ms": 789.2779449466616,
+          "total_ms": 819.2218288313597,
           "is_warmup": false
         },
         {
@@ -1080,9 +1080,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.948993982747197,
-          "decode_ms": 809.2333730310202,
-          "total_ms": 840.1823670137674,
+          "prefill_ms": 30.47998296096921,
+          "decode_ms": 795.3677368350327,
+          "total_ms": 825.8477197960019,
           "is_warmup": false
         },
         {
@@ -1091,9 +1091,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.035457039251924,
-          "decode_ms": 812.5411730725318,
-          "total_ms": 843.5766301117837,
+          "prefill_ms": 30.809064162895083,
+          "decode_ms": 794.5992189925164,
+          "total_ms": 825.4082831554115,
           "is_warmup": false
         },
         {
@@ -1102,9 +1102,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.917995143681765,
-          "decode_ms": 810.2769679389894,
-          "total_ms": 841.1949630826712,
+          "prefill_ms": 30.53114004433155,
+          "decode_ms": 788.6225390248001,
+          "total_ms": 819.1536790691316,
           "is_warmup": false
         },
         {
@@ -1113,9 +1113,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.797187937423587,
-          "decode_ms": 811.1818030010909,
-          "total_ms": 841.9789909385145,
+          "prefill_ms": 29.833555920049548,
+          "decode_ms": 789.5357399247587,
+          "total_ms": 819.3692958448082,
           "is_warmup": false
         },
         {
@@ -1124,9 +1124,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.976244946941733,
-          "decode_ms": 816.152926068753,
-          "total_ms": 847.1291710156947,
+          "prefill_ms": 29.924307018518448,
+          "decode_ms": 791.7488291859627,
+          "total_ms": 821.6731362044811,
           "is_warmup": false
         },
         {
@@ -1135,9 +1135,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.308090081438422,
-          "decode_ms": 819.0949680283666,
-          "total_ms": 850.403058109805,
+          "prefill_ms": 30.22265899926424,
+          "decode_ms": 801.1802169494331,
+          "total_ms": 831.4028759486973,
           "is_warmup": false
         },
         {
@@ -1146,9 +1146,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.810903990641236,
-          "decode_ms": 810.9554259572178,
-          "total_ms": 841.766329947859,
+          "prefill_ms": 30.411605024710298,
+          "decode_ms": 795.3649621922523,
+          "total_ms": 825.7765672169626,
           "is_warmup": false
         },
         {
@@ -1157,9 +1157,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.936659779399633,
-          "decode_ms": 813.6133330408484,
-          "total_ms": 844.549992820248,
+          "prefill_ms": 29.996372992172837,
+          "decode_ms": 794.6354472078383,
+          "total_ms": 824.6318202000111,
           "is_warmup": false
         },
         {
@@ -1168,9 +1168,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.974671943113208,
-          "decode_ms": 809.7265309188515,
-          "total_ms": 840.7012028619647,
+          "prefill_ms": 30.38152796216309,
+          "decode_ms": 790.9023649990559,
+          "total_ms": 821.283892961219,
           "is_warmup": false
         },
         {
@@ -1179,9 +1179,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.352801084518433,
-          "decode_ms": 812.3411869164556,
-          "total_ms": 842.6939880009741,
+          "prefill_ms": 29.286746168509126,
+          "decode_ms": 793.3605050202459,
+          "total_ms": 822.647251188755,
           "is_warmup": false
         },
         {
@@ -1190,9 +1190,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.03869198821485,
-          "decode_ms": 812.687809811905,
-          "total_ms": 843.7265018001199,
+          "prefill_ms": 30.374616151675582,
+          "decode_ms": 792.137211188674,
+          "total_ms": 822.5118273403496,
           "is_warmup": false
         },
         {
@@ -1201,9 +1201,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.98688507452607,
-          "decode_ms": 811.7156981024891,
-          "total_ms": 842.7025831770152,
+          "prefill_ms": 29.908817959949374,
+          "decode_ms": 793.1331470608711,
+          "total_ms": 823.0419650208205,
           "is_warmup": false
         }
       ]
@@ -1216,10 +1216,10 @@
       "gpu_hits": 90,
       "cpu_hits": 0,
       "disk_hits": 0,
-      "avg_prefill_ms": 32.5274846688109,
-      "avg_total_ms": 842.6567164151684,
-      "p95_total_ms": 855.3589393850416,
-      "prefill_speedup": 1.960706353862611,
+      "avg_prefill_ms": 32.053400392300986,
+      "avg_total_ms": 829.8061023662357,
+      "p95_total_ms": 842.956605553627,
+      "prefill_speedup": 1.94581123594624,
       "total_evictions": 0,
       "total_transfer_ms": 0.0,
       "routing_efficiency": 0.0,
@@ -1230,9 +1230,9 @@
           "worker_id": 0,
           "cache_hit": false,
           "tier_hit": null,
-          "prefill_ms": 61.85293197631836,
-          "decode_ms": 805.8178899809718,
-          "total_ms": 867.6708219572902,
+          "prefill_ms": 60.516892932355404,
+          "decode_ms": 794.7011210490018,
+          "total_ms": 855.2180139813572,
           "is_warmup": true
         },
         {
@@ -1241,9 +1241,9 @@
           "worker_id": 0,
           "cache_hit": false,
           "tier_hit": null,
-          "prefill_ms": 60.6454280205071,
-          "decode_ms": 810.731183970347,
-          "total_ms": 871.3766119908541,
+          "prefill_ms": 58.96828486584127,
+          "decode_ms": 798.7954150885344,
+          "total_ms": 857.7636999543756,
           "is_warmup": true
         },
         {
@@ -1252,9 +1252,9 @@
           "worker_id": 0,
           "cache_hit": false,
           "tier_hit": null,
-          "prefill_ms": 60.19058101810515,
-          "decode_ms": 810.1780018769205,
-          "total_ms": 870.3685828950256,
+          "prefill_ms": 59.37951011583209,
+          "decode_ms": 799.929701955989,
+          "total_ms": 859.3092120718211,
           "is_warmup": true
         },
         {
@@ -1263,9 +1263,9 @@
           "worker_id": 0,
           "cache_hit": false,
           "tier_hit": null,
-          "prefill_ms": 60.87514106184244,
-          "decode_ms": 817.4644359387457,
-          "total_ms": 878.3395770005882,
+          "prefill_ms": 59.525324031710625,
+          "decode_ms": 798.3051110059023,
+          "total_ms": 857.8304350376129,
           "is_warmup": true
         },
         {
@@ -1274,9 +1274,9 @@
           "worker_id": 0,
           "cache_hit": false,
           "tier_hit": null,
-          "prefill_ms": 60.57258113287389,
-          "decode_ms": 818.274020915851,
-          "total_ms": 878.8466020487249,
+          "prefill_ms": 60.047307750210166,
+          "decode_ms": 801.1194840073586,
+          "total_ms": 861.1667917575687,
           "is_warmup": true
         },
         {
@@ -1285,9 +1285,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.324972165748477,
-          "decode_ms": 809.4019501004368,
-          "total_ms": 840.7269222661853,
+          "prefill_ms": 30.687635065987706,
+          "decode_ms": 797.8359868284315,
+          "total_ms": 828.5236218944192,
           "is_warmup": false
         },
         {
@@ -1296,9 +1296,9 @@
           "worker_id": 0,
           "cache_hit": false,
           "tier_hit": null,
-          "prefill_ms": 61.11145601607859,
-          "decode_ms": 809.5004458446056,
-          "total_ms": 870.6119018606842,
+          "prefill_ms": 59.86446305178106,
+          "decode_ms": 803.3045290503651,
+          "total_ms": 863.1689921021461,
           "is_warmup": false
         },
         {
@@ -1307,9 +1307,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.024856958538294,
-          "decode_ms": 808.6685289163142,
-          "total_ms": 839.6933858748525,
+          "prefill_ms": 30.61392600648105,
+          "decode_ms": 797.1826770808548,
+          "total_ms": 827.7966030873358,
           "is_warmup": false
         },
         {
@@ -1318,9 +1318,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.87994293309748,
-          "decode_ms": 809.0239590965211,
-          "total_ms": 839.9039020296186,
+          "prefill_ms": 30.80120892263949,
+          "decode_ms": 797.3845258820802,
+          "total_ms": 828.1857348047197,
           "is_warmup": false
         },
         {
@@ -1329,9 +1329,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.103224027901888,
-          "decode_ms": 808.0278718844056,
-          "total_ms": 839.1310959123075,
+          "prefill_ms": 30.5486221332103,
+          "decode_ms": 798.1238688807935,
+          "total_ms": 828.6724910140038,
           "is_warmup": false
         },
         {
@@ -1340,9 +1340,9 @@
           "worker_id": 0,
           "cache_hit": false,
           "tier_hit": null,
-          "prefill_ms": 60.13256195001304,
-          "decode_ms": 808.8785349391401,
-          "total_ms": 869.0110968891531,
+          "prefill_ms": 59.09131793305278,
+          "decode_ms": 794.3398000206798,
+          "total_ms": 853.4311179537326,
           "is_warmup": false
         },
         {
@@ -1351,9 +1351,9 @@
           "worker_id": 0,
           "cache_hit": false,
           "tier_hit": null,
-          "prefill_ms": 61.012940015643835,
-          "decode_ms": 809.050097130239,
-          "total_ms": 870.0630371458828,
+          "prefill_ms": 59.31401578709483,
+          "decode_ms": 797.2748300526291,
+          "total_ms": 856.588845839724,
           "is_warmup": false
         },
         {
@@ -1362,9 +1362,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.96811007708311,
-          "decode_ms": 808.2809788174927,
-          "total_ms": 839.2490888945758,
+          "prefill_ms": 30.555775854736567,
+          "decode_ms": 794.5415510330349,
+          "total_ms": 825.0973268877715,
           "is_warmup": false
         },
         {
@@ -1373,9 +1373,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.91912786476314,
-          "decode_ms": 807.0072229020298,
-          "total_ms": 837.9263507667929,
+          "prefill_ms": 30.90894198976457,
+          "decode_ms": 794.9010678566992,
+          "total_ms": 825.8100098464638,
           "is_warmup": false
         },
         {
@@ -1384,9 +1384,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.54425392858684,
-          "decode_ms": 809.8238888196647,
-          "total_ms": 841.3681427482516,
+          "prefill_ms": 30.620136996731162,
+          "decode_ms": 794.1416068933904,
+          "total_ms": 824.7617438901216,
           "is_warmup": false
         },
         {
@@ -1395,9 +1395,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.89490090496838,
-          "decode_ms": 806.4440130256116,
-          "total_ms": 837.33891393058,
+          "prefill_ms": 30.568731017410755,
+          "decode_ms": 792.839233065024,
+          "total_ms": 823.4079640824348,
           "is_warmup": false
         },
         {
@@ -1406,9 +1406,9 @@
           "worker_id": 0,
           "cache_hit": false,
           "tier_hit": null,
-          "prefill_ms": 60.63828314654529,
-          "decode_ms": 815.9460099413991,
-          "total_ms": 876.5842930879444,
+          "prefill_ms": 59.59277111105621,
+          "decode_ms": 798.6087431199849,
+          "total_ms": 858.2015142310411,
           "is_warmup": false
         },
         {
@@ -1417,9 +1417,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.15609404630959,
-          "decode_ms": 812.6311460509896,
-          "total_ms": 843.7872400972992,
+          "prefill_ms": 30.597564997151494,
+          "decode_ms": 794.3739949259907,
+          "total_ms": 824.9715599231422,
           "is_warmup": false
         },
         {
@@ -1428,9 +1428,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.919868033379316,
-          "decode_ms": 809.1457318514585,
-          "total_ms": 840.0655998848379,
+          "prefill_ms": 30.622100923210382,
+          "decode_ms": 796.2508711498231,
+          "total_ms": 826.8729720730335,
           "is_warmup": false
         },
         {
@@ -1439,9 +1439,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.94692900776863,
-          "decode_ms": 808.9688080362976,
-          "total_ms": 839.9157370440662,
+          "prefill_ms": 30.708905076608062,
+          "decode_ms": 797.5477140862495,
+          "total_ms": 828.2566191628575,
           "is_warmup": false
         },
         {
@@ -1450,9 +1450,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.19059791788459,
-          "decode_ms": 809.3981870915741,
-          "total_ms": 840.5887850094587,
+          "prefill_ms": 30.060002114623785,
+          "decode_ms": 796.9586651306599,
+          "total_ms": 827.0186672452837,
           "is_warmup": false
         },
         {
@@ -1461,9 +1461,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.773402890190482,
-          "decode_ms": 813.2810299284756,
-          "total_ms": 844.0544328186661,
+          "prefill_ms": 30.61170200817287,
+          "decode_ms": 795.6815380603075,
+          "total_ms": 826.2932400684804,
           "is_warmup": false
         },
         {
@@ -1472,9 +1472,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.060313107445836,
-          "decode_ms": 816.3480770308524,
-          "total_ms": 847.4083901382983,
+          "prefill_ms": 30.64663801342249,
+          "decode_ms": 804.1778050828725,
+          "total_ms": 834.824443096295,
           "is_warmup": false
         },
         {
@@ -1483,9 +1483,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.065682880580425,
-          "decode_ms": 813.4241600055248,
-          "total_ms": 844.4898428861052,
+          "prefill_ms": 30.49346897751093,
+          "decode_ms": 797.0853529404849,
+          "total_ms": 827.5788219179958,
           "is_warmup": false
         },
         {
@@ -1494,9 +1494,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.36268211528659,
-          "decode_ms": 810.0077451672405,
-          "total_ms": 841.3704272825271,
+          "prefill_ms": 30.17200413160026,
+          "decode_ms": 807.536442996934,
+          "total_ms": 837.7084471285343,
           "is_warmup": false
         },
         {
@@ -1505,9 +1505,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.957227805629373,
-          "decode_ms": 809.2586740385741,
-          "total_ms": 840.2159018442035,
+          "prefill_ms": 30.96347488462925,
+          "decode_ms": 797.3594788927585,
+          "total_ms": 828.3229537773877,
           "is_warmup": false
         },
         {
@@ -1516,9 +1516,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.300825998187065,
-          "decode_ms": 809.8177169449627,
-          "total_ms": 841.1185429431498,
+          "prefill_ms": 30.702654039487243,
+          "decode_ms": 798.0381881352514,
+          "total_ms": 828.7408421747386,
           "is_warmup": false
         },
         {
@@ -1527,9 +1527,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.19546391442418,
-          "decode_ms": 808.955674059689,
-          "total_ms": 839.1511379741132,
+          "prefill_ms": 30.05605493672192,
+          "decode_ms": 798.5326799098402,
+          "total_ms": 828.5887348465621,
           "is_warmup": false
         },
         {
@@ -1538,9 +1538,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.496514100581408,
-          "decode_ms": 809.3311011325568,
-          "total_ms": 840.8276152331382,
+          "prefill_ms": 30.805697897449136,
+          "decode_ms": 794.4219110067934,
+          "total_ms": 825.2276089042425,
           "is_warmup": false
         },
         {
@@ -1549,9 +1549,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.923814978450537,
-          "decode_ms": 808.7918360251933,
-          "total_ms": 839.7156510036439,
+          "prefill_ms": 30.7121598161757,
+          "decode_ms": 797.2620490472764,
+          "total_ms": 827.9742088634521,
           "is_warmup": false
         },
         {
@@ -1560,9 +1560,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.343786977231503,
-          "decode_ms": 807.9106551595032,
-          "total_ms": 839.2544421367347,
+          "prefill_ms": 30.21347103640437,
+          "decode_ms": 796.5717890765518,
+          "total_ms": 826.7852601129562,
           "is_warmup": false
         },
         {
@@ -1571,9 +1571,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.88591410778463,
-          "decode_ms": 809.7067680209875,
-          "total_ms": 840.5926821287721,
+          "prefill_ms": 30.18788294866681,
+          "decode_ms": 797.7167658973485,
+          "total_ms": 827.9046488460153,
           "is_warmup": false
         },
         {
@@ -1582,9 +1582,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.9614771977067,
-          "decode_ms": 810.0839091930538,
-          "total_ms": 841.0453863907605,
+          "prefill_ms": 30.75158502906561,
+          "decode_ms": 794.9710730463266,
+          "total_ms": 825.7226580753922,
           "is_warmup": false
         },
         {
@@ -1593,9 +1593,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.540638068690896,
-          "decode_ms": 809.728569118306,
-          "total_ms": 841.2692071869969,
+          "prefill_ms": 30.142256058752537,
+          "decode_ms": 791.8656629044563,
+          "total_ms": 822.0079189632088,
           "is_warmup": false
         },
         {
@@ -1604,9 +1604,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.16233483888209,
-          "decode_ms": 809.6458839718252,
-          "total_ms": 840.8082188107073,
+          "prefill_ms": 30.643991893157363,
+          "decode_ms": 795.9563590120524,
+          "total_ms": 826.6003509052098,
           "is_warmup": false
         },
         {
@@ -1615,9 +1615,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.31771397218108,
-          "decode_ms": 810.1539800409228,
-          "total_ms": 840.4716940131038,
+          "prefill_ms": 29.985612025484443,
+          "decode_ms": 796.8680060002953,
+          "total_ms": 826.8536180257797,
           "is_warmup": false
         },
         {
@@ -1626,9 +1626,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.995169887319207,
-          "decode_ms": 809.6394520252943,
-          "total_ms": 840.6346219126135,
+          "prefill_ms": 30.84810613654554,
+          "decode_ms": 797.8678201325238,
+          "total_ms": 828.7159262690693,
           "is_warmup": false
         },
         {
@@ -1637,9 +1637,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.9922241140157,
-          "decode_ms": 809.0874820481986,
-          "total_ms": 840.0797061622143,
+          "prefill_ms": 30.110557796433568,
+          "decode_ms": 793.5848510824144,
+          "total_ms": 823.695408878848,
           "is_warmup": false
         },
         {
@@ -1648,9 +1648,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.9266010299325,
-          "decode_ms": 812.5242860987782,
-          "total_ms": 843.4508871287107,
+          "prefill_ms": 30.617451993748546,
+          "decode_ms": 798.8200448453426,
+          "total_ms": 829.4374968390912,
           "is_warmup": false
         },
         {
@@ -1659,9 +1659,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.80414980649948,
-          "decode_ms": 808.7886390276253,
-          "total_ms": 839.5927888341248,
+          "prefill_ms": 30.525087844580412,
+          "decode_ms": 794.8970340657979,
+          "total_ms": 825.4221219103783,
           "is_warmup": false
         },
         {
@@ -1670,9 +1670,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.847452115267515,
-          "decode_ms": 816.0201900172979,
-          "total_ms": 846.8676421325654,
+          "prefill_ms": 30.678476905450225,
+          "decode_ms": 798.6892280168831,
+          "total_ms": 829.3677049223334,
           "is_warmup": false
         },
         {
@@ -1681,9 +1681,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.800182837992907,
-          "decode_ms": 808.8378421962261,
-          "total_ms": 839.638025034219,
+          "prefill_ms": 30.53881390951574,
+          "decode_ms": 795.3130479436368,
+          "total_ms": 825.8518618531525,
           "is_warmup": false
         },
         {
@@ -1692,9 +1692,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.007714103907347,
-          "decode_ms": 809.3369221314788,
-          "total_ms": 840.3446362353861,
+          "prefill_ms": 30.634895199909806,
+          "decode_ms": 802.9996689874679,
+          "total_ms": 833.6345641873777,
           "is_warmup": false
         },
         {
@@ -1703,9 +1703,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.021539820358157,
-          "decode_ms": 809.0826331172138,
-          "total_ms": 840.104172937572,
+          "prefill_ms": 30.60042019933462,
+          "decode_ms": 793.5679289512336,
+          "total_ms": 824.1683491505682,
           "is_warmup": false
         },
         {
@@ -1714,9 +1714,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.016330001875758,
-          "decode_ms": 811.2088579218835,
-          "total_ms": 842.2251879237592,
+          "prefill_ms": 30.623022932559252,
+          "decode_ms": 796.6680699028075,
+          "total_ms": 827.2910928353667,
           "is_warmup": false
         },
         {
@@ -1725,9 +1725,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.867710011079907,
-          "decode_ms": 808.5850460920483,
-          "total_ms": 839.4527561031282,
+          "prefill_ms": 30.192452017217875,
+          "decode_ms": 796.4125378057361,
+          "total_ms": 826.6049898229539,
           "is_warmup": false
         },
         {
@@ -1736,9 +1736,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.877928948029876,
-          "decode_ms": 806.8142798729241,
-          "total_ms": 837.692208820954,
+          "prefill_ms": 30.435258988291025,
+          "decode_ms": 796.8491108622402,
+          "total_ms": 827.2843698505312,
           "is_warmup": false
         },
         {
@@ -1747,9 +1747,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.879892874509096,
-          "decode_ms": 808.4515240043402,
-          "total_ms": 839.3314168788493,
+          "prefill_ms": 30.644954182207584,
+          "decode_ms": 796.0649840533733,
+          "total_ms": 826.7099382355809,
           "is_warmup": false
         },
         {
@@ -1758,9 +1758,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.871436931192875,
-          "decode_ms": 808.6388069204986,
-          "total_ms": 839.5102438516915,
+          "prefill_ms": 30.572176910936832,
+          "decode_ms": 793.1020918767899,
+          "total_ms": 823.6742687877268,
           "is_warmup": false
         },
         {
@@ -1769,9 +1769,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.055303057655692,
-          "decode_ms": 809.655942954123,
-          "total_ms": 840.7112460117787,
+          "prefill_ms": 30.06016300059855,
+          "decode_ms": 794.5932610891759,
+          "total_ms": 824.6534240897745,
           "is_warmup": false
         },
         {
@@ -1780,9 +1780,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.907585052773356,
-          "decode_ms": 807.9109361860901,
-          "total_ms": 838.8185212388635,
+          "prefill_ms": 30.69708193652332,
+          "decode_ms": 798.0010218452662,
+          "total_ms": 828.6981037817895,
           "is_warmup": false
         },
         {
@@ -1791,9 +1791,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.9374809730798,
-          "decode_ms": 808.2521590404212,
-          "total_ms": 839.189640013501,
+          "prefill_ms": 30.17887589521706,
+          "decode_ms": 795.1256840024143,
+          "total_ms": 825.3045598976314,
           "is_warmup": false
         },
         {
@@ -1802,9 +1802,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.834316974505782,
-          "decode_ms": 809.4111711252481,
-          "total_ms": 840.2454880997539,
+          "prefill_ms": 30.698735965415835,
+          "decode_ms": 797.126614023,
+          "total_ms": 827.8253499884158,
           "is_warmup": false
         },
         {
@@ -1813,9 +1813,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.00065002217889,
-          "decode_ms": 809.3422420788556,
-          "total_ms": 840.3428921010345,
+          "prefill_ms": 30.880809063091874,
+          "decode_ms": 797.5434891413897,
+          "total_ms": 828.4242982044816,
           "is_warmup": false
         },
         {
@@ -1824,9 +1824,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.255436897277832,
-          "decode_ms": 808.655068045482,
-          "total_ms": 838.9105049427599,
+          "prefill_ms": 30.50683392211795,
+          "decode_ms": 798.370957840234,
+          "total_ms": 828.877791762352,
           "is_warmup": false
         },
         {
@@ -1835,9 +1835,9 @@
           "worker_id": 0,
           "cache_hit": false,
           "tier_hit": null,
-          "prefill_ms": 60.641129268333316,
-          "decode_ms": 809.2872188426554,
-          "total_ms": 869.9283481109887,
+          "prefill_ms": 59.19916904531419,
+          "decode_ms": 797.66028909944,
+          "total_ms": 856.8594581447542,
           "is_warmup": false
         },
         {
@@ -1846,9 +1846,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.844926834106445,
-          "decode_ms": 814.1570808365941,
-          "total_ms": 845.0020076707006,
+          "prefill_ms": 30.725476099178195,
+          "decode_ms": 794.7098209988326,
+          "total_ms": 825.4352970980108,
           "is_warmup": false
         },
         {
@@ -1857,9 +1857,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.917063122615218,
-          "decode_ms": 809.1151940170676,
-          "total_ms": 840.0322571396828,
+          "prefill_ms": 30.776642030104995,
+          "decode_ms": 798.7646199762821,
+          "total_ms": 829.5412620063871,
           "is_warmup": false
         },
         {
@@ -1868,9 +1868,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.93139990232885,
-          "decode_ms": 818.5766148380935,
-          "total_ms": 849.5080147404224,
+          "prefill_ms": 30.570172937586904,
+          "decode_ms": 802.9084759764373,
+          "total_ms": 833.4786489140242,
           "is_warmup": false
         },
         {
@@ -1879,9 +1879,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.14669513888657,
-          "decode_ms": 805.8621869422495,
-          "total_ms": 837.0088820811361,
+          "prefill_ms": 30.60179203748703,
+          "decode_ms": 794.3452741019428,
+          "total_ms": 824.9470661394298,
           "is_warmup": false
         },
         {
@@ -1890,9 +1890,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.873660929501057,
-          "decode_ms": 807.4757258873433,
-          "total_ms": 838.3493868168443,
+          "prefill_ms": 30.666986014693975,
+          "decode_ms": 802.9739398043603,
+          "total_ms": 833.6409258190542,
           "is_warmup": false
         },
         {
@@ -1901,9 +1901,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.862208921462297,
-          "decode_ms": 809.3310708645731,
-          "total_ms": 840.1932797860354,
+          "prefill_ms": 30.41756502352655,
+          "decode_ms": 799.5684738270938,
+          "total_ms": 829.9860388506204,
           "is_warmup": false
         },
         {
@@ -1912,9 +1912,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.892485985532403,
-          "decode_ms": 810.2525270078331,
-          "total_ms": 841.1450129933655,
+          "prefill_ms": 31.12554899416864,
+          "decode_ms": 800.1090527977794,
+          "total_ms": 831.2346017919481,
           "is_warmup": false
         },
         {
@@ -1923,9 +1923,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.565641121938825,
-          "decode_ms": 811.7901331279427,
-          "total_ms": 842.3557742498815,
+          "prefill_ms": 29.995850985869765,
+          "decode_ms": 800.7175291422755,
+          "total_ms": 830.7133801281452,
           "is_warmup": false
         },
         {
@@ -1934,9 +1934,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.212439062073827,
-          "decode_ms": 809.9774380680174,
-          "total_ms": 841.1898771300912,
+          "prefill_ms": 30.02097806893289,
+          "decode_ms": 797.2624800167978,
+          "total_ms": 827.2834580857307,
           "is_warmup": false
         },
         {
@@ -1945,9 +1945,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.02485602721572,
-          "decode_ms": 810.4935500305146,
-          "total_ms": 841.5184060577303,
+          "prefill_ms": 30.705488054081798,
+          "decode_ms": 797.1543970052153,
+          "total_ms": 827.8598850592971,
           "is_warmup": false
         },
         {
@@ -1956,9 +1956,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.901544028893113,
-          "decode_ms": 809.2923779040575,
-          "total_ms": 840.1939219329506,
+          "prefill_ms": 30.146615114063025,
+          "decode_ms": 803.2841847743839,
+          "total_ms": 833.4307998884469,
           "is_warmup": false
         },
         {
@@ -1967,9 +1967,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.270729145035148,
-          "decode_ms": 808.8601040653884,
-          "total_ms": 840.1308332104236,
+          "prefill_ms": 31.005742959678173,
+          "decode_ms": 800.4357090685517,
+          "total_ms": 831.4414520282298,
           "is_warmup": false
         },
         {
@@ -1978,9 +1978,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.956397065892816,
-          "decode_ms": 810.2093648631126,
-          "total_ms": 841.1657619290054,
+          "prefill_ms": 30.160451075062156,
+          "decode_ms": 798.4560690820217,
+          "total_ms": 828.6165201570839,
           "is_warmup": false
         },
         {
@@ -1989,9 +1989,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.976474983617663,
-          "decode_ms": 810.9040830750018,
-          "total_ms": 841.8805580586195,
+          "prefill_ms": 30.714265070855618,
+          "decode_ms": 796.5229661203921,
+          "total_ms": 827.2372311912477,
           "is_warmup": false
         },
         {
@@ -2000,9 +2000,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.178142013028264,
-          "decode_ms": 808.5797948297113,
-          "total_ms": 838.7579368427396,
+          "prefill_ms": 29.991382965818048,
+          "decode_ms": 802.1429949440062,
+          "total_ms": 832.1343779098243,
           "is_warmup": false
         },
         {
@@ -2011,9 +2011,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.170370057225227,
-          "decode_ms": 805.4363147821277,
-          "total_ms": 836.606684839353,
+          "prefill_ms": 30.715205939486623,
+          "decode_ms": 798.0938858818263,
+          "total_ms": 828.8090918213129,
           "is_warmup": false
         },
         {
@@ -2022,9 +2022,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.855296878144145,
-          "decode_ms": 810.8309560921043,
-          "total_ms": 841.6862529702485,
+          "prefill_ms": 30.152356019243598,
+          "decode_ms": 796.1373100988567,
+          "total_ms": 826.2896661181003,
           "is_warmup": false
         },
         {
@@ -2033,9 +2033,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.967287020757794,
-          "decode_ms": 809.1598090250045,
-          "total_ms": 840.1270960457623,
+          "prefill_ms": 31.28576115705073,
+          "decode_ms": 795.6355551723391,
+          "total_ms": 826.9213163293898,
           "is_warmup": false
         },
         {
@@ -2044,9 +2044,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.89104313403368,
-          "decode_ms": 814.2611370421946,
-          "total_ms": 845.1521801762283,
+          "prefill_ms": 30.105147045105696,
+          "decode_ms": 798.8679849077016,
+          "total_ms": 828.9731319528073,
           "is_warmup": false
         },
         {
@@ -2055,9 +2055,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.35465714149177,
-          "decode_ms": 817.6249319221824,
-          "total_ms": 848.9795890636742,
+          "prefill_ms": 30.67312715575099,
+          "decode_ms": 798.2353831175715,
+          "total_ms": 828.9085102733225,
           "is_warmup": false
         },
         {
@@ -2066,9 +2066,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.874271877110004,
-          "decode_ms": 809.4603149220347,
-          "total_ms": 840.3345867991447,
+          "prefill_ms": 30.652557965368032,
+          "decode_ms": 800.8555890992284,
+          "total_ms": 831.5081470645964,
           "is_warmup": false
         },
         {
@@ -2077,9 +2077,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.003135023638606,
-          "decode_ms": 813.3624750189483,
-          "total_ms": 844.3656100425869,
+          "prefill_ms": 30.174568062648177,
+          "decode_ms": 798.618745058775,
+          "total_ms": 828.7933131214231,
           "is_warmup": false
         },
         {
@@ -2088,9 +2088,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.85686918348074,
-          "decode_ms": 810.133723076433,
-          "total_ms": 840.9905922599137,
+          "prefill_ms": 30.638170894235373,
+          "decode_ms": 807.8293579164892,
+          "total_ms": 838.4675288107246,
           "is_warmup": false
         },
         {
@@ -2099,9 +2099,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.965908827260137,
-          "decode_ms": 813.7812330387533,
-          "total_ms": 845.7471418660134,
+          "prefill_ms": 30.60252289287746,
+          "decode_ms": 796.6637520585209,
+          "total_ms": 827.2662749513984,
           "is_warmup": false
         },
         {
@@ -2110,9 +2110,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.21260995976627,
-          "decode_ms": 815.2185699436814,
-          "total_ms": 846.4311799034476,
+          "prefill_ms": 30.641738092526793,
+          "decode_ms": 797.6373159326613,
+          "total_ms": 828.2790540251881,
           "is_warmup": false
         },
         {
@@ -2121,9 +2121,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.42046702466905,
-          "decode_ms": 813.7990969698876,
-          "total_ms": 844.2195639945567,
+          "prefill_ms": 29.989469097927213,
+          "decode_ms": 797.6357541047037,
+          "total_ms": 827.6252232026309,
           "is_warmup": false
         },
         {
@@ -2132,9 +2132,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.049884157255292,
-          "decode_ms": 809.5955590251833,
-          "total_ms": 840.6454431824386,
+          "prefill_ms": 30.207630014047027,
+          "decode_ms": 797.8486439678818,
+          "total_ms": 828.0562739819288,
           "is_warmup": false
         },
         {
@@ -2143,9 +2143,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.162985833361745,
-          "decode_ms": 812.1440189424902,
-          "total_ms": 843.307004775852,
+          "prefill_ms": 30.7580369990319,
+          "decode_ms": 801.4624619390815,
+          "total_ms": 832.2204989381135,
           "is_warmup": false
         },
         {
@@ -2154,9 +2154,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.143077882006764,
-          "decode_ms": 812.9643949214369,
-          "total_ms": 844.1074728034437,
+          "prefill_ms": 30.865398934111,
+          "decode_ms": 799.1177749354392,
+          "total_ms": 829.9831738695502,
           "is_warmup": false
         },
         {
@@ -2165,9 +2165,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.032921047881246,
-          "decode_ms": 809.2241389676929,
-          "total_ms": 840.2570600155741,
+          "prefill_ms": 30.325671890750527,
+          "decode_ms": 796.916418010369,
+          "total_ms": 827.2420899011195,
           "is_warmup": false
         },
         {
@@ -2176,9 +2176,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.90051212348044,
-          "decode_ms": 810.1514659356326,
-          "total_ms": 841.051978059113,
+          "prefill_ms": 30.615357914939523,
+          "decode_ms": 797.9147781152278,
+          "total_ms": 828.5301360301673,
           "is_warmup": false
         },
         {
@@ -2187,9 +2187,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.479462049901485,
-          "decode_ms": 808.37401910685,
-          "total_ms": 839.8534811567515,
+          "prefill_ms": 30.56505392305553,
+          "decode_ms": 796.1251069791615,
+          "total_ms": 826.690160902217,
           "is_warmup": false
         },
         {
@@ -2198,9 +2198,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.776559142395854,
-          "decode_ms": 808.0226860474795,
-          "total_ms": 838.7992451898754,
+          "prefill_ms": 30.68047109991312,
+          "decode_ms": 797.3048100247979,
+          "total_ms": 827.985281124711,
           "is_warmup": false
         },
         {
@@ -2209,9 +2209,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.973559012636542,
-          "decode_ms": 808.0761670134962,
-          "total_ms": 839.0497260261327,
+          "prefill_ms": 30.667826998978853,
+          "decode_ms": 800.7169379852712,
+          "total_ms": 831.3847649842501,
           "is_warmup": false
         },
         {
@@ -2220,9 +2220,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.824890127405524,
-          "decode_ms": 808.6725198663771,
-          "total_ms": 839.4974099937826,
+          "prefill_ms": 30.670040985569358,
+          "decode_ms": 796.7473489698023,
+          "total_ms": 827.4173899553716,
           "is_warmup": false
         },
         {
@@ -2231,9 +2231,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.68218007683754,
-          "decode_ms": 807.8814710024744,
-          "total_ms": 838.563651079312,
+          "prefill_ms": 30.466757947579026,
+          "decode_ms": 799.7005840297788,
+          "total_ms": 830.1673419773579,
           "is_warmup": false
         },
         {
@@ -2242,9 +2242,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.886315042153,
-          "decode_ms": 813.8138740323484,
-          "total_ms": 844.7001890745014,
+          "prefill_ms": 31.038906192407012,
+          "decode_ms": 795.6296131014824,
+          "total_ms": 826.6685192938894,
           "is_warmup": false
         },
         {
@@ -2253,9 +2253,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.835228972136974,
-          "decode_ms": 817.7212639711797,
-          "total_ms": 848.5564929433167,
+          "prefill_ms": 30.516841914504766,
+          "decode_ms": 796.5116859413683,
+          "total_ms": 827.0285278558731,
           "is_warmup": false
         },
         {
@@ -2264,9 +2264,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.69441393017769,
-          "decode_ms": 809.0496507938951,
-          "total_ms": 839.7440647240728,
+          "prefill_ms": 29.976465040817857,
+          "decode_ms": 794.5540270302445,
+          "total_ms": 824.5304920710623,
           "is_warmup": false
         },
         {
@@ -2275,9 +2275,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.939985997974873,
-          "decode_ms": 808.5260740481317,
-          "total_ms": 839.4660600461066,
+          "prefill_ms": 30.768085969612002,
+          "decode_ms": 800.2406908199191,
+          "total_ms": 831.0087767895311,
           "is_warmup": false
         },
         {
@@ -2286,9 +2286,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.058589229360223,
-          "decode_ms": 810.297671938315,
-          "total_ms": 841.3562611676753,
+          "prefill_ms": 30.97257111221552,
+          "decode_ms": 806.2375281006098,
+          "total_ms": 837.2100992128253,
           "is_warmup": false
         },
         {
@@ -2297,9 +2297,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.19494190812111,
-          "decode_ms": 807.6611959841102,
-          "total_ms": 837.8561378922313,
+          "prefill_ms": 29.960324056446552,
+          "decode_ms": 797.8163829538971,
+          "total_ms": 827.7767070103437,
           "is_warmup": false
         },
         {
@@ -2308,9 +2308,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.840127961710095,
-          "decode_ms": 808.6130579467863,
-          "total_ms": 839.4531859084964,
+          "prefill_ms": 30.630246037617326,
+          "decode_ms": 797.1342380624264,
+          "total_ms": 827.7644841000438,
           "is_warmup": false
         },
         {
@@ -2319,9 +2319,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.85268195718527,
-          "decode_ms": 807.3681241367012,
-          "total_ms": 838.2208060938865,
+          "prefill_ms": 30.64365196041763,
+          "decode_ms": 796.0485329385847,
+          "total_ms": 826.6921848990023,
           "is_warmup": false
         }
       ]
@@ -2334,10 +2334,10 @@
       "gpu_hits": 90,
       "cpu_hits": 0,
       "disk_hits": 0,
-      "avg_prefill_ms": 32.379484414368086,
-      "avg_total_ms": 840.2923444653616,
-      "p95_total_ms": 855.6501297047362,
-      "prefill_speedup": 1.9571231474034785,
+      "avg_prefill_ms": 32.07430260402984,
+      "avg_total_ms": 829.3936610466948,
+      "p95_total_ms": 843.1628020713106,
+      "prefill_speedup": 1.948627802874083,
       "total_evictions": 0,
       "total_transfer_ms": 0.0,
       "routing_efficiency": 0.0,
@@ -2348,9 +2348,9 @@
           "worker_id": 0,
           "cache_hit": false,
           "tier_hit": null,
-          "prefill_ms": 61.60017498768866,
-          "decode_ms": 802.8542620595545,
-          "total_ms": 864.4544370472431,
+          "prefill_ms": 61.076265992596745,
+          "decode_ms": 795.8265549968928,
+          "total_ms": 856.9028209894896,
           "is_warmup": true
         },
         {
@@ -2359,9 +2359,9 @@
           "worker_id": 0,
           "cache_hit": false,
           "tier_hit": null,
-          "prefill_ms": 60.257425997406244,
-          "decode_ms": 802.799898898229,
-          "total_ms": 863.0573248956352,
+          "prefill_ms": 60.48405799083412,
+          "decode_ms": 793.4772579465061,
+          "total_ms": 853.9613159373403,
           "is_warmup": true
         },
         {
@@ -2370,9 +2370,9 @@
           "worker_id": 0,
           "cache_hit": false,
           "tier_hit": null,
-          "prefill_ms": 59.42427599802613,
-          "decode_ms": 804.0340240113437,
-          "total_ms": 863.4583000093699,
+          "prefill_ms": 58.82256897166371,
+          "decode_ms": 796.8291840516031,
+          "total_ms": 855.6517530232668,
           "is_warmup": true
         },
         {
@@ -2381,9 +2381,9 @@
           "worker_id": 0,
           "cache_hit": false,
           "tier_hit": null,
-          "prefill_ms": 60.458464780822396,
-          "decode_ms": 815.4597841203213,
-          "total_ms": 875.9182489011437,
+          "prefill_ms": 59.86439227126539,
+          "decode_ms": 796.5447879396379,
+          "total_ms": 856.4091802109033,
           "is_warmup": true
         },
         {
@@ -2392,9 +2392,9 @@
           "worker_id": 0,
           "cache_hit": false,
           "tier_hit": null,
-          "prefill_ms": 61.39621092006564,
-          "decode_ms": 808.0707769840956,
-          "total_ms": 869.4669879041612,
+          "prefill_ms": 59.48432604782283,
+          "decode_ms": 795.4167530406266,
+          "total_ms": 854.9010790884495,
           "is_warmup": true
         },
         {
@@ -2403,9 +2403,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.213621143251657,
-          "decode_ms": 814.2359401099384,
-          "total_ms": 845.44956125319,
+          "prefill_ms": 30.479973182082176,
+          "decode_ms": 796.3129510171711,
+          "total_ms": 826.7929241992533,
           "is_warmup": false
         },
         {
@@ -2414,9 +2414,9 @@
           "worker_id": 0,
           "cache_hit": false,
           "tier_hit": null,
-          "prefill_ms": 60.206982074305415,
-          "decode_ms": 807.2029219474643,
-          "total_ms": 867.4099040217698,
+          "prefill_ms": 58.79264324903488,
+          "decode_ms": 804.9314881209284,
+          "total_ms": 863.7241313699633,
           "is_warmup": false
         },
         {
@@ -2425,9 +2425,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.788761097937822,
-          "decode_ms": 806.845790008083,
-          "total_ms": 837.6345511060208,
+          "prefill_ms": 30.04919085651636,
+          "decode_ms": 808.4320928901434,
+          "total_ms": 838.4812837466598,
           "is_warmup": false
         },
         {
@@ -2436,9 +2436,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.885834945365787,
-          "decode_ms": 806.6073700319976,
-          "total_ms": 837.4932049773633,
+          "prefill_ms": 31.067059142515063,
+          "decode_ms": 796.9447011128068,
+          "total_ms": 828.0117602553219,
           "is_warmup": false
         },
         {
@@ -2447,9 +2447,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.90524091385305,
-          "decode_ms": 806.3567788340151,
-          "total_ms": 837.2620197478682,
+          "prefill_ms": 30.7212071493268,
+          "decode_ms": 795.2193100936711,
+          "total_ms": 825.9405172429979,
           "is_warmup": false
         },
         {
@@ -2458,9 +2458,9 @@
           "worker_id": 0,
           "cache_hit": false,
           "tier_hit": null,
-          "prefill_ms": 59.532579965889454,
-          "decode_ms": 805.594954174012,
-          "total_ms": 865.1275341399014,
+          "prefill_ms": 58.17754496820271,
+          "decode_ms": 795.9087998606265,
+          "total_ms": 854.0863448288292,
           "is_warmup": false
         },
         {
@@ -2469,9 +2469,9 @@
           "worker_id": 0,
           "cache_hit": false,
           "tier_hit": null,
-          "prefill_ms": 60.810107039287686,
-          "decode_ms": 808.13082982786,
-          "total_ms": 868.9409368671477,
+          "prefill_ms": 60.112208826467395,
+          "decode_ms": 796.3767221663147,
+          "total_ms": 856.4889309927821,
           "is_warmup": false
         },
         {
@@ -2480,9 +2480,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.706957215443254,
-          "decode_ms": 806.2942810356617,
-          "total_ms": 837.001238251105,
+          "prefill_ms": 30.064190039411187,
+          "decode_ms": 792.0669820159674,
+          "total_ms": 822.1311720553786,
           "is_warmup": false
         },
         {
@@ -2491,9 +2491,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.739167938008904,
-          "decode_ms": 805.3729149978608,
-          "total_ms": 836.1120829358697,
+          "prefill_ms": 30.54832201451063,
+          "decode_ms": 792.603672016412,
+          "total_ms": 823.1519940309227,
           "is_warmup": false
         },
         {
@@ -2502,9 +2502,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.009326921775937,
-          "decode_ms": 807.2065589949489,
-          "total_ms": 838.2158859167248,
+          "prefill_ms": 30.59294610284269,
+          "decode_ms": 796.2396931834519,
+          "total_ms": 826.8326392862946,
           "is_warmup": false
         },
         {
@@ -2513,9 +2513,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.71259707212448,
-          "decode_ms": 807.1057801134884,
-          "total_ms": 837.8183771856129,
+          "prefill_ms": 30.593676958233118,
+          "decode_ms": 797.3119430243969,
+          "total_ms": 827.90561998263,
           "is_warmup": false
         },
         {
@@ -2524,9 +2524,9 @@
           "worker_id": 0,
           "cache_hit": false,
           "tier_hit": null,
-          "prefill_ms": 60.68517314270139,
-          "decode_ms": 808.267256943509,
-          "total_ms": 868.9524300862104,
+          "prefill_ms": 60.333034954965115,
+          "decode_ms": 795.140041038394,
+          "total_ms": 855.4730759933591,
           "is_warmup": false
         },
         {
@@ -2535,9 +2535,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.008474994450808,
-          "decode_ms": 805.5959560442716,
-          "total_ms": 836.6044310387224,
+          "prefill_ms": 31.00059414282441,
+          "decode_ms": 792.4760128371418,
+          "total_ms": 823.4766069799662,
           "is_warmup": false
         },
         {
@@ -2546,9 +2546,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.869373120367527,
-          "decode_ms": 807.1073920000345,
-          "total_ms": 837.976765120402,
+          "prefill_ms": 30.541479121893644,
+          "decode_ms": 797.0224269665778,
+          "total_ms": 827.5639060884714,
           "is_warmup": false
         },
         {
@@ -2557,9 +2557,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.066754832863808,
-          "decode_ms": 806.9910339545459,
-          "total_ms": 838.0577887874097,
+          "prefill_ms": 30.556678073480725,
+          "decode_ms": 799.3881939910352,
+          "total_ms": 829.944872064516,
           "is_warmup": false
         },
         {
@@ -2568,9 +2568,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.85711901076138,
-          "decode_ms": 806.7292699124664,
-          "total_ms": 837.5863889232278,
+          "prefill_ms": 30.66496178507805,
+          "decode_ms": 791.4800259750336,
+          "total_ms": 822.1449877601117,
           "is_warmup": false
         },
         {
@@ -2579,9 +2579,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.90716409496963,
-          "decode_ms": 809.9282761104405,
-          "total_ms": 840.8354402054101,
+          "prefill_ms": 30.59538104571402,
+          "decode_ms": 795.3438148833811,
+          "total_ms": 825.9391959290951,
           "is_warmup": false
         },
         {
@@ -2590,9 +2590,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.758374836295843,
-          "decode_ms": 814.3460270948708,
-          "total_ms": 845.1044019311666,
+          "prefill_ms": 29.99176294542849,
+          "decode_ms": 794.6693140547723,
+          "total_ms": 824.6610770002007,
           "is_warmup": false
         },
         {
@@ -2601,9 +2601,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.900532146915793,
-          "decode_ms": 807.0457361172885,
-          "total_ms": 837.9462682642043,
+          "prefill_ms": 30.622381949797273,
+          "decode_ms": 797.240026993677,
+          "total_ms": 827.8624089434743,
           "is_warmup": false
         },
         {
@@ -2612,9 +2612,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.829538125544786,
-          "decode_ms": 806.2217440456152,
-          "total_ms": 837.05128217116,
+          "prefill_ms": 30.55015509016812,
+          "decode_ms": 798.3966669999063,
+          "total_ms": 828.9468220900744,
           "is_warmup": false
         },
         {
@@ -2623,9 +2623,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.81830684095621,
-          "decode_ms": 805.4063580930233,
-          "total_ms": 836.2246649339795,
+          "prefill_ms": 30.536178965121508,
+          "decode_ms": 797.1524230670184,
+          "total_ms": 827.6886020321399,
           "is_warmup": false
         },
         {
@@ -2634,9 +2634,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.757864005863667,
-          "decode_ms": 805.6848128326237,
-          "total_ms": 836.4426768384874,
+          "prefill_ms": 35.73609492741525,
+          "decode_ms": 797.900992911309,
+          "total_ms": 833.6370878387243,
           "is_warmup": false
         },
         {
@@ -2645,9 +2645,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.21319699473679,
-          "decode_ms": 806.5937850624323,
-          "total_ms": 836.8069820571691,
+          "prefill_ms": 29.895462095737457,
+          "decode_ms": 794.4979309104383,
+          "total_ms": 824.3933930061758,
           "is_warmup": false
         },
         {
@@ -2656,9 +2656,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.848182970657945,
-          "decode_ms": 805.59431319125,
-          "total_ms": 836.4424961619079,
+          "prefill_ms": 30.939097981899977,
+          "decode_ms": 795.2086310833693,
+          "total_ms": 826.1477290652692,
           "is_warmup": false
         },
         {
@@ -2667,9 +2667,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.887938104569912,
-          "decode_ms": 804.271139902994,
-          "total_ms": 835.159078007564,
+          "prefill_ms": 30.59010999277234,
+          "decode_ms": 793.7071418855339,
+          "total_ms": 824.2972518783063,
           "is_warmup": false
         },
         {
@@ -2678,9 +2678,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.89617402292788,
-          "decode_ms": 807.2767909616232,
-          "total_ms": 838.1729649845511,
+          "prefill_ms": 30.469303019344807,
+          "decode_ms": 799.753753002733,
+          "total_ms": 830.2230560220778,
           "is_warmup": false
         },
         {
@@ -2689,9 +2689,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.972087057307363,
-          "decode_ms": 808.5667609702796,
-          "total_ms": 839.5388480275869,
+          "prefill_ms": 30.63818090595305,
+          "decode_ms": 791.410526027903,
+          "total_ms": 822.048706933856,
           "is_warmup": false
         },
         {
@@ -2700,9 +2700,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.760658904910088,
-          "decode_ms": 807.1695088874549,
-          "total_ms": 837.930167792365,
+          "prefill_ms": 30.552790965884924,
+          "decode_ms": 793.8705489505082,
+          "total_ms": 824.4233399163932,
           "is_warmup": false
         },
         {
@@ -2711,9 +2711,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.82977794110775,
-          "decode_ms": 805.953879840672,
-          "total_ms": 836.7836577817798,
+          "prefill_ms": 30.210274970158935,
+          "decode_ms": 797.7403400000185,
+          "total_ms": 827.9506149701774,
           "is_warmup": false
         },
         {
@@ -2722,9 +2722,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.791647033765912,
-          "decode_ms": 806.6241920460016,
-          "total_ms": 837.4158390797675,
+          "prefill_ms": 30.100448057055473,
+          "decode_ms": 795.0688179116696,
+          "total_ms": 825.1692659687251,
           "is_warmup": false
         },
         {
@@ -2733,9 +2733,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.238194158300757,
-          "decode_ms": 807.3208949062973,
-          "total_ms": 837.5590890645981,
+          "prefill_ms": 29.859833884984255,
+          "decode_ms": 797.7945129387081,
+          "total_ms": 827.6543468236923,
           "is_warmup": false
         },
         {
@@ -2744,9 +2744,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.858081998303533,
-          "decode_ms": 807.0656640920788,
-          "total_ms": 837.9237460903823,
+          "prefill_ms": 30.654771951958537,
+          "decode_ms": 792.0270669274032,
+          "total_ms": 822.6818388793617,
           "is_warmup": false
         },
         {
@@ -2755,9 +2755,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.8124260045588,
-          "decode_ms": 805.6851329747587,
-          "total_ms": 836.4975589793175,
+          "prefill_ms": 30.760110821574926,
+          "decode_ms": 797.1141301095486,
+          "total_ms": 827.8742409311235,
           "is_warmup": false
         },
         {
@@ -2766,9 +2766,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.92958708293736,
-          "decode_ms": 808.0177570227534,
-          "total_ms": 838.9473441056907,
+          "prefill_ms": 30.580742983147502,
+          "decode_ms": 798.8139030057937,
+          "total_ms": 829.3946459889412,
           "is_warmup": false
         },
         {
@@ -2777,9 +2777,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.577813973650336,
-          "decode_ms": 813.0485028959811,
-          "total_ms": 843.6263168696314,
+          "prefill_ms": 30.0242539960891,
+          "decode_ms": 797.6424258667976,
+          "total_ms": 827.6666798628867,
           "is_warmup": false
         },
         {
@@ -2788,9 +2788,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.79455206170678,
-          "decode_ms": 816.1531111691147,
-          "total_ms": 846.9476632308215,
+          "prefill_ms": 30.645304126664996,
+          "decode_ms": 796.348427888006,
+          "total_ms": 826.993732014671,
           "is_warmup": false
         },
         {
@@ -2799,9 +2799,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.84414592012763,
-          "decode_ms": 805.89350592345,
-          "total_ms": 836.7376518435776,
+          "prefill_ms": 31.22321399860084,
+          "decode_ms": 793.7946261372417,
+          "total_ms": 825.0178401358426,
           "is_warmup": false
         },
         {
@@ -2810,9 +2810,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.886424938216805,
-          "decode_ms": 808.1638829316944,
-          "total_ms": 839.0503078699112,
+          "prefill_ms": 30.166792916134,
+          "decode_ms": 798.4293780755252,
+          "total_ms": 828.5961709916592,
           "is_warmup": false
         },
         {
@@ -2821,9 +2821,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.819930136203766,
-          "decode_ms": 808.7584520690143,
-          "total_ms": 839.5783822052181,
+          "prefill_ms": 30.736737186089158,
+          "decode_ms": 792.3631900921464,
+          "total_ms": 823.0999272782356,
           "is_warmup": false
         },
         {
@@ -2832,9 +2832,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.840046936646104,
-          "decode_ms": 807.3500201571733,
-          "total_ms": 838.1900670938194,
+          "prefill_ms": 30.126237077638507,
+          "decode_ms": 801.9446609541774,
+          "total_ms": 832.0708980318159,
           "is_warmup": false
         },
         {
@@ -2843,9 +2843,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.359235988929868,
-          "decode_ms": 807.6408770866692,
-          "total_ms": 839.0001130755991,
+          "prefill_ms": 30.68221383728087,
+          "decode_ms": 799.2438029032201,
+          "total_ms": 829.9260167405009,
           "is_warmup": false
         },
         {
@@ -2854,9 +2854,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.932602006942034,
-          "decode_ms": 808.215179014951,
-          "total_ms": 839.147781021893,
+          "prefill_ms": 30.83185595460236,
+          "decode_ms": 804.7107930760831,
+          "total_ms": 835.5426490306854,
           "is_warmup": false
         },
         {
@@ -2865,9 +2865,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.90374800376594,
-          "decode_ms": 806.370735168457,
-          "total_ms": 837.274483172223,
+          "prefill_ms": 30.354386195540428,
+          "decode_ms": 797.3091180901974,
+          "total_ms": 827.6635042857379,
           "is_warmup": false
         },
         {
@@ -2876,9 +2876,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.148558016866446,
-          "decode_ms": 807.1176710072905,
-          "total_ms": 838.2662290241569,
+          "prefill_ms": 31.069745076820254,
+          "decode_ms": 800.0590179581195,
+          "total_ms": 831.1287630349398,
           "is_warmup": false
         },
         {
@@ -2887,9 +2887,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.864372849464417,
-          "decode_ms": 806.8599561229348,
-          "total_ms": 837.7243289723992,
+          "prefill_ms": 30.64984316006303,
+          "decode_ms": 796.0394460242242,
+          "total_ms": 826.6892891842872,
           "is_warmup": false
         },
         {
@@ -2898,9 +2898,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.531038926914334,
-          "decode_ms": 808.8413889054209,
-          "total_ms": 840.3724278323352,
+          "prefill_ms": 30.23425000719726,
+          "decode_ms": 796.6744620352983,
+          "total_ms": 826.9087120424956,
           "is_warmup": false
         },
         {
@@ -2909,9 +2909,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.82052106037736,
-          "decode_ms": 809.6512740012258,
-          "total_ms": 840.4717950616032,
+          "prefill_ms": 30.779476976022124,
+          "decode_ms": 798.995214048773,
+          "total_ms": 829.7746910247952,
           "is_warmup": false
         },
         {
@@ -2920,9 +2920,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.488840002566576,
-          "decode_ms": 806.1896141152829,
-          "total_ms": 837.6784541178495,
+          "prefill_ms": 30.670932959765196,
+          "decode_ms": 799.2409570142627,
+          "total_ms": 829.9118899740279,
           "is_warmup": false
         },
         {
@@ -2931,9 +2931,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.94611712731421,
-          "decode_ms": 808.0948630813509,
-          "total_ms": 839.0409802086651,
+          "prefill_ms": 30.712250852957368,
+          "decode_ms": 797.0193719957024,
+          "total_ms": 827.7316228486598,
           "is_warmup": false
         },
         {
@@ -2942,9 +2942,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.347330030053854,
-          "decode_ms": 807.7848779503256,
-          "total_ms": 838.1322079803795,
+          "prefill_ms": 29.436896787956357,
+          "decode_ms": 798.4894909895957,
+          "total_ms": 827.926387777552,
           "is_warmup": false
         },
         {
@@ -2953,9 +2953,9 @@
           "worker_id": 0,
           "cache_hit": false,
           "tier_hit": null,
-          "prefill_ms": 60.4223960544914,
-          "decode_ms": 805.8729579206556,
-          "total_ms": 866.295353975147,
+          "prefill_ms": 60.22826815024018,
+          "decode_ms": 794.5952450390905,
+          "total_ms": 854.8235131893307,
           "is_warmup": false
         },
         {
@@ -2964,9 +2964,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.995941953733563,
-          "decode_ms": 807.7531480230391,
-          "total_ms": 838.7490899767727,
+          "prefill_ms": 30.231895856559277,
+          "decode_ms": 798.0208080261946,
+          "total_ms": 828.2527038827538,
           "is_warmup": false
         },
         {
@@ -2975,9 +2975,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.81378899514675,
-          "decode_ms": 809.6745167858899,
-          "total_ms": 840.4883057810366,
+          "prefill_ms": 30.806939117610455,
+          "decode_ms": 799.4718521367759,
+          "total_ms": 830.2787912543863,
           "is_warmup": false
         },
         {
@@ -2986,9 +2986,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.774293933063745,
-          "decode_ms": 816.2621660158038,
-          "total_ms": 847.0364599488676,
+          "prefill_ms": 30.65918991342187,
+          "decode_ms": 793.194395955652,
+          "total_ms": 823.8535858690739,
           "is_warmup": false
         },
         {
@@ -2997,9 +2997,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.749988043680787,
-          "decode_ms": 807.429098058492,
-          "total_ms": 838.1790861021727,
+          "prefill_ms": 30.58107290416956,
+          "decode_ms": 794.744485989213,
+          "total_ms": 825.3255588933825,
           "is_warmup": false
         },
         {
@@ -3008,9 +3008,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.785806011408567,
-          "decode_ms": 805.2562589291483,
-          "total_ms": 836.0420649405569,
+          "prefill_ms": 30.870750080794096,
+          "decode_ms": 803.0605630483478,
+          "total_ms": 833.9313131291419,
           "is_warmup": false
         },
         {
@@ -3019,9 +3019,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.76437604613602,
-          "decode_ms": 807.8305060043931,
-          "total_ms": 838.5948820505291,
+          "prefill_ms": 30.580892926082015,
+          "decode_ms": 796.6030780225992,
+          "total_ms": 827.1839709486812,
           "is_warmup": false
         },
         {
@@ -3030,9 +3030,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.826773028820753,
-          "decode_ms": 807.1945279370993,
-          "total_ms": 838.0213009659201,
+          "prefill_ms": 30.693104956299067,
+          "decode_ms": 802.866677986458,
+          "total_ms": 833.559782942757,
           "is_warmup": false
         },
         {
@@ -3041,9 +3041,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 29.95341783389449,
-          "decode_ms": 805.6556899100542,
-          "total_ms": 835.6091077439487,
+          "prefill_ms": 29.90570105612278,
+          "decode_ms": 798.7962991464883,
+          "total_ms": 828.7020002026111,
           "is_warmup": false
         },
         {
@@ -3052,9 +3052,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.54405120201409,
-          "decode_ms": 805.823776172474,
-          "total_ms": 836.3678273744881,
+          "prefill_ms": 30.36795207299292,
+          "decode_ms": 795.3477629926056,
+          "total_ms": 825.7157150655985,
           "is_warmup": false
         },
         {
@@ -3063,9 +3063,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.870465096086264,
-          "decode_ms": 806.4535830635577,
-          "total_ms": 837.324048159644,
+          "prefill_ms": 30.679058050736785,
+          "decode_ms": 800.3367211204022,
+          "total_ms": 831.015779171139,
           "is_warmup": false
         },
         {
@@ -3074,9 +3074,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.728858895599842,
-          "decode_ms": 807.7407369855791,
-          "total_ms": 838.469595881179,
+          "prefill_ms": 29.983827844262123,
+          "decode_ms": 797.5066700018942,
+          "total_ms": 827.4904978461564,
           "is_warmup": false
         },
         {
@@ -3085,9 +3085,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.902986880391836,
-          "decode_ms": 808.3290648646653,
-          "total_ms": 839.2320517450571,
+          "prefill_ms": 30.090188840404153,
+          "decode_ms": 797.9473799932748,
+          "total_ms": 828.037568833679,
           "is_warmup": false
         },
         {
@@ -3096,9 +3096,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.699263093993068,
-          "decode_ms": 806.8427748512477,
-          "total_ms": 837.5420379452407,
+          "prefill_ms": 30.937445117160678,
+          "decode_ms": 799.0269439760596,
+          "total_ms": 829.9643890932202,
           "is_warmup": false
         },
         {
@@ -3107,9 +3107,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.896475072950125,
-          "decode_ms": 806.4881570171565,
-          "total_ms": 837.3846320901066,
+          "prefill_ms": 30.66090401262045,
+          "decode_ms": 797.0076601486653,
+          "total_ms": 827.6685641612858,
           "is_warmup": false
         },
         {
@@ -3118,9 +3118,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.086388811469078,
-          "decode_ms": 807.9715210478753,
-          "total_ms": 838.0579098593444,
+          "prefill_ms": 29.745690058916807,
+          "decode_ms": 796.1436819750816,
+          "total_ms": 825.8893720339984,
           "is_warmup": false
         },
         {
@@ -3129,9 +3129,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.756189953535795,
-          "decode_ms": 807.1548629086465,
-          "total_ms": 837.9110528621823,
+          "prefill_ms": 30.510860960930586,
+          "decode_ms": 793.6252080835402,
+          "total_ms": 824.1360690444708,
           "is_warmup": false
         },
         {
@@ -3140,9 +3140,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.737544875591993,
-          "decode_ms": 805.4593801498413,
-          "total_ms": 836.1969250254333,
+          "prefill_ms": 30.75572196394205,
+          "decode_ms": 798.3828110154718,
+          "total_ms": 829.1385329794139,
           "is_warmup": false
         },
         {
@@ -3151,9 +3151,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.297850888222456,
-          "decode_ms": 806.9151618983597,
-          "total_ms": 838.2130127865821,
+          "prefill_ms": 30.326644191518426,
+          "decode_ms": 798.6784570384771,
+          "total_ms": 829.0051012299955,
           "is_warmup": false
         },
         {
@@ -3162,9 +3162,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.73203400708735,
-          "decode_ms": 806.7635269835591,
-          "total_ms": 837.4955609906465,
+          "prefill_ms": 30.729913851246238,
+          "decode_ms": 797.7659178432077,
+          "total_ms": 828.495831694454,
           "is_warmup": false
         },
         {
@@ -3173,9 +3173,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.836210818961263,
-          "decode_ms": 811.4213601220399,
-          "total_ms": 842.2575709410012,
+          "prefill_ms": 30.684537952765822,
+          "decode_ms": 796.6366808395833,
+          "total_ms": 827.3212187923491,
           "is_warmup": false
         },
         {
@@ -3184,9 +3184,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.74062103405595,
-          "decode_ms": 814.240809995681,
-          "total_ms": 844.981431029737,
+          "prefill_ms": 30.5954001378268,
+          "decode_ms": 794.568904908374,
+          "total_ms": 825.1643050462008,
           "is_warmup": false
         },
         {
@@ -3195,9 +3195,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.15860791876912,
-          "decode_ms": 806.8795748986304,
-          "total_ms": 838.0381828173995,
+          "prefill_ms": 30.602412996813655,
+          "decode_ms": 794.3394992034882,
+          "total_ms": 824.9419122003019,
           "is_warmup": false
         },
         {
@@ -3206,9 +3206,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.853864969685674,
-          "decode_ms": 806.3526020850986,
-          "total_ms": 837.2064670547843,
+          "prefill_ms": 30.56023409590125,
+          "decode_ms": 804.906546138227,
+          "total_ms": 835.4667802341282,
           "is_warmup": false
         },
         {
@@ -3217,9 +3217,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.845697969198227,
-          "decode_ms": 806.7268379963934,
-          "total_ms": 837.5725359655917,
+          "prefill_ms": 30.607371823862195,
+          "decode_ms": 796.1284799966961,
+          "total_ms": 826.7358518205583,
           "is_warmup": false
         },
         {
@@ -3228,9 +3228,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.853192787617445,
-          "decode_ms": 806.3112650997937,
-          "total_ms": 837.1644578874111,
+          "prefill_ms": 30.54256015457213,
+          "decode_ms": 801.6216380055994,
+          "total_ms": 832.1641981601715,
           "is_warmup": false
         },
         {
@@ -3239,9 +3239,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.469479970633984,
-          "decode_ms": 804.8269590362906,
-          "total_ms": 835.2964390069246,
+          "prefill_ms": 29.924825998023152,
+          "decode_ms": 796.7427670955658,
+          "total_ms": 826.667593093589,
           "is_warmup": false
         },
         {
@@ -3250,9 +3250,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.793300131335855,
-          "decode_ms": 806.0958788264543,
-          "total_ms": 836.8891789577901,
+          "prefill_ms": 30.64243891276419,
+          "decode_ms": 796.3455179706216,
+          "total_ms": 826.9879568833858,
           "is_warmup": false
         },
         {
@@ -3261,9 +3261,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.702770221978426,
-          "decode_ms": 805.8344661258161,
-          "total_ms": 836.5372363477945,
+          "prefill_ms": 30.589208006858826,
+          "decode_ms": 796.4372611604631,
+          "total_ms": 827.0264691673219,
           "is_warmup": false
         },
         {
@@ -3272,9 +3272,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.806264141574502,
-          "decode_ms": 806.330731138587,
-          "total_ms": 837.1369952801615,
+          "prefill_ms": 31.093236990273,
+          "decode_ms": 795.8920139353722,
+          "total_ms": 826.9852509256452,
           "is_warmup": false
         },
         {
@@ -3283,9 +3283,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.360778957605362,
-          "decode_ms": 806.298912037164,
-          "total_ms": 837.6596909947693,
+          "prefill_ms": 30.118691036477685,
+          "decode_ms": 793.5907491482794,
+          "total_ms": 823.7094401847571,
           "is_warmup": false
         },
         {
@@ -3294,9 +3294,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.822205124422908,
-          "decode_ms": 806.2111060135067,
-          "total_ms": 837.0333111379296,
+          "prefill_ms": 30.68383620120585,
+          "decode_ms": 796.0339209530503,
+          "total_ms": 826.7177571542561,
           "is_warmup": false
         },
         {
@@ -3305,9 +3305,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.810953117907047,
-          "decode_ms": 808.2324131391943,
-          "total_ms": 839.0433662571013,
+          "prefill_ms": 30.485692899674177,
+          "decode_ms": 796.1278478614986,
+          "total_ms": 826.6135407611728,
           "is_warmup": false
         },
         {
@@ -3316,9 +3316,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.881565995514393,
-          "decode_ms": 806.49941903539,
-          "total_ms": 837.3809850309044,
+          "prefill_ms": 30.65682598389685,
+          "decode_ms": 798.8068049307913,
+          "total_ms": 829.4636309146881,
           "is_warmup": false
         },
         {
@@ -3327,9 +3327,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.016831984743476,
-          "decode_ms": 806.1968788970262,
-          "total_ms": 837.2137108817697,
+          "prefill_ms": 30.943796038627625,
+          "decode_ms": 796.9011249952018,
+          "total_ms": 827.8449210338295,
           "is_warmup": false
         },
         {
@@ -3338,9 +3338,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.850668903440237,
-          "decode_ms": 807.9631058499217,
-          "total_ms": 838.8137747533619,
+          "prefill_ms": 30.061152996495366,
+          "decode_ms": 797.1215099096298,
+          "total_ms": 827.1826629061252,
           "is_warmup": false
         },
         {
@@ -3349,9 +3349,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.694182962179184,
-          "decode_ms": 808.1502781715244,
-          "total_ms": 838.8444611337036,
+          "prefill_ms": 29.903696849942207,
+          "decode_ms": 797.5658569484949,
+          "total_ms": 827.4695537984371,
           "is_warmup": false
         },
         {
@@ -3360,9 +3360,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.880735022947192,
-          "decode_ms": 811.1699861474335,
-          "total_ms": 842.0507211703807,
+          "prefill_ms": 30.592232942581177,
+          "decode_ms": 799.0867830812931,
+          "total_ms": 829.6790160238743,
           "is_warmup": false
         },
         {
@@ -3371,9 +3371,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.822826083749533,
-          "decode_ms": 809.9856849294156,
-          "total_ms": 840.8085110131651,
+          "prefill_ms": 29.82130111195147,
+          "decode_ms": 797.9004480876029,
+          "total_ms": 827.7217491995543,
           "is_warmup": false
         },
         {
@@ -3382,9 +3382,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.619502067565918,
-          "decode_ms": 820.9688828792423,
-          "total_ms": 851.5883849468082,
+          "prefill_ms": 30.46275000087917,
+          "decode_ms": 800.1838091295213,
+          "total_ms": 830.6465591304004,
           "is_warmup": false
         },
         {
@@ -3393,9 +3393,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.761900823563337,
-          "decode_ms": 809.3236680142581,
-          "total_ms": 840.0855688378215,
+          "prefill_ms": 30.712821055203676,
+          "decode_ms": 799.2125791497529,
+          "total_ms": 829.9254002049565,
           "is_warmup": false
         },
         {
@@ -3404,9 +3404,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.802868073806167,
-          "decode_ms": 808.1612091045827,
-          "total_ms": 838.9640771783888,
+          "prefill_ms": 30.74100404046476,
+          "decode_ms": 805.1707639824599,
+          "total_ms": 835.9117680229247,
           "is_warmup": false
         },
         {
@@ -3415,9 +3415,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.215190956369042,
-          "decode_ms": 814.2210731748492,
-          "total_ms": 844.4362641312182,
+          "prefill_ms": 29.53053405508399,
+          "decode_ms": 797.168639022857,
+          "total_ms": 826.6991730779409,
           "is_warmup": false
         },
         {
@@ -3426,9 +3426,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.860997969284654,
-          "decode_ms": 813.1003719754517,
-          "total_ms": 843.9613699447364,
+          "prefill_ms": 30.61257186345756,
+          "decode_ms": 804.1112378705293,
+          "total_ms": 834.7238097339869,
           "is_warmup": false
         },
         {
@@ -3437,9 +3437,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.13782894797623,
-          "decode_ms": 810.795099940151,
-          "total_ms": 841.9329288881272,
+          "prefill_ms": 30.6204070802778,
+          "decode_ms": 795.7450670655817,
+          "total_ms": 826.3654741458595,
           "is_warmup": false
         }
       ]
@@ -3452,10 +3452,10 @@
       "gpu_hits": 90,
       "cpu_hits": 0,
       "disk_hits": 0,
-      "avg_prefill_ms": 32.45593567231768,
-      "avg_total_ms": 842.3601127621766,
-      "p95_total_ms": 857.7869100030512,
-      "prefill_speedup": 1.9636545591294083,
+      "avg_prefill_ms": 32.15729900341677,
+      "avg_total_ms": 830.313778296113,
+      "p95_total_ms": 844.7846150258556,
+      "prefill_speedup": 1.9482911758671044,
       "total_evictions": 0,
       "total_transfer_ms": 0.0,
       "routing_efficiency": 0.0,
@@ -3466,9 +3466,9 @@
           "worker_id": 0,
           "cache_hit": false,
           "tier_hit": null,
-          "prefill_ms": 61.77091691643,
-          "decode_ms": 804.4107651803643,
-          "total_ms": 866.1816820967942,
+          "prefill_ms": 61.54432496987283,
+          "decode_ms": 791.3657170720398,
+          "total_ms": 852.9100420419127,
           "is_warmup": true
         },
         {
@@ -3477,9 +3477,9 @@
           "worker_id": 0,
           "cache_hit": false,
           "tier_hit": null,
-          "prefill_ms": 60.32319110818207,
-          "decode_ms": 805.6279579177499,
-          "total_ms": 865.951149025932,
+          "prefill_ms": 60.19401107914746,
+          "decode_ms": 796.4923749677837,
+          "total_ms": 856.6863860469311,
           "is_warmup": true
         },
         {
@@ -3488,9 +3488,9 @@
           "worker_id": 0,
           "cache_hit": false,
           "tier_hit": null,
-          "prefill_ms": 59.56948036327958,
-          "decode_ms": 807.4835720472038,
-          "total_ms": 867.0530524104834,
+          "prefill_ms": 59.20171178877354,
+          "decode_ms": 795.0387059245259,
+          "total_ms": 854.2404177132994,
           "is_warmup": true
         },
         {
@@ -3499,9 +3499,9 @@
           "worker_id": 0,
           "cache_hit": false,
           "tier_hit": null,
-          "prefill_ms": 60.55826414376497,
-          "decode_ms": 808.1606479827315,
-          "total_ms": 868.7189121264964,
+          "prefill_ms": 60.01010490581393,
+          "decode_ms": 796.728148823604,
+          "total_ms": 856.7382537294179,
           "is_warmup": true
         },
         {
@@ -3510,9 +3510,9 @@
           "worker_id": 0,
           "cache_hit": false,
           "tier_hit": null,
-          "prefill_ms": 60.563182923942804,
-          "decode_ms": 810.7106708921492,
-          "total_ms": 871.273853816092,
+          "prefill_ms": 60.0178400054574,
+          "decode_ms": 796.2486459873617,
+          "total_ms": 856.2664859928191,
           "is_warmup": true
         },
         {
@@ -3521,9 +3521,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.174458097666502,
-          "decode_ms": 814.6427171304822,
-          "total_ms": 845.8171752281487,
+          "prefill_ms": 30.06470901891589,
+          "decode_ms": 796.6547210235149,
+          "total_ms": 826.7194300424308,
           "is_warmup": false
         },
         {
@@ -3532,9 +3532,9 @@
           "worker_id": 0,
           "cache_hit": false,
           "tier_hit": null,
-          "prefill_ms": 60.32415293157101,
-          "decode_ms": 808.3975138142705,
-          "total_ms": 868.7216667458415,
+          "prefill_ms": 60.056793270632625,
+          "decode_ms": 796.2050039786845,
+          "total_ms": 856.2617972493172,
           "is_warmup": false
         },
         {
@@ -3543,9 +3543,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.815702863037586,
-          "decode_ms": 807.5304210651666,
-          "total_ms": 838.3461239282042,
+          "prefill_ms": 30.10508604347706,
+          "decode_ms": 798.2493150047958,
+          "total_ms": 828.3544010482728,
           "is_warmup": false
         },
         {
@@ -3554,9 +3554,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.833254801109433,
-          "decode_ms": 808.0329280346632,
-          "total_ms": 838.8661828357726,
+          "prefill_ms": 30.697562033310533,
+          "decode_ms": 800.8476400282234,
+          "total_ms": 831.5452020615339,
           "is_warmup": false
         },
         {
@@ -3565,9 +3565,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.889291083440185,
-          "decode_ms": 805.9094371274114,
-          "total_ms": 836.7987282108516,
+          "prefill_ms": 30.661674914881587,
+          "decode_ms": 802.2789959795773,
+          "total_ms": 832.9406708944589,
           "is_warmup": false
         },
         {
@@ -3576,9 +3576,9 @@
           "worker_id": 0,
           "cache_hit": false,
           "tier_hit": null,
-          "prefill_ms": 59.601912973448634,
-          "decode_ms": 806.5497539937496,
-          "total_ms": 866.1516669671983,
+          "prefill_ms": 58.1867010332644,
+          "decode_ms": 797.5276750512421,
+          "total_ms": 855.7143760845065,
           "is_warmup": false
         },
         {
@@ -3587,9 +3587,9 @@
           "worker_id": 0,
           "cache_hit": false,
           "tier_hit": null,
-          "prefill_ms": 60.66560512408614,
-          "decode_ms": 807.5709368567914,
-          "total_ms": 868.2365419808775,
+          "prefill_ms": 60.20887917838991,
+          "decode_ms": 796.6717828530818,
+          "total_ms": 856.8806620314717,
           "is_warmup": false
         },
         {
@@ -3598,9 +3598,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.78607702627778,
-          "decode_ms": 806.2030400615185,
-          "total_ms": 836.9891170877963,
+          "prefill_ms": 30.55050503462553,
+          "decode_ms": 793.5695189516991,
+          "total_ms": 824.1200239863247,
           "is_warmup": false
         },
         {
@@ -3609,9 +3609,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.763793969526887,
-          "decode_ms": 810.3849079925567,
-          "total_ms": 841.1487019620836,
+          "prefill_ms": 30.93152306973934,
+          "decode_ms": 794.851022073999,
+          "total_ms": 825.7825451437384,
           "is_warmup": false
         },
         {
@@ -3620,9 +3620,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.077396124601364,
-          "decode_ms": 812.9113558679819,
-          "total_ms": 843.9887519925833,
+          "prefill_ms": 30.692232074216008,
+          "decode_ms": 795.9391220938414,
+          "total_ms": 826.6313541680574,
           "is_warmup": false
         },
         {
@@ -3631,9 +3631,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.962279066443443,
-          "decode_ms": 813.1352381315082,
-          "total_ms": 844.0975171979517,
+          "prefill_ms": 30.872081173583865,
+          "decode_ms": 795.8191270008683,
+          "total_ms": 826.6912081744522,
           "is_warmup": false
         },
         {
@@ -3642,9 +3642,9 @@
           "worker_id": 0,
           "cache_hit": false,
           "tier_hit": null,
-          "prefill_ms": 60.911569744348526,
-          "decode_ms": 809.4133581034839,
-          "total_ms": 870.3249278478324,
+          "prefill_ms": 59.765053912997246,
+          "decode_ms": 795.381722971797,
+          "total_ms": 855.1467768847942,
           "is_warmup": false
         },
         {
@@ -3653,9 +3653,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.95713909715414,
-          "decode_ms": 810.0867159664631,
-          "total_ms": 841.0438550636172,
+          "prefill_ms": 30.60723189264536,
+          "decode_ms": 797.0007827971131,
+          "total_ms": 827.6080146897584,
           "is_warmup": false
         },
         {
@@ -3664,9 +3664,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.862590996548533,
-          "decode_ms": 807.9714018385857,
-          "total_ms": 838.8339928351343,
+          "prefill_ms": 30.137246008962393,
+          "decode_ms": 795.2080559916794,
+          "total_ms": 825.3453020006418,
           "is_warmup": false
         },
         {
@@ -3675,9 +3675,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.867710011079907,
-          "decode_ms": 807.7520879451185,
-          "total_ms": 838.6197979561985,
+          "prefill_ms": 30.634382972493768,
+          "decode_ms": 796.445014886558,
+          "total_ms": 827.0793978590518,
           "is_warmup": false
         },
         {
@@ -3686,9 +3686,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.793169979006052,
-          "decode_ms": 806.9330658763647,
-          "total_ms": 837.7262358553708,
+          "prefill_ms": 30.56565299630165,
+          "decode_ms": 796.5121429879218,
+          "total_ms": 827.0777959842235,
           "is_warmup": false
         },
         {
@@ -3697,9 +3697,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.825501075014472,
-          "decode_ms": 811.0641159582883,
-          "total_ms": 841.8896170333028,
+          "prefill_ms": 30.61951487325132,
+          "decode_ms": 796.2782310787588,
+          "total_ms": 826.8977459520102,
           "is_warmup": false
         },
         {
@@ -3708,9 +3708,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.92760290019214,
-          "decode_ms": 807.6006530318409,
-          "total_ms": 838.5282559320331,
+          "prefill_ms": 30.436970992013812,
+          "decode_ms": 795.3386208973825,
+          "total_ms": 825.7755918893963,
           "is_warmup": false
         },
         {
@@ -3719,9 +3719,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.84457595832646,
-          "decode_ms": 813.0393568426371,
-          "total_ms": 843.8839328009635,
+          "prefill_ms": 30.56616405956447,
+          "decode_ms": 800.360132008791,
+          "total_ms": 830.9262960683554,
           "is_warmup": false
         },
         {
@@ -3730,9 +3730,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.775397084653378,
-          "decode_ms": 806.594317080453,
-          "total_ms": 837.3697141651064,
+          "prefill_ms": 30.880626989528537,
+          "decode_ms": 797.4731221329421,
+          "total_ms": 828.3537491224706,
           "is_warmup": false
         },
         {
@@ -3741,9 +3741,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.841120053082705,
-          "decode_ms": 809.6177231054753,
-          "total_ms": 840.458843158558,
+          "prefill_ms": 30.552669195458293,
+          "decode_ms": 798.1355311349034,
+          "total_ms": 828.6882003303617,
           "is_warmup": false
         },
         {
@@ -3752,9 +3752,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.38009598478675,
-          "decode_ms": 813.9226499479264,
-          "total_ms": 845.3027459327132,
+          "prefill_ms": 30.160911148414016,
+          "decode_ms": 804.1835650801659,
+          "total_ms": 834.3444762285799,
           "is_warmup": false
         },
         {
@@ -3763,9 +3763,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.4121021181345,
-          "decode_ms": 810.3265271056443,
-          "total_ms": 840.7386292237788,
+          "prefill_ms": 30.921614030376077,
+          "decode_ms": 807.488450082019,
+          "total_ms": 838.410064112395,
           "is_warmup": false
         },
         {
@@ -3774,9 +3774,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.933954985812306,
-          "decode_ms": 807.2561740409583,
-          "total_ms": 838.1901290267706,
+          "prefill_ms": 30.55904107168317,
+          "decode_ms": 794.8425770737231,
+          "total_ms": 825.4016181454062,
           "is_warmup": false
         },
         {
@@ -3785,9 +3785,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.86417308077216,
-          "decode_ms": 808.4624570328742,
-          "total_ms": 839.3266301136464,
+          "prefill_ms": 30.12359095737338,
+          "decode_ms": 799.3144409265369,
+          "total_ms": 829.4380318839103,
           "is_warmup": false
         },
         {
@@ -3796,9 +3796,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.148829963058233,
-          "decode_ms": 807.1830058470368,
-          "total_ms": 838.3318358100951,
+          "prefill_ms": 30.0980219617486,
+          "decode_ms": 796.000838978216,
+          "total_ms": 826.0988609399647,
           "is_warmup": false
         },
         {
@@ -3807,9 +3807,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.897576827555895,
-          "decode_ms": 808.0192669294775,
-          "total_ms": 838.9168437570333,
+          "prefill_ms": 30.68446717225015,
+          "decode_ms": 799.3207341060042,
+          "total_ms": 830.0052012782544,
           "is_warmup": false
         },
         {
@@ -3818,9 +3818,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.879972968250513,
-          "decode_ms": 809.4776039943099,
-          "total_ms": 840.3575769625604,
+          "prefill_ms": 30.71775007992983,
+          "decode_ms": 799.0856701508164,
+          "total_ms": 829.8034202307463,
           "is_warmup": false
         },
         {
@@ -3829,9 +3829,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.917063122615218,
-          "decode_ms": 806.5096030477434,
-          "total_ms": 837.4266661703587,
+          "prefill_ms": 30.144650023430586,
+          "decode_ms": 796.5827148873359,
+          "total_ms": 826.7273649107665,
           "is_warmup": false
         },
         {
@@ -3840,9 +3840,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.874453019350767,
-          "decode_ms": 808.3396800793707,
-          "total_ms": 839.2141330987215,
+          "prefill_ms": 30.650543048977852,
+          "decode_ms": 797.3255750257522,
+          "total_ms": 827.97611807473,
           "is_warmup": false
         },
         {
@@ -3851,9 +3851,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.126695055514574,
-          "decode_ms": 809.8492841236293,
-          "total_ms": 839.9759791791439,
+          "prefill_ms": 30.69617901928723,
+          "decode_ms": 798.794450936839,
+          "total_ms": 829.4906299561262,
           "is_warmup": false
         },
         {
@@ -3862,9 +3862,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.972748063504696,
-          "decode_ms": 807.799784000963,
-          "total_ms": 838.7725320644677,
+          "prefill_ms": 30.23965982720256,
+          "decode_ms": 795.6870370544493,
+          "total_ms": 825.9266968816519,
           "is_warmup": false
         },
         {
@@ -3873,9 +3873,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.960094882175326,
-          "decode_ms": 805.4273349698633,
-          "total_ms": 836.3874298520386,
+          "prefill_ms": 30.582034029066563,
+          "decode_ms": 797.8422991000116,
+          "total_ms": 828.4243331290781,
           "is_warmup": false
         },
         {
@@ -3884,9 +3884,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.841220868751407,
-          "decode_ms": 805.2780339494348,
-          "total_ms": 836.1192548181862,
+          "prefill_ms": 30.65060405060649,
+          "decode_ms": 800.3458941821009,
+          "total_ms": 830.9964982327074,
           "is_warmup": false
         },
         {
@@ -3895,9 +3895,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.6890441570431,
-          "decode_ms": 811.0321019776165,
-          "total_ms": 841.7211461346596,
+          "prefill_ms": 30.710757011547685,
+          "decode_ms": 797.4713689181954,
+          "total_ms": 828.182125929743,
           "is_warmup": false
         },
         {
@@ -3906,9 +3906,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.861197970807552,
-          "decode_ms": 807.8759268391877,
-          "total_ms": 838.7371248099953,
+          "prefill_ms": 31.239994103088975,
+          "decode_ms": 798.0933911167085,
+          "total_ms": 829.3333852197975,
           "is_warmup": false
         },
         {
@@ -3917,9 +3917,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.880593927577138,
-          "decode_ms": 818.5380490031093,
-          "total_ms": 849.4186429306865,
+          "prefill_ms": 30.806367052718997,
+          "decode_ms": 797.3783349152654,
+          "total_ms": 828.1847019679844,
           "is_warmup": false
         },
         {
@@ -3928,9 +3928,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.163939042016864,
-          "decode_ms": 806.7390150390565,
-          "total_ms": 837.9029540810734,
+          "prefill_ms": 30.75690404511988,
+          "decode_ms": 798.2792409602553,
+          "total_ms": 829.0361450053751,
           "is_warmup": false
         },
         {
@@ -3939,9 +3939,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.0431111138314,
-          "decode_ms": 808.7929240427911,
-          "total_ms": 839.8360351566225,
+          "prefill_ms": 30.82561306655407,
+          "decode_ms": 798.32020890899,
+          "total_ms": 829.1458219755441,
           "is_warmup": false
         },
         {
@@ -3950,9 +3950,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.92584991827607,
-          "decode_ms": 807.172232074663,
-          "total_ms": 838.0980819929391,
+          "prefill_ms": 30.76524008065462,
+          "decode_ms": 802.2515038028359,
+          "total_ms": 833.0167438834906,
           "is_warmup": false
         },
         {
@@ -3961,9 +3961,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.769204953685403,
-          "decode_ms": 807.7244511805475,
-          "total_ms": 838.4936561342329,
+          "prefill_ms": 30.59915592893958,
+          "decode_ms": 802.2463948000222,
+          "total_ms": 832.8455507289618,
           "is_warmup": false
         },
         {
@@ -3972,9 +3972,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.850437935441732,
-          "decode_ms": 807.2729408740997,
-          "total_ms": 838.1233788095415,
+          "prefill_ms": 31.02361597120762,
+          "decode_ms": 796.3268929161131,
+          "total_ms": 827.3505088873208,
           "is_warmup": false
         },
         {
@@ -3983,9 +3983,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.689287861809134,
-          "decode_ms": 807.5465469155461,
-          "total_ms": 839.2358347773552,
+          "prefill_ms": 30.61251202598214,
+          "decode_ms": 799.5177041739225,
+          "total_ms": 830.1302161999047,
           "is_warmup": false
         },
         {
@@ -3994,9 +3994,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.811835080385208,
-          "decode_ms": 808.4386568516493,
-          "total_ms": 839.2504919320345,
+          "prefill_ms": 31.013086205348372,
+          "decode_ms": 798.0703280773014,
+          "total_ms": 829.0834142826498,
           "is_warmup": false
         },
         {
@@ -4005,9 +4005,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.767190968617797,
-          "decode_ms": 808.387921191752,
-          "total_ms": 839.1551121603698,
+          "prefill_ms": 30.69779183715582,
+          "decode_ms": 800.4600799176842,
+          "total_ms": 831.15787175484,
           "is_warmup": false
         },
         {
@@ -4016,9 +4016,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.903196893632412,
-          "decode_ms": 808.033584151417,
-          "total_ms": 838.9367810450494,
+          "prefill_ms": 30.72099620476365,
+          "decode_ms": 795.2300659380853,
+          "total_ms": 825.951062142849,
           "is_warmup": false
         },
         {
@@ -4027,9 +4027,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.148348934948444,
-          "decode_ms": 807.55949113518,
-          "total_ms": 838.7078400701284,
+          "prefill_ms": 30.641375808045268,
+          "decode_ms": 796.0319078993052,
+          "total_ms": 826.6732837073505,
           "is_warmup": false
         },
         {
@@ -4038,9 +4038,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.04239981621504,
-          "decode_ms": 808.0336139537394,
-          "total_ms": 839.0760137699544,
+          "prefill_ms": 30.672183958813548,
+          "decode_ms": 799.8741648625582,
+          "total_ms": 830.5463488213718,
           "is_warmup": false
         },
         {
@@ -4049,9 +4049,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.85798188112676,
-          "decode_ms": 808.5621600039303,
-          "total_ms": 839.4201418850571,
+          "prefill_ms": 30.22994101047516,
+          "decode_ms": 797.0066939014941,
+          "total_ms": 827.2366349119693,
           "is_warmup": false
         },
         {
@@ -4060,9 +4060,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.156841035932302,
-          "decode_ms": 807.2532839141786,
-          "total_ms": 837.4101249501109,
+          "prefill_ms": 30.666362959891558,
+          "decode_ms": 800.8457068353891,
+          "total_ms": 831.5120697952807,
           "is_warmup": false
         },
         {
@@ -4071,9 +4071,9 @@
           "worker_id": 0,
           "cache_hit": false,
           "tier_hit": null,
-          "prefill_ms": 61.77606899291277,
-          "decode_ms": 806.4890548121184,
-          "total_ms": 868.2651238050312,
+          "prefill_ms": 60.14994787983596,
+          "decode_ms": 794.8033828288317,
+          "total_ms": 854.9533307086676,
           "is_warmup": false
         },
         {
@@ -4082,9 +4082,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.955646187067032,
-          "decode_ms": 809.921570122242,
-          "total_ms": 840.877216309309,
+          "prefill_ms": 30.640555080026388,
+          "decode_ms": 799.45233091712,
+          "total_ms": 830.0928859971464,
           "is_warmup": false
         },
         {
@@ -4093,9 +4093,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.91338719241321,
-          "decode_ms": 813.4531411342323,
-          "total_ms": 844.3665283266455,
+          "prefill_ms": 30.575041193515062,
+          "decode_ms": 798.0139509309083,
+          "total_ms": 828.5889921244234,
           "is_warmup": false
         },
         {
@@ -4104,9 +4104,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.84570006467402,
-          "decode_ms": 809.1851240023971,
-          "total_ms": 840.0308240670711,
+          "prefill_ms": 30.73670598678291,
+          "decode_ms": 793.7558190897107,
+          "total_ms": 824.4925250764936,
           "is_warmup": false
         },
         {
@@ -4115,9 +4115,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.771018005907536,
-          "decode_ms": 814.9866301100701,
-          "total_ms": 845.7576481159776,
+          "prefill_ms": 30.741465045139194,
+          "decode_ms": 793.695375090465,
+          "total_ms": 824.4368401356041,
           "is_warmup": false
         },
         {
@@ -4126,9 +4126,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.93550819903612,
-          "decode_ms": 807.8659281600267,
-          "total_ms": 838.8014363590628,
+          "prefill_ms": 30.801086919382215,
+          "decode_ms": 793.3900998905301,
+          "total_ms": 824.1911868099123,
           "is_warmup": false
         },
         {
@@ -4137,9 +4137,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.836621997877955,
-          "decode_ms": 809.453038033098,
-          "total_ms": 840.2896600309759,
+          "prefill_ms": 30.142545932903886,
+          "decode_ms": 794.0937660168856,
+          "total_ms": 824.2363119497895,
           "is_warmup": false
         },
         {
@@ -4148,9 +4148,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.901785008609295,
-          "decode_ms": 807.8162539750338,
-          "total_ms": 838.718038983643,
+          "prefill_ms": 30.09839286096394,
+          "decode_ms": 799.1221088450402,
+          "total_ms": 829.2205017060041,
           "is_warmup": false
         },
         {
@@ -4159,9 +4159,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.03608388826251,
-          "decode_ms": 806.5563519485295,
-          "total_ms": 836.592435836792,
+          "prefill_ms": 29.887566110119224,
+          "decode_ms": 795.1272330246866,
+          "total_ms": 825.0147991348058,
           "is_warmup": false
         },
         {
@@ -4170,9 +4170,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.73584195226431,
-          "decode_ms": 807.9067750368267,
-          "total_ms": 838.642616989091,
+          "prefill_ms": 36.268046824261546,
+          "decode_ms": 799.6695800684392,
+          "total_ms": 835.9376268927008,
           "is_warmup": false
         },
         {
@@ -4181,9 +4181,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.92000912874937,
-          "decode_ms": 809.2888579703867,
-          "total_ms": 840.2088670991361,
+          "prefill_ms": 30.651274835690856,
+          "decode_ms": 794.4392771460116,
+          "total_ms": 825.0905519817024,
           "is_warmup": false
         },
         {
@@ -4192,9 +4192,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.79466288909316,
-          "decode_ms": 808.2681258674711,
-          "total_ms": 839.0627887565643,
+          "prefill_ms": 30.61137907207012,
+          "decode_ms": 796.3114241138101,
+          "total_ms": 826.9228031858802,
           "is_warmup": false
         },
         {
@@ -4203,9 +4203,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.82113293930888,
-          "decode_ms": 806.7287059966475,
-          "total_ms": 837.5498389359564,
+          "prefill_ms": 30.593235045671463,
+          "decode_ms": 796.1175690870732,
+          "total_ms": 826.7108041327447,
           "is_warmup": false
         },
         {
@@ -4214,9 +4214,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.794552993029356,
-          "decode_ms": 808.798765996471,
-          "total_ms": 839.5933189895004,
+          "prefill_ms": 30.085498932749033,
+          "decode_ms": 795.2960911206901,
+          "total_ms": 825.3815900534391,
           "is_warmup": false
         },
         {
@@ -4225,9 +4225,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.727897072210908,
-          "decode_ms": 807.7995928470045,
-          "total_ms": 838.5274899192154,
+          "prefill_ms": 30.616097850725055,
+          "decode_ms": 798.5804888885468,
+          "total_ms": 829.1965867392719,
           "is_warmup": false
         },
         {
@@ -4236,9 +4236,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.105965910479426,
-          "decode_ms": 808.028815081343,
-          "total_ms": 838.1347809918225,
+          "prefill_ms": 30.00489715486765,
+          "decode_ms": 796.0857490543276,
+          "total_ms": 826.0906462091953,
           "is_warmup": false
         },
         {
@@ -4247,9 +4247,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.758664943277836,
-          "decode_ms": 805.8953869622201,
-          "total_ms": 836.6540519054979,
+          "prefill_ms": 30.65251698717475,
+          "decode_ms": 796.375875826925,
+          "total_ms": 827.0283928140998,
           "is_warmup": false
         },
         {
@@ -4258,9 +4258,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.806245049461722,
-          "decode_ms": 807.7758389990777,
-          "total_ms": 838.5820840485394,
+          "prefill_ms": 30.62728000804782,
+          "decode_ms": 796.6403339523822,
+          "total_ms": 827.26761396043,
           "is_warmup": false
         },
         {
@@ -4269,9 +4269,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.868732137605548,
-          "decode_ms": 807.6845770701766,
-          "total_ms": 838.5533092077821,
+          "prefill_ms": 30.595629941672087,
+          "decode_ms": 793.9917340409011,
+          "total_ms": 824.5873639825732,
           "is_warmup": false
         },
         {
@@ -4280,9 +4280,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.842121923342347,
-          "decode_ms": 808.8010200299323,
-          "total_ms": 839.6431419532746,
+          "prefill_ms": 30.609266133978963,
+          "decode_ms": 797.8518360760063,
+          "total_ms": 828.4611022099853,
           "is_warmup": false
         },
         {
@@ -4291,9 +4291,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.882878927513957,
-          "decode_ms": 812.2554859146476,
-          "total_ms": 843.1383648421615,
+          "prefill_ms": 30.695046996697783,
+          "decode_ms": 797.4694259464741,
+          "total_ms": 828.1644729431719,
           "is_warmup": false
         },
         {
@@ -4302,9 +4302,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.819780891761184,
-          "decode_ms": 815.365303074941,
-          "total_ms": 846.1850839667022,
+          "prefill_ms": 30.818870989605784,
+          "decode_ms": 799.4295279495418,
+          "total_ms": 830.2483989391476,
           "is_warmup": false
         },
         {
@@ -4313,9 +4313,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.909910099580884,
-          "decode_ms": 808.896749978885,
-          "total_ms": 839.8066600784659,
+          "prefill_ms": 30.207900097593665,
+          "decode_ms": 800.573593005538,
+          "total_ms": 830.7814931031317,
           "is_warmup": false
         },
         {
@@ -4324,9 +4324,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.895363073796034,
-          "decode_ms": 811.4389381371439,
-          "total_ms": 842.3343012109399,
+          "prefill_ms": 30.835813144221902,
+          "decode_ms": 805.1927760243416,
+          "total_ms": 836.0285891685635,
           "is_warmup": false
         },
         {
@@ -4335,9 +4335,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.875645810738206,
-          "decode_ms": 812.964750919491,
-          "total_ms": 843.8403967302293,
+          "prefill_ms": 30.77415586449206,
+          "decode_ms": 803.2270830590278,
+          "total_ms": 834.0012389235198,
           "is_warmup": false
         },
         {
@@ -4346,9 +4346,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.990310944616795,
-          "decode_ms": 816.162935923785,
-          "total_ms": 847.1532468684018,
+          "prefill_ms": 30.980534851551056,
+          "decode_ms": 808.6100730579346,
+          "total_ms": 839.5906079094857,
           "is_warmup": false
         },
         {
@@ -4357,9 +4357,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.351958936080337,
-          "decode_ms": 815.0285189040005,
-          "total_ms": 845.3804778400809,
+          "prefill_ms": 30.057135969400406,
+          "decode_ms": 802.1069520618767,
+          "total_ms": 832.1640880312771,
           "is_warmup": false
         },
         {
@@ -4368,9 +4368,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.217389041557908,
-          "decode_ms": 815.4175020754337,
-          "total_ms": 846.6348911169916,
+          "prefill_ms": 30.87906399741769,
+          "decode_ms": 809.5475300215185,
+          "total_ms": 840.4265940189362,
           "is_warmup": false
         },
         {
@@ -4379,9 +4379,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.19051898829639,
-          "decode_ms": 814.2292639240623,
-          "total_ms": 845.4197829123586,
+          "prefill_ms": 30.257832957431674,
+          "decode_ms": 795.8593629300594,
+          "total_ms": 826.1171958874911,
           "is_warmup": false
         },
         {
@@ -4390,9 +4390,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.656657112762332,
-          "decode_ms": 814.2316380981356,
-          "total_ms": 845.8882952108979,
+          "prefill_ms": 31.12362395040691,
+          "decode_ms": 800.8924541063607,
+          "total_ms": 832.0160780567676,
           "is_warmup": false
         },
         {
@@ -4401,9 +4401,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.181481201201677,
-          "decode_ms": 813.506131991744,
-          "total_ms": 844.6876131929457,
+          "prefill_ms": 30.872952891513705,
+          "decode_ms": 801.9201899878681,
+          "total_ms": 832.7931428793818,
           "is_warmup": false
         },
         {
@@ -4412,9 +4412,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.147818081080914,
-          "decode_ms": 813.2247419562191,
-          "total_ms": 844.3725600373,
+          "prefill_ms": 31.100641004741192,
+          "decode_ms": 801.1638859752566,
+          "total_ms": 832.2645269799978,
           "is_warmup": false
         },
         {
@@ -4423,9 +4423,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.027871882542968,
-          "decode_ms": 811.0097600147128,
-          "total_ms": 842.0376318972558,
+          "prefill_ms": 30.242956010624766,
+          "decode_ms": 797.7636901196092,
+          "total_ms": 828.006646130234,
           "is_warmup": false
         },
         {
@@ -4434,9 +4434,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.21132799424231,
-          "decode_ms": 812.3866429086775,
-          "total_ms": 843.5979709029198,
+          "prefill_ms": 30.287840170785785,
+          "decode_ms": 799.4946711696684,
+          "total_ms": 829.7825113404542,
           "is_warmup": false
         },
         {
@@ -4445,9 +4445,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.069630989804864,
-          "decode_ms": 813.4451669175178,
-          "total_ms": 844.5147979073226,
+          "prefill_ms": 30.71241988800466,
+          "decode_ms": 797.8747598826885,
+          "total_ms": 828.5871797706932,
           "is_warmup": false
         },
         {
@@ -4456,9 +4456,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.48250887170434,
-          "decode_ms": 813.8351009692997,
-          "total_ms": 845.317609841004,
+          "prefill_ms": 30.2786931861192,
+          "decode_ms": 799.083867110312,
+          "total_ms": 829.3625602964312,
           "is_warmup": false
         },
         {
@@ -4467,9 +4467,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.900351935997605,
-          "decode_ms": 813.2132701575756,
-          "total_ms": 844.1136220935732,
+          "prefill_ms": 30.436960980296135,
+          "decode_ms": 794.1566840745509,
+          "total_ms": 824.593645054847,
           "is_warmup": false
         },
         {
@@ -4478,9 +4478,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.086964067071676,
-          "decode_ms": 813.5502140503377,
-          "total_ms": 844.6371781174093,
+          "prefill_ms": 30.195315834134817,
+          "decode_ms": 800.5479250568897,
+          "total_ms": 830.7432408910245,
           "is_warmup": false
         },
         {
@@ -4489,9 +4489,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.004308024421334,
-          "decode_ms": 819.5614370051771,
-          "total_ms": 850.5657450295985,
+          "prefill_ms": 30.626638093963265,
+          "decode_ms": 796.8120470177382,
+          "total_ms": 827.4386851117015,
           "is_warmup": false
         },
         {
@@ -4500,9 +4500,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.82163305953145,
-          "decode_ms": 823.3803811017424,
-          "total_ms": 854.2020141612738,
+          "prefill_ms": 30.62734892591834,
+          "decode_ms": 800.6491158157587,
+          "total_ms": 831.276464741677,
           "is_warmup": false
         },
         {
@@ -4511,9 +4511,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.145574059337378,
-          "decode_ms": 813.6569461785257,
-          "total_ms": 844.8025202378631,
+          "prefill_ms": 30.78363509848714,
+          "decode_ms": 799.782712943852,
+          "total_ms": 830.5663480423391,
           "is_warmup": false
         },
         {
@@ -4522,9 +4522,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 31.092504039406776,
-          "decode_ms": 809.1316821519285,
-          "total_ms": 840.2241861913353,
+          "prefill_ms": 30.563830165192485,
+          "decode_ms": 795.163671951741,
+          "total_ms": 825.7275021169335,
           "is_warmup": false
         },
         {
@@ -4533,9 +4533,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.16752190887928,
-          "decode_ms": 808.6153699550778,
-          "total_ms": 838.782891863957,
+          "prefill_ms": 29.744196217507124,
+          "decode_ms": 796.5826750732958,
+          "total_ms": 826.326871290803,
           "is_warmup": false
         },
         {
@@ -4544,9 +4544,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.851640040054917,
-          "decode_ms": 808.4487461019307,
-          "total_ms": 839.3003861419857,
+          "prefill_ms": 30.62820085324347,
+          "decode_ms": 801.2532640714198,
+          "total_ms": 831.8814649246633,
           "is_warmup": false
         },
         {
@@ -4555,9 +4555,9 @@
           "worker_id": 0,
           "cache_hit": true,
           "tier_hit": "gpu",
-          "prefill_ms": 30.91494902037084,
-          "decode_ms": 807.0812409278005,
-          "total_ms": 837.9961899481714,
+          "prefill_ms": 30.119142960757017,
+          "decode_ms": 795.9280519280583,
+          "total_ms": 826.0471948888153,
           "is_warmup": false
         }
       ]

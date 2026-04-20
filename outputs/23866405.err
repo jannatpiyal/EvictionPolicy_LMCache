@@ -1,0 +1,726 @@
+Skipping import of cpp extensions due to incompatible torch version 2.7.1+cu118 for torchao version 0.15.0             Please see https://github.com/pytorch/ao/issues/2919 for more info
+17:21:12 [INFO] __main__: ============================================================
+17:21:12 [INFO] __main__: KV-Cache Eviction Benchmark — REAL INFERENCE
+17:21:12 [INFO] __main__: ============================================================
+17:21:12 [INFO] __main__: Model: meta-llama/Llama-3.1-8B-Instruct
+17:21:12 [INFO] __main__: Device: cuda
+17:21:12 [INFO] __main__: GPU: NVIDIA H100 PCIe MIG 3g.40gb
+17:21:12 [INFO] __main__: GPU Memory: 39.5 GB
+17:21:12 [INFO] __main__: KV Cache tiers: GPU=512.0MB, CPU=8192MB, Disk=32768MB
+17:21:12 [INFO] __main__: Requests: 100
+17:21:12 [INFO] __main__: Unique prefixes: 10
+17:21:12 [INFO] __main__: Reuse ratio: 0.7
+17:21:12 [INFO] __main__: Policies: ['lru', 'lfu', 'semantic', 'learned']
+17:21:12 [INFO] __main__: ============================================================
+17:21:12 [INFO] workload.loader: Generated 100 requests with 10 unique prefixes, reuse_ratio=0.7
+17:21:12 [INFO] evaluation.benchmark: Workload: {'total_requests': 100, 'unique_prefixes_seen': 10, 'max_reuse': 36, 'prefix_distribution': {0: 36, 1: 23, 4: 9, 6: 6, 8: 6, 7: 5, 2: 5, 5: 4, 3: 4, 9: 2}}
+17:21:12 [INFO] evaluation.benchmark: 
+============================================================
+17:21:12 [INFO] evaluation.benchmark: POLICY: lru (1 worker(s))
+17:21:12 [INFO] evaluation.benchmark: ============================================================
+17:21:12 [INFO] evaluation.benchmark:   Trial 1/1
+17:21:12 [INFO] worker.inference_worker: Worker 0: Loading meta-llama/Llama-3.1-8B-Instruct on cuda:0...
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:05<00:17,  5.71s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:10<00:10,  5.29s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:16<00:05,  5.53s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:17<00:00,  3.89s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:17<00:00,  4.47s/it]
+17:21:37 [INFO] worker.inference_worker: Worker 0: Model loaded. GPU memory: 14.96 GB
+17:21:38 [INFO] evaluation.benchmark:     [MISS] Req   0: prefill= 275.4ms decode= 813.1ms | How do recommendation systems work?
+17:21:39 [INFO] evaluation.benchmark:     [MISS] Req   1: prefill=  59.8ms decode= 794.9ms | What is dynamic programming? Give me a simple exam
+17:21:39 [INFO] evaluation.benchmark:     [MISS] Req   2: prefill=  59.0ms decode= 798.0ms | What is a linked list and when should I use one?
+17:21:40 [INFO] evaluation.benchmark:     [MISS] Req   3: prefill=  60.0ms decode= 793.7ms | What is gradient descent and how does it work?
+17:21:41 [INFO] evaluation.benchmark:     [MISS] Req   4: prefill=  58.7ms decode= 807.6ms | How does garbage collection work in Java?
+17:21:42 [INFO] evaluation.benchmark:     [HIT ](gpu) Req   5: prefill=  30.5ms decode= 794.1ms | What is a binary search tree?
+17:21:43 [INFO] evaluation.benchmark:     [MISS] Req   6: prefill=  59.1ms decode= 793.0ms | What is a binary search tree?
+17:21:44 [INFO] evaluation.benchmark:     [HIT ](gpu) Req   7: prefill=  30.4ms decode= 791.5ms | How do hash tables handle collisions?
+17:21:45 [INFO] evaluation.benchmark:     [HIT ](gpu) Req   8: prefill=  30.5ms decode= 795.1ms | What is gradient descent and how does it work?
+17:21:45 [INFO] evaluation.benchmark:     [HIT ](gpu) Req   9: prefill=  29.9ms decode= 790.1ms | What is dynamic programming? Give me a simple exam
+17:21:46 [INFO] evaluation.benchmark:     [MISS] Req  10: prefill=  59.4ms decode= 795.8ms | What is transfer learning in deep learning?
+17:21:47 [INFO] evaluation.benchmark:     [MISS] Req  11: prefill=  59.8ms decode= 791.2ms | What is gradient descent and how does it work?
+17:21:48 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  12: prefill=  30.5ms decode= 795.2ms | What is CI/CD and why is it important?
+17:21:49 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  13: prefill=  30.6ms decode= 789.9ms | Explain the difference between TCP and UDP.
+17:21:50 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  14: prefill=  30.6ms decode= 792.5ms | Explain RESTful API design principles.
+17:21:50 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  15: prefill=  30.0ms decode= 794.1ms | What is eventual consistency?
+17:21:51 [INFO] evaluation.benchmark:     [MISS] Req  16: prefill=  59.8ms decode= 791.5ms | How does quicksort work? Walk me through an exampl
+17:21:52 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  17: prefill=  31.2ms decode= 791.5ms | What is a linked list and when should I use one?
+17:21:53 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  18: prefill=  30.5ms decode= 792.6ms | Explain the difference between TCP and UDP.
+17:21:54 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  19: prefill=  30.4ms decode= 796.0ms | Explain Big O notation with common examples.
+17:21:54 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  20: prefill=  30.3ms decode= 799.0ms | What is a binary search tree?
+17:21:55 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  21: prefill=  30.5ms decode= 789.9ms | How does Git branching work?
+17:21:56 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  22: prefill=  30.0ms decode= 800.0ms | What is microservices architecture?
+17:21:57 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  23: prefill=  30.5ms decode= 796.6ms | What is a linked list and when should I use one?
+17:21:58 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  24: prefill=  30.4ms decode= 794.0ms | What is CI/CD and why is it important?
+17:21:59 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  25: prefill=  30.5ms decode= 791.7ms | Explain Big O notation with common examples.
+17:21:59 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  26: prefill=  30.5ms decode= 795.3ms | Explain the attention mechanism in transformers.
+17:22:00 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  27: prefill=  29.8ms decode= 795.4ms | How do recommendation systems work?
+17:22:01 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  28: prefill=  30.5ms decode= 795.2ms | Explain the attention mechanism in transformers.
+17:22:02 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  29: prefill=  30.5ms decode= 792.2ms | What is CI/CD and why is it important?
+17:22:03 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  30: prefill=  30.8ms decode= 794.7ms | What is eventual consistency?
+17:22:04 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  31: prefill=  30.7ms decode= 792.6ms | What is a binary search tree?
+17:22:04 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  32: prefill=  30.4ms decode= 798.0ms | Explain the difference between SQL and NoSQL datab
+17:22:05 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  33: prefill=  30.3ms decode= 789.0ms | Explain RESTful API design principles.
+17:22:06 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  34: prefill=  30.0ms decode= 791.9ms | How does garbage collection work in Java?
+17:22:07 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  35: prefill=  29.6ms decode= 789.4ms | What is a linked list and when should I use one?
+17:22:08 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  36: prefill=  30.5ms decode= 793.0ms | How does backpropagation work in neural networks?
+17:22:09 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  37: prefill=  30.5ms decode= 793.7ms | What is the CAP theorem in distributed systems?
+17:22:09 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  38: prefill=  30.4ms decode= 795.2ms | Explain the attention mechanism in transformers.
+17:22:10 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  39: prefill=  30.6ms decode= 791.8ms | What is eventual consistency?
+17:22:11 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  40: prefill=  30.5ms decode= 800.4ms | Explain how HTTPS encryption works.
+17:22:12 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  41: prefill=  30.5ms decode= 794.6ms | How does garbage collection work in Java?
+17:22:13 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  42: prefill=  30.5ms decode= 795.8ms | How do hash tables handle collisions?
+17:22:13 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  43: prefill=  31.2ms decode= 792.6ms | Explain Big O notation with common examples.
+17:22:14 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  44: prefill=  30.0ms decode= 790.4ms | How does backpropagation work in neural networks?
+17:22:15 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  45: prefill=  30.6ms decode= 792.3ms | Explain how HTTPS encryption works.
+17:22:16 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  46: prefill=  30.0ms decode= 793.0ms | What is dynamic programming? Give me a simple exam
+17:22:17 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  47: prefill=  30.5ms decode= 793.0ms | Explain the difference between TCP and UDP.
+17:22:18 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  48: prefill=  31.1ms decode= 794.0ms | How does a load balancer distribute traffic?
+17:22:18 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  49: prefill=  30.5ms decode= 793.6ms | What is dynamic programming? Give me a simple exam
+17:22:19 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  50: prefill=  30.0ms decode= 795.4ms | What are design patterns? Name three common ones.
+17:22:20 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  51: prefill=  30.5ms decode= 792.1ms | What are design patterns? Name three common ones.
+17:22:21 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  52: prefill=  29.9ms decode= 793.1ms | What is microservices architecture?
+17:22:22 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  53: prefill=  30.5ms decode= 793.6ms | How does garbage collection work in Java?
+17:22:23 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  54: prefill=  29.8ms decode= 796.4ms | How does quicksort work? Walk me through an exampl
+17:22:23 [INFO] evaluation.benchmark:     [MISS] Req  55: prefill=  60.2ms decode= 791.5ms | What is gradient descent and how does it work?
+17:22:24 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  56: prefill=  30.4ms decode= 800.1ms | Explain the difference between SQL and NoSQL datab
+17:22:25 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  57: prefill=  29.9ms decode= 793.9ms | What is CI/CD and why is it important?
+17:22:26 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  58: prefill=  30.0ms decode= 805.4ms | What is dynamic programming? Give me a simple exam
+17:22:27 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  59: prefill=  30.7ms decode= 791.9ms | How does a load balancer distribute traffic?
+17:22:28 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  60: prefill=  30.0ms decode= 791.6ms | Explain the difference between TCP and UDP.
+17:22:28 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  61: prefill=  30.5ms decode= 795.8ms | What is CI/CD and why is it important?
+17:22:29 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  62: prefill=  30.3ms decode= 796.6ms | What is the difference between a process and a thr
+17:22:30 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  63: prefill=  30.2ms decode= 793.2ms | How do recommendation systems work?
+17:22:31 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  64: prefill=  30.4ms decode= 794.8ms | What is microservices architecture?
+17:22:32 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  65: prefill=  30.7ms decode= 786.1ms | What are design patterns? Name three common ones.
+17:22:32 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  66: prefill=  29.9ms decode= 787.3ms | Explain RESTful API design principles.
+17:22:33 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  67: prefill=  30.3ms decode= 784.3ms | Explain Big O notation with common examples.
+17:22:34 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  68: prefill=  30.5ms decode= 793.0ms | Explain the attention mechanism in transformers.
+17:22:35 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  69: prefill=  30.4ms decode= 792.3ms | Explain the difference between TCP and UDP.
+17:22:36 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  70: prefill=  29.3ms decode= 789.4ms | How does quicksort work? Walk me through an exampl
+17:22:37 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  71: prefill=  31.0ms decode= 792.6ms | What is transfer learning in deep learning?
+17:22:37 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  72: prefill=  30.6ms decode= 791.7ms | What is a binary search tree?
+17:22:38 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  73: prefill=  30.7ms decode= 798.7ms | How does backpropagation work in neural networks?
+17:22:39 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  74: prefill=  30.7ms decode= 791.9ms | What is the difference between a process and a thr
+17:22:40 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  75: prefill=  31.0ms decode= 797.6ms | Explain the difference between TCP and UDP.
+17:22:41 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  76: prefill=  30.6ms decode= 808.6ms | What is a binary search tree?
+17:22:42 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  77: prefill=  30.0ms decode= 786.0ms | What is dynamic programming? Give me a simple exam
+17:22:42 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  78: prefill=  30.0ms decode= 786.9ms | How does a load balancer distribute traffic?
+17:22:43 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  79: prefill=  30.0ms decode= 789.6ms | How does garbage collection work in Java?
+17:22:44 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  80: prefill=  30.6ms decode= 786.3ms | Explain the difference between SQL and NoSQL datab
+17:22:45 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  81: prefill=  29.6ms decode= 788.5ms | How do recommendation systems work?
+17:22:46 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  82: prefill=  30.0ms decode= 784.7ms | What are design patterns? Name three common ones.
+17:22:46 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  83: prefill=  30.0ms decode= 783.9ms | What is the CAP theorem in distributed systems?
+17:22:47 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  84: prefill=  30.1ms decode= 789.0ms | What are design patterns? Name three common ones.
+17:22:48 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  85: prefill=  30.1ms decode= 784.9ms | What are design patterns? Name three common ones.
+17:22:49 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  86: prefill=  30.0ms decode= 784.0ms | Explain Big O notation with common examples.
+17:22:50 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  87: prefill=  29.9ms decode= 789.3ms | What is transfer learning in deep learning?
+17:22:51 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  88: prefill=  30.5ms decode= 795.4ms | How does garbage collection work in Java?
+17:22:51 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  89: prefill=  30.8ms decode= 794.6ms | Explain the attention mechanism in transformers.
+17:22:52 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  90: prefill=  30.5ms decode= 788.6ms | What is transfer learning in deep learning?
+17:22:53 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  91: prefill=  29.8ms decode= 789.5ms | How do recommendation systems work?
+17:22:54 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  92: prefill=  29.9ms decode= 791.7ms | Explain the difference between TCP and UDP.
+17:22:55 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  93: prefill=  30.2ms decode= 801.2ms | What is microservices architecture?
+17:22:55 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  94: prefill=  30.4ms decode= 795.4ms | How do recommendation systems work?
+17:22:56 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  95: prefill=  30.0ms decode= 794.6ms | What is the CAP theorem in distributed systems?
+17:22:57 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  96: prefill=  30.4ms decode= 790.9ms | What is CI/CD and why is it important?
+17:22:58 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  97: prefill=  29.3ms decode= 793.4ms | What is gradient descent and how does it work?
+17:22:59 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  98: prefill=  30.4ms decode= 792.1ms | What is a binary search tree?
+17:23:00 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  99: prefill=  29.9ms decode= 793.1ms | What is the CAP theorem in distributed systems?
+17:23:00 [INFO] evaluation.benchmark:     Hit rate: 94.7%, Speedup: 2.0x, Evictions: 0, Routing eff: 0.0%
+17:23:00 [INFO] evaluation.benchmark: 
+============================================================
+17:23:00 [INFO] evaluation.benchmark: POLICY: lfu (1 worker(s))
+17:23:00 [INFO] evaluation.benchmark: ============================================================
+17:23:00 [INFO] evaluation.benchmark:   Trial 1/1
+17:23:00 [INFO] worker.inference_worker: Worker 0: Loading meta-llama/Llama-3.1-8B-Instruct on cuda:0...
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:01<00:04,  1.58s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:03<00:03,  1.53s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:04<00:01,  1.48s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:04<00:00,  1.04s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:04<00:00,  1.21s/it]
+17:23:05 [INFO] worker.inference_worker: Worker 0: Model loaded. GPU memory: 14.99 GB
+17:23:06 [INFO] evaluation.benchmark:     [MISS] Req   0: prefill=  60.5ms decode= 794.7ms | How do recommendation systems work?
+17:23:07 [INFO] evaluation.benchmark:     [MISS] Req   1: prefill=  59.0ms decode= 798.8ms | What is dynamic programming? Give me a simple exam
+17:23:08 [INFO] evaluation.benchmark:     [MISS] Req   2: prefill=  59.4ms decode= 799.9ms | What is a linked list and when should I use one?
+17:23:09 [INFO] evaluation.benchmark:     [MISS] Req   3: prefill=  59.5ms decode= 798.3ms | What is gradient descent and how does it work?
+17:23:09 [INFO] evaluation.benchmark:     [MISS] Req   4: prefill=  60.0ms decode= 801.1ms | How does garbage collection work in Java?
+17:23:10 [INFO] evaluation.benchmark:     [HIT ](gpu) Req   5: prefill=  30.7ms decode= 797.8ms | What is a binary search tree?
+17:23:11 [INFO] evaluation.benchmark:     [MISS] Req   6: prefill=  59.9ms decode= 803.3ms | What is a binary search tree?
+17:23:12 [INFO] evaluation.benchmark:     [HIT ](gpu) Req   7: prefill=  30.6ms decode= 797.2ms | How do hash tables handle collisions?
+17:23:13 [INFO] evaluation.benchmark:     [HIT ](gpu) Req   8: prefill=  30.8ms decode= 797.4ms | What is gradient descent and how does it work?
+17:23:14 [INFO] evaluation.benchmark:     [HIT ](gpu) Req   9: prefill=  30.5ms decode= 798.1ms | What is dynamic programming? Give me a simple exam
+17:23:14 [INFO] evaluation.benchmark:     [MISS] Req  10: prefill=  59.1ms decode= 794.3ms | What is transfer learning in deep learning?
+17:23:15 [INFO] evaluation.benchmark:     [MISS] Req  11: prefill=  59.3ms decode= 797.3ms | What is gradient descent and how does it work?
+17:23:16 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  12: prefill=  30.6ms decode= 794.5ms | What is CI/CD and why is it important?
+17:23:17 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  13: prefill=  30.9ms decode= 794.9ms | Explain the difference between TCP and UDP.
+17:23:18 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  14: prefill=  30.6ms decode= 794.1ms | Explain RESTful API design principles.
+17:23:19 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  15: prefill=  30.6ms decode= 792.8ms | What is eventual consistency?
+17:23:19 [INFO] evaluation.benchmark:     [MISS] Req  16: prefill=  59.6ms decode= 798.6ms | How does quicksort work? Walk me through an exampl
+17:23:20 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  17: prefill=  30.6ms decode= 794.4ms | What is a linked list and when should I use one?
+17:23:21 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  18: prefill=  30.6ms decode= 796.3ms | Explain the difference between TCP and UDP.
+17:23:22 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  19: prefill=  30.7ms decode= 797.5ms | Explain Big O notation with common examples.
+17:23:23 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  20: prefill=  30.1ms decode= 797.0ms | What is a binary search tree?
+17:23:24 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  21: prefill=  30.6ms decode= 795.7ms | How does Git branching work?
+17:23:24 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  22: prefill=  30.6ms decode= 804.2ms | What is microservices architecture?
+17:23:25 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  23: prefill=  30.5ms decode= 797.1ms | What is a linked list and when should I use one?
+17:23:26 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  24: prefill=  30.2ms decode= 807.5ms | What is CI/CD and why is it important?
+17:23:27 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  25: prefill=  31.0ms decode= 797.4ms | Explain Big O notation with common examples.
+17:23:28 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  26: prefill=  30.7ms decode= 798.0ms | Explain the attention mechanism in transformers.
+17:23:29 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  27: prefill=  30.1ms decode= 798.5ms | How do recommendation systems work?
+17:23:29 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  28: prefill=  30.8ms decode= 794.4ms | Explain the attention mechanism in transformers.
+17:23:30 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  29: prefill=  30.7ms decode= 797.3ms | What is CI/CD and why is it important?
+17:23:31 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  30: prefill=  30.2ms decode= 796.6ms | What is eventual consistency?
+17:23:32 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  31: prefill=  30.2ms decode= 797.7ms | What is a binary search tree?
+17:23:33 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  32: prefill=  30.8ms decode= 795.0ms | Explain the difference between SQL and NoSQL datab
+17:23:34 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  33: prefill=  30.1ms decode= 791.9ms | Explain RESTful API design principles.
+17:23:34 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  34: prefill=  30.6ms decode= 796.0ms | How does garbage collection work in Java?
+17:23:35 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  35: prefill=  30.0ms decode= 796.9ms | What is a linked list and when should I use one?
+17:23:36 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  36: prefill=  30.8ms decode= 797.9ms | How does backpropagation work in neural networks?
+17:23:37 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  37: prefill=  30.1ms decode= 793.6ms | What is the CAP theorem in distributed systems?
+17:23:38 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  38: prefill=  30.6ms decode= 798.8ms | Explain the attention mechanism in transformers.
+17:23:38 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  39: prefill=  30.5ms decode= 794.9ms | What is eventual consistency?
+17:23:39 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  40: prefill=  30.7ms decode= 798.7ms | Explain how HTTPS encryption works.
+17:23:40 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  41: prefill=  30.5ms decode= 795.3ms | How does garbage collection work in Java?
+17:23:41 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  42: prefill=  30.6ms decode= 803.0ms | How do hash tables handle collisions?
+17:23:42 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  43: prefill=  30.6ms decode= 793.6ms | Explain Big O notation with common examples.
+17:23:43 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  44: prefill=  30.6ms decode= 796.7ms | How does backpropagation work in neural networks?
+17:23:43 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  45: prefill=  30.2ms decode= 796.4ms | Explain how HTTPS encryption works.
+17:23:44 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  46: prefill=  30.4ms decode= 796.8ms | What is dynamic programming? Give me a simple exam
+17:23:45 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  47: prefill=  30.6ms decode= 796.1ms | Explain the difference between TCP and UDP.
+17:23:46 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  48: prefill=  30.6ms decode= 793.1ms | How does a load balancer distribute traffic?
+17:23:47 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  49: prefill=  30.1ms decode= 794.6ms | What is dynamic programming? Give me a simple exam
+17:23:48 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  50: prefill=  30.7ms decode= 798.0ms | What are design patterns? Name three common ones.
+17:23:48 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  51: prefill=  30.2ms decode= 795.1ms | What are design patterns? Name three common ones.
+17:23:49 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  52: prefill=  30.7ms decode= 797.1ms | What is microservices architecture?
+17:23:50 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  53: prefill=  30.9ms decode= 797.5ms | How does garbage collection work in Java?
+17:23:51 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  54: prefill=  30.5ms decode= 798.4ms | How does quicksort work? Walk me through an exampl
+17:23:52 [INFO] evaluation.benchmark:     [MISS] Req  55: prefill=  59.2ms decode= 797.7ms | What is gradient descent and how does it work?
+17:23:53 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  56: prefill=  30.7ms decode= 794.7ms | Explain the difference between SQL and NoSQL datab
+17:23:53 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  57: prefill=  30.8ms decode= 798.8ms | What is CI/CD and why is it important?
+17:23:54 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  58: prefill=  30.6ms decode= 802.9ms | What is dynamic programming? Give me a simple exam
+17:23:55 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  59: prefill=  30.6ms decode= 794.3ms | How does a load balancer distribute traffic?
+17:23:56 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  60: prefill=  30.7ms decode= 803.0ms | Explain the difference between TCP and UDP.
+17:23:57 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  61: prefill=  30.4ms decode= 799.6ms | What is CI/CD and why is it important?
+17:23:58 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  62: prefill=  31.1ms decode= 800.1ms | What is the difference between a process and a thr
+17:23:58 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  63: prefill=  30.0ms decode= 800.7ms | How do recommendation systems work?
+17:23:59 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  64: prefill=  30.0ms decode= 797.3ms | What is microservices architecture?
+17:24:00 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  65: prefill=  30.7ms decode= 797.2ms | What are design patterns? Name three common ones.
+17:24:01 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  66: prefill=  30.1ms decode= 803.3ms | Explain RESTful API design principles.
+17:24:02 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  67: prefill=  31.0ms decode= 800.4ms | Explain Big O notation with common examples.
+17:24:03 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  68: prefill=  30.2ms decode= 798.5ms | Explain the attention mechanism in transformers.
+17:24:03 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  69: prefill=  30.7ms decode= 796.5ms | Explain the difference between TCP and UDP.
+17:24:04 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  70: prefill=  30.0ms decode= 802.1ms | How does quicksort work? Walk me through an exampl
+17:24:05 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  71: prefill=  30.7ms decode= 798.1ms | What is transfer learning in deep learning?
+17:24:06 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  72: prefill=  30.2ms decode= 796.1ms | What is a binary search tree?
+17:24:07 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  73: prefill=  31.3ms decode= 795.6ms | How does backpropagation work in neural networks?
+17:24:08 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  74: prefill=  30.1ms decode= 798.9ms | What is the difference between a process and a thr
+17:24:08 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  75: prefill=  30.7ms decode= 798.2ms | Explain the difference between TCP and UDP.
+17:24:09 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  76: prefill=  30.7ms decode= 800.9ms | What is a binary search tree?
+17:24:10 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  77: prefill=  30.2ms decode= 798.6ms | What is dynamic programming? Give me a simple exam
+17:24:11 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  78: prefill=  30.6ms decode= 807.8ms | How does a load balancer distribute traffic?
+17:24:12 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  79: prefill=  30.6ms decode= 796.7ms | How does garbage collection work in Java?
+17:24:13 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  80: prefill=  30.6ms decode= 797.6ms | Explain the difference between SQL and NoSQL datab
+17:24:13 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  81: prefill=  30.0ms decode= 797.6ms | How do recommendation systems work?
+17:24:14 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  82: prefill=  30.2ms decode= 797.8ms | What are design patterns? Name three common ones.
+17:24:15 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  83: prefill=  30.8ms decode= 801.5ms | What is the CAP theorem in distributed systems?
+17:24:16 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  84: prefill=  30.9ms decode= 799.1ms | What are design patterns? Name three common ones.
+17:24:17 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  85: prefill=  30.3ms decode= 796.9ms | What are design patterns? Name three common ones.
+17:24:17 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  86: prefill=  30.6ms decode= 797.9ms | Explain Big O notation with common examples.
+17:24:18 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  87: prefill=  30.6ms decode= 796.1ms | What is transfer learning in deep learning?
+17:24:19 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  88: prefill=  30.7ms decode= 797.3ms | How does garbage collection work in Java?
+17:24:20 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  89: prefill=  30.7ms decode= 800.7ms | Explain the attention mechanism in transformers.
+17:24:21 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  90: prefill=  30.7ms decode= 796.7ms | What is transfer learning in deep learning?
+17:24:22 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  91: prefill=  30.5ms decode= 799.7ms | How do recommendation systems work?
+17:24:22 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  92: prefill=  31.0ms decode= 795.6ms | Explain the difference between TCP and UDP.
+17:24:23 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  93: prefill=  30.5ms decode= 796.5ms | What is microservices architecture?
+17:24:24 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  94: prefill=  30.0ms decode= 794.6ms | How do recommendation systems work?
+17:24:25 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  95: prefill=  30.8ms decode= 800.2ms | What is the CAP theorem in distributed systems?
+17:24:26 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  96: prefill=  31.0ms decode= 806.2ms | What is CI/CD and why is it important?
+17:24:27 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  97: prefill=  30.0ms decode= 797.8ms | What is gradient descent and how does it work?
+17:24:27 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  98: prefill=  30.6ms decode= 797.1ms | What is a binary search tree?
+17:24:28 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  99: prefill=  30.6ms decode= 796.0ms | What is the CAP theorem in distributed systems?
+17:24:28 [INFO] evaluation.benchmark:     Hit rate: 94.7%, Speedup: 1.9x, Evictions: 0, Routing eff: 0.0%
+17:24:28 [INFO] evaluation.benchmark: 
+============================================================
+17:24:28 [INFO] evaluation.benchmark: POLICY: semantic (1 worker(s))
+17:24:28 [INFO] evaluation.benchmark: ============================================================
+17:24:28 [INFO] evaluation.benchmark:   Trial 1/1
+17:24:28 [INFO] worker.inference_worker: Worker 0: Loading meta-llama/Llama-3.1-8B-Instruct on cuda:0...
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:01<00:04,  1.54s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:03<00:03,  1.56s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:04<00:01,  1.50s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:04<00:00,  1.05s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:04<00:00,  1.23s/it]
+17:24:34 [INFO] worker.inference_worker: Worker 0: Model loaded. GPU memory: 14.99 GB
+17:24:35 [INFO] evaluation.benchmark:     [MISS] Req   0: prefill=  61.1ms decode= 795.8ms | How do recommendation systems work?
+17:24:35 [INFO] evaluation.benchmark:     [MISS] Req   1: prefill=  60.5ms decode= 793.5ms | What is dynamic programming? Give me a simple exam
+17:24:36 [INFO] evaluation.benchmark:     [MISS] Req   2: prefill=  58.8ms decode= 796.8ms | What is a linked list and when should I use one?
+17:24:37 [INFO] evaluation.benchmark:     [MISS] Req   3: prefill=  59.9ms decode= 796.5ms | What is gradient descent and how does it work?
+17:24:38 [INFO] evaluation.benchmark:     [MISS] Req   4: prefill=  59.5ms decode= 795.4ms | How does garbage collection work in Java?
+17:24:39 [INFO] evaluation.benchmark:     [HIT ](gpu) Req   5: prefill=  30.5ms decode= 796.3ms | What is a binary search tree?
+17:24:40 [INFO] evaluation.benchmark:     [MISS] Req   6: prefill=  58.8ms decode= 804.9ms | What is a binary search tree?
+17:24:40 [INFO] evaluation.benchmark:     [HIT ](gpu) Req   7: prefill=  30.0ms decode= 808.4ms | How do hash tables handle collisions?
+17:24:41 [INFO] evaluation.benchmark:     [HIT ](gpu) Req   8: prefill=  31.1ms decode= 796.9ms | What is gradient descent and how does it work?
+17:24:42 [INFO] evaluation.benchmark:     [HIT ](gpu) Req   9: prefill=  30.7ms decode= 795.2ms | What is dynamic programming? Give me a simple exam
+17:24:43 [INFO] evaluation.benchmark:     [MISS] Req  10: prefill=  58.2ms decode= 795.9ms | What is transfer learning in deep learning?
+17:24:44 [INFO] evaluation.benchmark:     [MISS] Req  11: prefill=  60.1ms decode= 796.4ms | What is gradient descent and how does it work?
+17:24:45 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  12: prefill=  30.1ms decode= 792.1ms | What is CI/CD and why is it important?
+17:24:45 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  13: prefill=  30.5ms decode= 792.6ms | Explain the difference between TCP and UDP.
+17:24:46 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  14: prefill=  30.6ms decode= 796.2ms | Explain RESTful API design principles.
+17:24:47 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  15: prefill=  30.6ms decode= 797.3ms | What is eventual consistency?
+17:24:48 [INFO] evaluation.benchmark:     [MISS] Req  16: prefill=  60.3ms decode= 795.1ms | How does quicksort work? Walk me through an exampl
+17:24:49 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  17: prefill=  31.0ms decode= 792.5ms | What is a linked list and when should I use one?
+17:24:50 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  18: prefill=  30.5ms decode= 797.0ms | Explain the difference between TCP and UDP.
+17:24:50 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  19: prefill=  30.6ms decode= 799.4ms | Explain Big O notation with common examples.
+17:24:51 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  20: prefill=  30.7ms decode= 791.5ms | What is a binary search tree?
+17:24:52 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  21: prefill=  30.6ms decode= 795.3ms | How does Git branching work?
+17:24:53 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  22: prefill=  30.0ms decode= 794.7ms | What is microservices architecture?
+17:24:54 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  23: prefill=  30.6ms decode= 797.2ms | What is a linked list and when should I use one?
+17:24:55 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  24: prefill=  30.6ms decode= 798.4ms | What is CI/CD and why is it important?
+17:24:55 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  25: prefill=  30.5ms decode= 797.2ms | Explain Big O notation with common examples.
+17:24:56 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  26: prefill=  35.7ms decode= 797.9ms | Explain the attention mechanism in transformers.
+17:24:57 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  27: prefill=  29.9ms decode= 794.5ms | How do recommendation systems work?
+17:24:58 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  28: prefill=  30.9ms decode= 795.2ms | Explain the attention mechanism in transformers.
+17:24:59 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  29: prefill=  30.6ms decode= 793.7ms | What is CI/CD and why is it important?
+17:25:00 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  30: prefill=  30.5ms decode= 799.8ms | What is eventual consistency?
+17:25:00 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  31: prefill=  30.6ms decode= 791.4ms | What is a binary search tree?
+17:25:01 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  32: prefill=  30.6ms decode= 793.9ms | Explain the difference between SQL and NoSQL datab
+17:25:02 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  33: prefill=  30.2ms decode= 797.7ms | Explain RESTful API design principles.
+17:25:03 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  34: prefill=  30.1ms decode= 795.1ms | How does garbage collection work in Java?
+17:25:04 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  35: prefill=  29.9ms decode= 797.8ms | What is a linked list and when should I use one?
+17:25:05 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  36: prefill=  30.7ms decode= 792.0ms | How does backpropagation work in neural networks?
+17:25:05 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  37: prefill=  30.8ms decode= 797.1ms | What is the CAP theorem in distributed systems?
+17:25:06 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  38: prefill=  30.6ms decode= 798.8ms | Explain the attention mechanism in transformers.
+17:25:07 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  39: prefill=  30.0ms decode= 797.6ms | What is eventual consistency?
+17:25:08 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  40: prefill=  30.6ms decode= 796.3ms | Explain how HTTPS encryption works.
+17:25:09 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  41: prefill=  31.2ms decode= 793.8ms | How does garbage collection work in Java?
+17:25:10 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  42: prefill=  30.2ms decode= 798.4ms | How do hash tables handle collisions?
+17:25:10 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  43: prefill=  30.7ms decode= 792.4ms | Explain Big O notation with common examples.
+17:25:11 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  44: prefill=  30.1ms decode= 801.9ms | How does backpropagation work in neural networks?
+17:25:12 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  45: prefill=  30.7ms decode= 799.2ms | Explain how HTTPS encryption works.
+17:25:13 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  46: prefill=  30.8ms decode= 804.7ms | What is dynamic programming? Give me a simple exam
+17:25:14 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  47: prefill=  30.4ms decode= 797.3ms | Explain the difference between TCP and UDP.
+17:25:14 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  48: prefill=  31.1ms decode= 800.1ms | How does a load balancer distribute traffic?
+17:25:15 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  49: prefill=  30.6ms decode= 796.0ms | What is dynamic programming? Give me a simple exam
+17:25:16 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  50: prefill=  30.2ms decode= 796.7ms | What are design patterns? Name three common ones.
+17:25:17 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  51: prefill=  30.8ms decode= 799.0ms | What are design patterns? Name three common ones.
+17:25:18 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  52: prefill=  30.7ms decode= 799.2ms | What is microservices architecture?
+17:25:19 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  53: prefill=  30.7ms decode= 797.0ms | How does garbage collection work in Java?
+17:25:19 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  54: prefill=  29.4ms decode= 798.5ms | How does quicksort work? Walk me through an exampl
+17:25:20 [INFO] evaluation.benchmark:     [MISS] Req  55: prefill=  60.2ms decode= 794.6ms | What is gradient descent and how does it work?
+17:25:21 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  56: prefill=  30.2ms decode= 798.0ms | Explain the difference between SQL and NoSQL datab
+17:25:22 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  57: prefill=  30.8ms decode= 799.5ms | What is CI/CD and why is it important?
+17:25:23 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  58: prefill=  30.7ms decode= 793.2ms | What is dynamic programming? Give me a simple exam
+17:25:24 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  59: prefill=  30.6ms decode= 794.7ms | How does a load balancer distribute traffic?
+17:25:24 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  60: prefill=  30.9ms decode= 803.1ms | Explain the difference between TCP and UDP.
+17:25:25 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  61: prefill=  30.6ms decode= 796.6ms | What is CI/CD and why is it important?
+17:25:26 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  62: prefill=  30.7ms decode= 802.9ms | What is the difference between a process and a thr
+17:25:27 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  63: prefill=  29.9ms decode= 798.8ms | How do recommendation systems work?
+17:25:28 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  64: prefill=  30.4ms decode= 795.3ms | What is microservices architecture?
+17:25:29 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  65: prefill=  30.7ms decode= 800.3ms | What are design patterns? Name three common ones.
+17:25:29 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  66: prefill=  30.0ms decode= 797.5ms | Explain RESTful API design principles.
+17:25:30 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  67: prefill=  30.1ms decode= 797.9ms | Explain Big O notation with common examples.
+17:25:31 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  68: prefill=  30.9ms decode= 799.0ms | Explain the attention mechanism in transformers.
+17:25:32 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  69: prefill=  30.7ms decode= 797.0ms | Explain the difference between TCP and UDP.
+17:25:33 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  70: prefill=  29.7ms decode= 796.1ms | How does quicksort work? Walk me through an exampl
+17:25:34 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  71: prefill=  30.5ms decode= 793.6ms | What is transfer learning in deep learning?
+17:25:34 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  72: prefill=  30.8ms decode= 798.4ms | What is a binary search tree?
+17:25:35 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  73: prefill=  30.3ms decode= 798.7ms | How does backpropagation work in neural networks?
+17:25:36 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  74: prefill=  30.7ms decode= 797.8ms | What is the difference between a process and a thr
+17:25:37 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  75: prefill=  30.7ms decode= 796.6ms | Explain the difference between TCP and UDP.
+17:25:38 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  76: prefill=  30.6ms decode= 794.6ms | What is a binary search tree?
+17:25:39 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  77: prefill=  30.6ms decode= 794.3ms | What is dynamic programming? Give me a simple exam
+17:25:39 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  78: prefill=  30.6ms decode= 804.9ms | How does a load balancer distribute traffic?
+17:25:40 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  79: prefill=  30.6ms decode= 796.1ms | How does garbage collection work in Java?
+17:25:41 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  80: prefill=  30.5ms decode= 801.6ms | Explain the difference between SQL and NoSQL datab
+17:25:42 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  81: prefill=  29.9ms decode= 796.7ms | How do recommendation systems work?
+17:25:43 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  82: prefill=  30.6ms decode= 796.3ms | What are design patterns? Name three common ones.
+17:25:44 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  83: prefill=  30.6ms decode= 796.4ms | What is the CAP theorem in distributed systems?
+17:25:44 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  84: prefill=  31.1ms decode= 795.9ms | What are design patterns? Name three common ones.
+17:25:45 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  85: prefill=  30.1ms decode= 793.6ms | What are design patterns? Name three common ones.
+17:25:46 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  86: prefill=  30.7ms decode= 796.0ms | Explain Big O notation with common examples.
+17:25:47 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  87: prefill=  30.5ms decode= 796.1ms | What is transfer learning in deep learning?
+17:25:48 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  88: prefill=  30.7ms decode= 798.8ms | How does garbage collection work in Java?
+17:25:48 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  89: prefill=  30.9ms decode= 796.9ms | Explain the attention mechanism in transformers.
+17:25:49 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  90: prefill=  30.1ms decode= 797.1ms | What is transfer learning in deep learning?
+17:25:50 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  91: prefill=  29.9ms decode= 797.6ms | How do recommendation systems work?
+17:25:51 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  92: prefill=  30.6ms decode= 799.1ms | Explain the difference between TCP and UDP.
+17:25:52 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  93: prefill=  29.8ms decode= 797.9ms | What is microservices architecture?
+17:25:53 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  94: prefill=  30.5ms decode= 800.2ms | How do recommendation systems work?
+17:25:53 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  95: prefill=  30.7ms decode= 799.2ms | What is the CAP theorem in distributed systems?
+17:25:54 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  96: prefill=  30.7ms decode= 805.2ms | What is CI/CD and why is it important?
+17:25:55 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  97: prefill=  29.5ms decode= 797.2ms | What is gradient descent and how does it work?
+17:25:56 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  98: prefill=  30.6ms decode= 804.1ms | What is a binary search tree?
+17:25:57 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  99: prefill=  30.6ms decode= 795.7ms | What is the CAP theorem in distributed systems?
+17:25:57 [INFO] evaluation.benchmark:     Hit rate: 94.7%, Speedup: 1.9x, Evictions: 0, Routing eff: 0.0%
+17:25:57 [INFO] evaluation.benchmark: 
+============================================================
+17:25:57 [INFO] evaluation.benchmark: POLICY: learned (1 worker(s))
+17:25:57 [INFO] evaluation.benchmark: ============================================================
+17:25:57 [INFO] evaluation.benchmark:   Trial 1/1
+17:25:57 [INFO] worker.inference_worker: Worker 0: Loading meta-llama/Llama-3.1-8B-Instruct on cuda:0...
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:01<00:04,  1.56s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:03<00:03,  1.52s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:04<00:01,  1.48s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:04<00:00,  1.03s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:04<00:00,  1.20s/it]
+17:26:02 [INFO] worker.inference_worker: Worker 0: Model loaded. GPU memory: 14.99 GB
+17:26:03 [INFO] evaluation.benchmark:     [MISS] Req   0: prefill=  61.5ms decode= 791.4ms | How do recommendation systems work?
+17:26:04 [INFO] evaluation.benchmark:     [MISS] Req   1: prefill=  60.2ms decode= 796.5ms | What is dynamic programming? Give me a simple exam
+17:26:05 [INFO] evaluation.benchmark:     [MISS] Req   2: prefill=  59.2ms decode= 795.0ms | What is a linked list and when should I use one?
+17:26:06 [INFO] evaluation.benchmark:     [MISS] Req   3: prefill=  60.0ms decode= 796.7ms | What is gradient descent and how does it work?
+17:26:06 [INFO] evaluation.benchmark:     [MISS] Req   4: prefill=  60.0ms decode= 796.2ms | How does garbage collection work in Java?
+17:26:07 [INFO] evaluation.benchmark:     [HIT ](gpu) Req   5: prefill=  30.1ms decode= 796.7ms | What is a binary search tree?
+17:26:08 [INFO] evaluation.benchmark:     [MISS] Req   6: prefill=  60.1ms decode= 796.2ms | What is a binary search tree?
+17:26:09 [INFO] evaluation.benchmark:     [HIT ](gpu) Req   7: prefill=  30.1ms decode= 798.2ms | How do hash tables handle collisions?
+17:26:10 [INFO] evaluation.benchmark:     [HIT ](gpu) Req   8: prefill=  30.7ms decode= 800.8ms | What is gradient descent and how does it work?
+17:26:11 [INFO] evaluation.benchmark:     [HIT ](gpu) Req   9: prefill=  30.7ms decode= 802.3ms | What is dynamic programming? Give me a simple exam
+17:26:11 [INFO] evaluation.benchmark:     [MISS] Req  10: prefill=  58.2ms decode= 797.5ms | What is transfer learning in deep learning?
+17:26:12 [INFO] evaluation.benchmark:     [MISS] Req  11: prefill=  60.2ms decode= 796.7ms | What is gradient descent and how does it work?
+17:26:13 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  12: prefill=  30.6ms decode= 793.6ms | What is CI/CD and why is it important?
+17:26:14 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  13: prefill=  30.9ms decode= 794.9ms | Explain the difference between TCP and UDP.
+17:26:15 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  14: prefill=  30.7ms decode= 795.9ms | Explain RESTful API design principles.
+17:26:16 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  15: prefill=  30.9ms decode= 795.8ms | What is eventual consistency?
+17:26:16 [INFO] evaluation.benchmark:     [MISS] Req  16: prefill=  59.8ms decode= 795.4ms | How does quicksort work? Walk me through an exampl
+17:26:17 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  17: prefill=  30.6ms decode= 797.0ms | What is a linked list and when should I use one?
+17:26:18 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  18: prefill=  30.1ms decode= 795.2ms | Explain the difference between TCP and UDP.
+17:26:19 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  19: prefill=  30.6ms decode= 796.4ms | Explain Big O notation with common examples.
+17:26:20 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  20: prefill=  30.6ms decode= 796.5ms | What is a binary search tree?
+17:26:21 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  21: prefill=  30.6ms decode= 796.3ms | How does Git branching work?
+17:26:21 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  22: prefill=  30.4ms decode= 795.3ms | What is microservices architecture?
+17:26:22 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  23: prefill=  30.6ms decode= 800.4ms | What is a linked list and when should I use one?
+17:26:23 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  24: prefill=  30.9ms decode= 797.5ms | What is CI/CD and why is it important?
+17:26:24 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  25: prefill=  30.6ms decode= 798.1ms | Explain Big O notation with common examples.
+17:26:25 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  26: prefill=  30.2ms decode= 804.2ms | Explain the attention mechanism in transformers.
+17:26:26 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  27: prefill=  30.9ms decode= 807.5ms | How do recommendation systems work?
+17:26:26 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  28: prefill=  30.6ms decode= 794.8ms | Explain the attention mechanism in transformers.
+17:26:27 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  29: prefill=  30.1ms decode= 799.3ms | What is CI/CD and why is it important?
+17:26:28 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  30: prefill=  30.1ms decode= 796.0ms | What is eventual consistency?
+17:26:29 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  31: prefill=  30.7ms decode= 799.3ms | What is a binary search tree?
+17:26:30 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  32: prefill=  30.7ms decode= 799.1ms | Explain the difference between SQL and NoSQL datab
+17:26:31 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  33: prefill=  30.1ms decode= 796.6ms | Explain RESTful API design principles.
+17:26:31 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  34: prefill=  30.7ms decode= 797.3ms | How does garbage collection work in Java?
+17:26:32 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  35: prefill=  30.7ms decode= 798.8ms | What is a linked list and when should I use one?
+17:26:33 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  36: prefill=  30.2ms decode= 795.7ms | How does backpropagation work in neural networks?
+17:26:34 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  37: prefill=  30.6ms decode= 797.8ms | What is the CAP theorem in distributed systems?
+17:26:35 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  38: prefill=  30.7ms decode= 800.3ms | Explain the attention mechanism in transformers.
+17:26:36 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  39: prefill=  30.7ms decode= 797.5ms | What is eventual consistency?
+17:26:36 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  40: prefill=  31.2ms decode= 798.1ms | Explain how HTTPS encryption works.
+17:26:37 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  41: prefill=  30.8ms decode= 797.4ms | How does garbage collection work in Java?
+17:26:38 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  42: prefill=  30.8ms decode= 798.3ms | How do hash tables handle collisions?
+17:26:39 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  43: prefill=  30.8ms decode= 798.3ms | Explain Big O notation with common examples.
+17:26:40 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  44: prefill=  30.8ms decode= 802.3ms | How does backpropagation work in neural networks?
+17:26:41 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  45: prefill=  30.6ms decode= 802.2ms | Explain how HTTPS encryption works.
+17:26:41 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  46: prefill=  31.0ms decode= 796.3ms | What is dynamic programming? Give me a simple exam
+17:26:42 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  47: prefill=  30.6ms decode= 799.5ms | Explain the difference between TCP and UDP.
+17:26:43 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  48: prefill=  31.0ms decode= 798.1ms | How does a load balancer distribute traffic?
+17:26:44 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  49: prefill=  30.7ms decode= 800.5ms | What is dynamic programming? Give me a simple exam
+17:26:45 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  50: prefill=  30.7ms decode= 795.2ms | What are design patterns? Name three common ones.
+17:26:45 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  51: prefill=  30.6ms decode= 796.0ms | What are design patterns? Name three common ones.
+17:26:46 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  52: prefill=  30.7ms decode= 799.9ms | What is microservices architecture?
+17:26:47 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  53: prefill=  30.2ms decode= 797.0ms | How does garbage collection work in Java?
+17:26:48 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  54: prefill=  30.7ms decode= 800.8ms | How does quicksort work? Walk me through an exampl
+17:26:49 [INFO] evaluation.benchmark:     [MISS] Req  55: prefill=  60.1ms decode= 794.8ms | What is gradient descent and how does it work?
+17:26:50 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  56: prefill=  30.6ms decode= 799.5ms | Explain the difference between SQL and NoSQL datab
+17:26:50 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  57: prefill=  30.6ms decode= 798.0ms | What is CI/CD and why is it important?
+17:26:51 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  58: prefill=  30.7ms decode= 793.8ms | What is dynamic programming? Give me a simple exam
+17:26:52 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  59: prefill=  30.7ms decode= 793.7ms | How does a load balancer distribute traffic?
+17:26:53 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  60: prefill=  30.8ms decode= 793.4ms | Explain the difference between TCP and UDP.
+17:26:54 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  61: prefill=  30.1ms decode= 794.1ms | What is CI/CD and why is it important?
+17:26:55 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  62: prefill=  30.1ms decode= 799.1ms | What is the difference between a process and a thr
+17:26:55 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  63: prefill=  29.9ms decode= 795.1ms | How do recommendation systems work?
+17:26:56 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  64: prefill=  36.3ms decode= 799.7ms | What is microservices architecture?
+17:26:57 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  65: prefill=  30.7ms decode= 794.4ms | What are design patterns? Name three common ones.
+17:26:58 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  66: prefill=  30.6ms decode= 796.3ms | Explain RESTful API design principles.
+17:26:59 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  67: prefill=  30.6ms decode= 796.1ms | Explain Big O notation with common examples.
+17:27:00 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  68: prefill=  30.1ms decode= 795.3ms | Explain the attention mechanism in transformers.
+17:27:00 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  69: prefill=  30.6ms decode= 798.6ms | Explain the difference between TCP and UDP.
+17:27:01 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  70: prefill=  30.0ms decode= 796.1ms | How does quicksort work? Walk me through an exampl
+17:27:02 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  71: prefill=  30.7ms decode= 796.4ms | What is transfer learning in deep learning?
+17:27:03 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  72: prefill=  30.6ms decode= 796.6ms | What is a binary search tree?
+17:27:04 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  73: prefill=  30.6ms decode= 794.0ms | How does backpropagation work in neural networks?
+17:27:05 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  74: prefill=  30.6ms decode= 797.9ms | What is the difference between a process and a thr
+17:27:05 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  75: prefill=  30.7ms decode= 797.5ms | Explain the difference between TCP and UDP.
+17:27:06 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  76: prefill=  30.8ms decode= 799.4ms | What is a binary search tree?
+17:27:07 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  77: prefill=  30.2ms decode= 800.6ms | What is dynamic programming? Give me a simple exam
+17:27:08 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  78: prefill=  30.8ms decode= 805.2ms | How does a load balancer distribute traffic?
+17:27:09 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  79: prefill=  30.8ms decode= 803.2ms | How does garbage collection work in Java?
+17:27:10 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  80: prefill=  31.0ms decode= 808.6ms | Explain the difference between SQL and NoSQL datab
+17:27:10 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  81: prefill=  30.1ms decode= 802.1ms | How do recommendation systems work?
+17:27:11 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  82: prefill=  30.9ms decode= 809.5ms | What are design patterns? Name three common ones.
+17:27:12 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  83: prefill=  30.3ms decode= 795.9ms | What is the CAP theorem in distributed systems?
+17:27:13 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  84: prefill=  31.1ms decode= 800.9ms | What are design patterns? Name three common ones.
+17:27:14 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  85: prefill=  30.9ms decode= 801.9ms | What are design patterns? Name three common ones.
+17:27:15 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  86: prefill=  31.1ms decode= 801.2ms | Explain Big O notation with common examples.
+17:27:15 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  87: prefill=  30.2ms decode= 797.8ms | What is transfer learning in deep learning?
+17:27:16 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  88: prefill=  30.3ms decode= 799.5ms | How does garbage collection work in Java?
+17:27:17 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  89: prefill=  30.7ms decode= 797.9ms | Explain the attention mechanism in transformers.
+17:27:18 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  90: prefill=  30.3ms decode= 799.1ms | What is transfer learning in deep learning?
+17:27:19 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  91: prefill=  30.4ms decode= 794.2ms | How do recommendation systems work?
+17:27:20 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  92: prefill=  30.2ms decode= 800.5ms | Explain the difference between TCP and UDP.
+17:27:20 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  93: prefill=  30.6ms decode= 796.8ms | What is microservices architecture?
+17:27:21 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  94: prefill=  30.6ms decode= 800.6ms | How do recommendation systems work?
+17:27:22 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  95: prefill=  30.8ms decode= 799.8ms | What is the CAP theorem in distributed systems?
+17:27:23 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  96: prefill=  30.6ms decode= 795.2ms | What is CI/CD and why is it important?
+17:27:24 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  97: prefill=  29.7ms decode= 796.6ms | What is gradient descent and how does it work?
+17:27:25 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  98: prefill=  30.6ms decode= 801.3ms | What is a binary search tree?
+17:27:25 [INFO] evaluation.benchmark:     [HIT ](gpu) Req  99: prefill=  30.1ms decode= 795.9ms | What is the CAP theorem in distributed systems?
+17:27:25 [INFO] evaluation.benchmark:     Hit rate: 94.7%, Speedup: 1.9x, Evictions: 0, Routing eff: 0.0%
+17:27:25 [INFO] __main__: 
+================================================================================
+17:27:25 [INFO] __main__: RESULTS SUMMARY (REAL INFERENCE)
+17:27:25 [INFO] __main__: ================================================================================
+17:27:25 [INFO] __main__: Policy      Hit Rate  Prefill(HIT)  Prefill(MISS)  Speedup  Evictions  Transfer(ms)
+17:27:25 [INFO] __main__: --------------------------------------------------------------------------------
+17:27:25 [INFO] __main__: learned       94.7%         30.6ms          59.7ms     1.9x          0          0.0ms
+17:27:25 [INFO] __main__: lfu           94.7%         30.5ms          59.4ms     1.9x          0          0.0ms
+17:27:25 [INFO] __main__: lru           94.7%         30.3ms          59.7ms     2.0x          0          0.0ms
+17:27:25 [INFO] __main__: semantic      94.7%         30.5ms          59.5ms     1.9x          0          0.0ms
+17:27:25 [INFO] __main__: ================================================================================
+17:27:25 [INFO] __main__: Benchmark completed in 373.6s
+17:27:25 [INFO] evaluation.benchmark: Results saved to results_1gpu/
+17:27:27 [INFO] evaluation.visualize: All plots saved to results_1gpu/
+Skipping import of cpp extensions due to incompatible torch version 2.7.1+cu118 for torchao version 0.15.0             Please see https://github.com/pytorch/ao/issues/2919 for more info
+17:28:57 [INFO] __main__: ============================================================
+17:28:57 [INFO] __main__: KV-Cache Eviction Benchmark — REAL INFERENCE
+17:28:57 [INFO] __main__: ============================================================
+17:28:57 [INFO] __main__: Model: meta-llama/Llama-3.1-8B-Instruct
+17:28:57 [INFO] __main__: Device: cuda
+17:28:57 [INFO] __main__: GPU: NVIDIA H100 PCIe MIG 3g.40gb
+17:28:57 [INFO] __main__: GPU Memory: 39.5 GB
+17:28:57 [INFO] __main__: KV Cache tiers: GPU=512.0MB, CPU=8192MB, Disk=32768MB
+17:28:57 [INFO] __main__: Requests: 100
+17:28:57 [INFO] __main__: Unique prefixes: 10
+17:28:57 [INFO] __main__: Reuse ratio: 0.7
+17:28:57 [INFO] __main__: Policies: ['lru', 'lfu']
+17:28:57 [INFO] __main__: ============================================================
+17:28:57 [INFO] workload.loader: Generated 100 requests with 10 unique prefixes, reuse_ratio=0.7
+17:28:57 [INFO] evaluation.benchmark: Workload: {'total_requests': 100, 'unique_prefixes_seen': 10, 'max_reuse': 36, 'prefix_distribution': {0: 36, 1: 23, 4: 9, 6: 6, 8: 6, 7: 5, 2: 5, 5: 4, 3: 4, 9: 2}}
+17:28:57 [INFO] evaluation.benchmark: 
+============================================================
+17:28:57 [INFO] evaluation.benchmark: POLICY: lru (3 worker(s))
+17:28:57 [INFO] evaluation.benchmark: ============================================================
+17:28:57 [INFO] evaluation.benchmark:   Trial 1/1
+17:28:57 [WARNING] controller.cache_controller: Requested 3 workers but only 2 GPUs available. Using 2 workers.
+17:28:57 [INFO] controller.cache_controller: Creating 2 workers across 2 GPUs
+17:28:57 [INFO] worker.inference_worker: Worker 0: Loading meta-llama/Llama-3.1-8B-Instruct on cuda:0...
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:05<00:17,  5.89s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:10<00:10,  5.20s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:15<00:05,  5.09s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:17<00:00,  3.97s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:17<00:00,  4.45s/it]
+17:29:22 [INFO] worker.inference_worker: Worker 0: Model loaded. GPU memory: 14.96 GB
+17:29:22 [INFO] controller.cache_controller:   Worker 0: cuda:0, GPU mem: 14.96 GB
+17:29:22 [INFO] worker.inference_worker: Worker 1: Loading meta-llama/Llama-3.1-8B-Instruct on cuda:1...
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:01<00:04,  1.66s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:03<00:03,  1.58s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:04<00:01,  1.51s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:04<00:00,  1.04s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:04<00:00,  1.23s/it]
+17:29:27 [INFO] worker.inference_worker: Worker 1: Model loaded. GPU memory: 14.96 GB
+17:29:27 [INFO] controller.cache_controller:   Worker 1: cuda:1, GPU mem: 14.96 GB
+17:29:28 [INFO] evaluation.benchmark:     [MISS] W0 Req   0: prefill= 209.6ms decode= 820.2ms | How do recommendation systems work?
+17:29:29 [INFO] evaluation.benchmark:     [MISS] W1 Req   1: prefill= 166.0ms decode= 822.2ms | What is dynamic programming? Give me a simple exam
+17:29:30 [INFO] evaluation.benchmark:     [MISS] W0 Req   2: prefill=  60.0ms decode= 800.6ms | What is a linked list and when should I use one?
+17:29:31 [INFO] evaluation.benchmark:     [MISS] W1 Req   3: prefill=  58.4ms decode= 812.2ms | What is gradient descent and how does it work?
+17:29:32 [INFO] evaluation.benchmark:     [MISS] W0 Req   4: prefill=  60.1ms decode= 799.8ms | How does garbage collection work in Java?
+17:29:33 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req   5: prefill=  30.3ms decode= 810.4ms | What is a binary search tree?
+17:29:34 [INFO] evaluation.benchmark:     [MISS] W1 Req   6: prefill=  57.7ms decode= 812.6ms | What is a binary search tree?
+17:29:35 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req   7: prefill=  30.8ms decode= 798.1ms | How do hash tables handle collisions?
+17:29:35 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req   8: prefill=  30.5ms decode= 801.0ms | What is gradient descent and how does it work?
+17:29:36 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req   9: prefill=  30.6ms decode= 811.1ms | What is dynamic programming? Give me a simple exam
+17:29:37 [INFO] evaluation.benchmark:     [MISS] W0 Req  10: prefill=  58.2ms decode= 799.1ms | What is transfer learning in deep learning?
+17:29:38 [INFO] evaluation.benchmark:     [MISS] W1 Req  11: prefill=  57.8ms decode= 812.4ms | What is gradient descent and how does it work?
+17:29:39 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  12: prefill=  29.8ms decode= 809.8ms | What is CI/CD and why is it important?
+17:29:40 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  13: prefill=  30.0ms decode= 814.0ms | Explain the difference between TCP and UDP.
+17:29:41 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  14: prefill=  29.8ms decode= 816.9ms | Explain RESTful API design principles.
+17:29:41 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  15: prefill=  29.7ms decode= 810.6ms | What is eventual consistency?
+17:29:42 [INFO] evaluation.benchmark:     [MISS] W0 Req  16: prefill=  60.5ms decode= 795.2ms | How does quicksort work? Walk me through an exampl
+17:29:43 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  17: prefill=  30.6ms decode= 796.6ms | What is a linked list and when should I use one?
+17:29:44 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  18: prefill=  30.0ms decode= 811.3ms | Explain the difference between TCP and UDP.
+17:29:45 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  19: prefill=  30.6ms decode= 798.7ms | Explain Big O notation with common examples.
+17:29:46 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  20: prefill=  29.9ms decode= 808.7ms | What is a binary search tree?
+17:29:46 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  21: prefill=  30.6ms decode= 797.8ms | How does Git branching work?
+17:29:47 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  22: prefill=  30.2ms decode= 800.2ms | What is microservices architecture?
+17:29:48 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  23: prefill=  29.9ms decode= 810.0ms | What is a linked list and when should I use one?
+17:29:49 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  24: prefill=  29.3ms decode= 809.4ms | What is CI/CD and why is it important?
+17:29:50 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  25: prefill=  29.8ms decode= 813.6ms | Explain Big O notation with common examples.
+17:29:51 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  26: prefill=  29.8ms decode= 809.7ms | Explain the attention mechanism in transformers.
+17:29:51 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  27: prefill=  28.5ms decode= 810.3ms | How do recommendation systems work?
+17:29:52 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  28: prefill=  29.8ms decode= 809.3ms | Explain the attention mechanism in transformers.
+17:29:53 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  29: prefill=  30.0ms decode= 808.9ms | What is CI/CD and why is it important?
+17:29:54 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  30: prefill=  30.7ms decode= 796.1ms | What is eventual consistency?
+17:29:55 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  31: prefill=  29.8ms decode= 817.6ms | What is a binary search tree?
+17:29:56 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  32: prefill=  29.7ms decode= 816.4ms | Explain the difference between SQL and NoSQL datab
+17:29:56 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  33: prefill=  29.7ms decode= 810.8ms | Explain RESTful API design principles.
+17:29:57 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  34: prefill=  29.7ms decode= 811.9ms | How does garbage collection work in Java?
+17:29:58 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  35: prefill=  29.0ms decode= 808.9ms | What is a linked list and when should I use one?
+17:29:59 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  36: prefill=  31.3ms decode= 798.3ms | How does backpropagation work in neural networks?
+17:30:00 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  37: prefill=  30.1ms decode= 813.4ms | What is the CAP theorem in distributed systems?
+17:30:01 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  38: prefill=  29.3ms decode= 814.2ms | Explain the attention mechanism in transformers.
+17:30:02 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  39: prefill=  29.4ms decode= 814.0ms | What is eventual consistency?
+17:30:02 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  40: prefill=  31.8ms decode= 802.5ms | Explain how HTTPS encryption works.
+17:30:03 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  41: prefill=  30.5ms decode= 797.3ms | How does garbage collection work in Java?
+17:30:04 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  42: prefill=  30.7ms decode= 802.2ms | How do hash tables handle collisions?
+17:30:05 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  43: prefill=  30.0ms decode= 809.5ms | Explain Big O notation with common examples.
+17:30:06 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  44: prefill=  29.6ms decode= 809.1ms | How does backpropagation work in neural networks?
+17:30:07 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  45: prefill=  29.2ms decode= 809.5ms | Explain how HTTPS encryption works.
+17:30:07 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  46: prefill=  30.1ms decode= 812.3ms | What is dynamic programming? Give me a simple exam
+17:30:08 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  47: prefill=  29.9ms decode= 812.5ms | Explain the difference between TCP and UDP.
+17:30:09 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  48: prefill=  30.8ms decode= 798.9ms | How does a load balancer distribute traffic?
+17:30:10 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  49: prefill=  30.1ms decode= 816.9ms | What is dynamic programming? Give me a simple exam
+17:30:11 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  50: prefill=  29.9ms decode= 822.9ms | What are design patterns? Name three common ones.
+17:30:12 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  51: prefill=  29.8ms decode= 814.8ms | What are design patterns? Name three common ones.
+17:30:12 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  52: prefill=  29.3ms decode= 808.7ms | What is microservices architecture?
+17:30:13 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  53: prefill=  29.9ms decode= 813.2ms | How does garbage collection work in Java?
+17:30:14 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  54: prefill=  29.0ms decode= 811.1ms | How does quicksort work? Walk me through an exampl
+17:30:15 [INFO] evaluation.benchmark:     [MISS] W1 Req  55: prefill=  58.4ms decode= 813.8ms | What is gradient descent and how does it work?
+17:30:16 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  56: prefill=  30.8ms decode= 798.3ms | Explain the difference between SQL and NoSQL datab
+17:30:17 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  57: prefill=  29.9ms decode= 809.2ms | What is CI/CD and why is it important?
+17:30:18 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  58: prefill=  30.5ms decode= 799.3ms | What is dynamic programming? Give me a simple exam
+17:30:18 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  59: prefill=  30.0ms decode= 809.2ms | How does a load balancer distribute traffic?
+17:30:19 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  60: prefill=  29.2ms decode= 809.9ms | Explain the difference between TCP and UDP.
+17:30:20 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  61: prefill=  30.0ms decode= 806.4ms | What is CI/CD and why is it important?
+17:30:21 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  62: prefill=  29.6ms decode= 810.2ms | What is the difference between a process and a thr
+17:30:22 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  63: prefill=  29.3ms decode= 809.0ms | How do recommendation systems work?
+17:30:23 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  64: prefill=  29.3ms decode= 810.0ms | What is microservices architecture?
+17:30:23 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  65: prefill=  30.0ms decode= 808.6ms | What are design patterns? Name three common ones.
+17:30:24 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  66: prefill=  31.7ms decode= 804.3ms | Explain RESTful API design principles.
+17:30:25 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  67: prefill=  30.0ms decode= 813.9ms | Explain Big O notation with common examples.
+17:30:26 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  68: prefill=  29.8ms decode= 813.5ms | Explain the attention mechanism in transformers.
+17:30:27 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  69: prefill=  31.2ms decode= 799.3ms | Explain the difference between TCP and UDP.
+17:30:28 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  70: prefill=  29.8ms decode= 797.2ms | How does quicksort work? Walk me through an exampl
+17:30:28 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  71: prefill=  30.0ms decode= 808.4ms | What is transfer learning in deep learning?
+17:30:29 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  72: prefill=  29.9ms decode= 808.3ms | What is a binary search tree?
+17:30:30 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  73: prefill=  29.3ms decode= 809.9ms | How does backpropagation work in neural networks?
+17:30:31 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  74: prefill=  29.5ms decode= 810.5ms | What is the difference between a process and a thr
+17:30:32 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  75: prefill=  29.9ms decode= 810.5ms | Explain the difference between TCP and UDP.
+17:30:33 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  76: prefill=  30.8ms decode= 802.5ms | What is a binary search tree?
+17:30:33 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  77: prefill=  30.1ms decode= 813.3ms | What is dynamic programming? Give me a simple exam
+17:30:34 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  78: prefill=  30.1ms decode= 796.1ms | How does a load balancer distribute traffic?
+17:30:35 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  79: prefill=  30.4ms decode= 800.3ms | How does garbage collection work in Java?
+17:30:36 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  80: prefill=  30.2ms decode= 809.8ms | Explain the difference between SQL and NoSQL datab
+17:30:37 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  81: prefill=  29.0ms decode= 811.3ms | How do recommendation systems work?
+17:30:38 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  82: prefill=  29.8ms decode= 807.6ms | What are design patterns? Name three common ones.
+17:30:38 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  83: prefill=  30.7ms decode= 798.1ms | What is the CAP theorem in distributed systems?
+17:30:39 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  84: prefill=  29.9ms decode= 812.3ms | What are design patterns? Name three common ones.
+17:30:40 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  85: prefill=  29.3ms decode= 809.3ms | What are design patterns? Name three common ones.
+17:30:41 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  86: prefill=  30.7ms decode= 813.7ms | Explain Big O notation with common examples.
+17:30:42 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  87: prefill=  30.1ms decode= 808.3ms | What is transfer learning in deep learning?
+17:30:43 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  88: prefill=  30.5ms decode= 798.3ms | How does garbage collection work in Java?
+17:30:44 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  89: prefill=  29.4ms decode= 811.3ms | Explain the attention mechanism in transformers.
+17:30:44 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  90: prefill=  29.9ms decode= 811.8ms | What is transfer learning in deep learning?
+17:30:45 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  91: prefill=  29.8ms decode= 806.2ms | How do recommendation systems work?
+17:30:46 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  92: prefill=  29.6ms decode= 810.7ms | Explain the difference between TCP and UDP.
+17:30:47 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  93: prefill=  29.2ms decode= 811.2ms | What is microservices architecture?
+17:30:48 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  94: prefill=  30.0ms decode= 808.0ms | How do recommendation systems work?
+17:30:49 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  95: prefill=  29.9ms decode= 809.3ms | What is the CAP theorem in distributed systems?
+17:30:49 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  96: prefill=  29.7ms decode= 810.1ms | What is CI/CD and why is it important?
+17:30:50 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  97: prefill=  30.7ms decode= 797.7ms | What is gradient descent and how does it work?
+17:30:51 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  98: prefill=  29.7ms decode= 804.4ms | What is a binary search tree?
+17:30:52 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  99: prefill=  29.2ms decode= 807.1ms | What is the CAP theorem in distributed systems?
+17:30:52 [INFO] evaluation.benchmark:     Hit rate: 94.7%, Speedup: 2.0x, Evictions: 0, Routing eff: 90.0%
+17:30:52 [INFO] evaluation.benchmark: 
+============================================================
+17:30:52 [INFO] evaluation.benchmark: POLICY: lfu (3 worker(s))
+17:30:52 [INFO] evaluation.benchmark: ============================================================
+17:30:52 [INFO] evaluation.benchmark:   Trial 1/1
+17:30:52 [WARNING] controller.cache_controller: Requested 3 workers but only 2 GPUs available. Using 2 workers.
+17:30:52 [INFO] controller.cache_controller: Creating 2 workers across 2 GPUs
+17:30:52 [INFO] worker.inference_worker: Worker 0: Loading meta-llama/Llama-3.1-8B-Instruct on cuda:0...
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:01<00:04,  1.53s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:03<00:03,  1.51s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:04<00:01,  1.45s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:04<00:00,  1.01s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:04<00:00,  1.18s/it]
+17:30:57 [INFO] worker.inference_worker: Worker 0: Model loaded. GPU memory: 14.99 GB
+17:30:57 [INFO] controller.cache_controller:   Worker 0: cuda:0, GPU mem: 14.99 GB
+17:30:57 [INFO] worker.inference_worker: Worker 1: Loading meta-llama/Llama-3.1-8B-Instruct on cuda:1...
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:01<00:04,  1.54s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:03<00:03,  1.51s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:04<00:01,  1.45s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:04<00:00,  1.01s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:04<00:00,  1.19s/it]
+17:31:02 [INFO] worker.inference_worker: Worker 1: Model loaded. GPU memory: 14.99 GB
+17:31:02 [INFO] controller.cache_controller:   Worker 1: cuda:1, GPU mem: 14.99 GB
+17:31:03 [INFO] evaluation.benchmark:     [MISS] W0 Req   0: prefill=  60.1ms decode= 799.6ms | How do recommendation systems work?
+17:31:04 [INFO] evaluation.benchmark:     [MISS] W1 Req   1: prefill=  58.7ms decode= 811.3ms | What is dynamic programming? Give me a simple exam
+17:31:05 [INFO] evaluation.benchmark:     [MISS] W0 Req   2: prefill=  59.6ms decode= 801.7ms | What is a linked list and when should I use one?
+17:31:06 [INFO] evaluation.benchmark:     [MISS] W1 Req   3: prefill=  57.8ms decode= 813.4ms | What is gradient descent and how does it work?
+17:31:07 [INFO] evaluation.benchmark:     [MISS] W0 Req   4: prefill=  60.0ms decode= 801.7ms | How does garbage collection work in Java?
+17:31:08 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req   5: prefill=  29.7ms decode= 812.7ms | What is a binary search tree?
+17:31:08 [INFO] evaluation.benchmark:     [MISS] W1 Req   6: prefill=  58.3ms decode= 811.0ms | What is a binary search tree?
+17:31:09 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req   7: prefill=  30.2ms decode= 805.4ms | How do hash tables handle collisions?
+17:31:10 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req   8: prefill=  31.1ms decode= 802.3ms | What is gradient descent and how does it work?
+17:31:11 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req   9: prefill=  30.1ms decode= 822.4ms | What is dynamic programming? Give me a simple exam
+17:31:12 [INFO] evaluation.benchmark:     [MISS] W0 Req  10: prefill=  58.4ms decode= 800.2ms | What is transfer learning in deep learning?
+17:31:13 [INFO] evaluation.benchmark:     [MISS] W1 Req  11: prefill=  58.8ms decode= 808.2ms | What is gradient descent and how does it work?
+17:31:13 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  12: prefill=  29.5ms decode= 811.4ms | What is CI/CD and why is it important?
+17:31:14 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  13: prefill=  29.9ms decode= 811.1ms | Explain the difference between TCP and UDP.
+17:31:15 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  14: prefill=  29.4ms decode= 809.9ms | Explain RESTful API design principles.
+17:31:16 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  15: prefill=  29.7ms decode= 809.3ms | What is eventual consistency?
+17:31:17 [INFO] evaluation.benchmark:     [MISS] W0 Req  16: prefill=  60.2ms decode= 796.8ms | How does quicksort work? Walk me through an exampl
+17:31:18 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  17: prefill=  30.6ms decode= 798.8ms | What is a linked list and when should I use one?
+17:31:19 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  18: prefill=  30.5ms decode= 812.6ms | Explain the difference between TCP and UDP.
+17:31:19 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  19: prefill=  30.7ms decode= 804.4ms | Explain Big O notation with common examples.
+17:31:20 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  20: prefill=  30.1ms decode= 809.5ms | What is a binary search tree?
+17:31:21 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  21: prefill=  30.5ms decode= 807.6ms | How does Git branching work?
+17:31:22 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  22: prefill=  30.6ms decode= 804.9ms | What is microservices architecture?
+17:31:23 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  23: prefill=  30.2ms decode= 815.5ms | What is a linked list and when should I use one?
+17:31:24 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  24: prefill=  30.0ms decode= 806.6ms | What is CI/CD and why is it important?
+17:31:24 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  25: prefill=  29.8ms decode= 812.5ms | Explain Big O notation with common examples.
+17:31:25 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  26: prefill=  29.8ms decode= 815.4ms | Explain the attention mechanism in transformers.
+17:31:26 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  27: prefill=  29.1ms decode= 822.5ms | How do recommendation systems work?
+17:31:27 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  28: prefill=  29.8ms decode= 813.3ms | Explain the attention mechanism in transformers.
+17:31:28 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  29: prefill=  30.0ms decode= 812.8ms | What is CI/CD and why is it important?
+17:31:29 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  30: prefill=  30.9ms decode= 801.3ms | What is eventual consistency?
+17:31:29 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  31: prefill=  30.0ms decode= 811.3ms | What is a binary search tree?
+17:31:30 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  32: prefill=  29.6ms decode= 814.4ms | Explain the difference between SQL and NoSQL datab
+17:31:31 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  33: prefill=  29.8ms decode= 811.9ms | Explain RESTful API design principles.
+17:31:32 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  34: prefill=  29.3ms decode= 809.8ms | How does garbage collection work in Java?
+17:31:33 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  35: prefill=  29.1ms decode= 814.3ms | What is a linked list and when should I use one?
+17:31:34 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  36: prefill=  30.3ms decode= 798.3ms | How does backpropagation work in neural networks?
+17:31:35 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  37: prefill=  30.8ms decode= 807.3ms | What is the CAP theorem in distributed systems?
+17:31:35 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  38: prefill=  29.9ms decode= 808.0ms | Explain the attention mechanism in transformers.
+17:31:36 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  39: prefill=  29.2ms decode= 809.5ms | What is eventual consistency?
+17:31:37 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  40: prefill=  30.2ms decode= 802.4ms | Explain how HTTPS encryption works.
+17:31:38 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  41: prefill=  30.6ms decode= 802.4ms | How does garbage collection work in Java?
+17:31:39 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  42: prefill=  30.6ms decode= 799.4ms | How do hash tables handle collisions?
+17:31:40 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  43: prefill=  30.1ms decode= 818.7ms | Explain Big O notation with common examples.
+17:31:40 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  44: prefill=  29.3ms decode= 808.4ms | How does backpropagation work in neural networks?
+17:31:41 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  45: prefill=  30.1ms decode= 820.9ms | Explain how HTTPS encryption works.
+17:31:42 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  46: prefill=  29.8ms decode= 808.9ms | What is dynamic programming? Give me a simple exam
+17:31:43 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  47: prefill=  29.9ms decode= 813.0ms | Explain the difference between TCP and UDP.
+17:31:44 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  48: prefill=  30.9ms decode= 799.6ms | How does a load balancer distribute traffic?
+17:31:45 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  49: prefill=  30.4ms decode= 808.1ms | What is dynamic programming? Give me a simple exam
+17:31:45 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  50: prefill=  29.9ms decode= 809.0ms | What are design patterns? Name three common ones.
+17:31:46 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  51: prefill=  29.9ms decode= 810.3ms | What are design patterns? Name three common ones.
+17:31:47 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  52: prefill=  29.8ms decode= 811.2ms | What is microservices architecture?
+17:31:48 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  53: prefill=  29.7ms decode= 809.1ms | How does garbage collection work in Java?
+17:31:49 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  54: prefill=  28.6ms decode= 812.3ms | How does quicksort work? Walk me through an exampl
+17:31:50 [INFO] evaluation.benchmark:     [MISS] W1 Req  55: prefill=  58.2ms decode= 809.2ms | What is gradient descent and how does it work?
+17:31:50 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  56: prefill=  31.0ms decode= 801.4ms | Explain the difference between SQL and NoSQL datab
+17:31:51 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  57: prefill=  30.1ms decode= 807.0ms | What is CI/CD and why is it important?
+17:31:52 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  58: prefill=  30.7ms decode= 797.8ms | What is dynamic programming? Give me a simple exam
+17:31:53 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  59: prefill=  29.4ms decode= 809.2ms | How does a load balancer distribute traffic?
+17:31:54 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  60: prefill=  29.8ms decode= 810.8ms | Explain the difference between TCP and UDP.
+17:31:55 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  61: prefill=  30.1ms decode= 810.8ms | What is CI/CD and why is it important?
+17:31:56 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  62: prefill=  29.3ms decode= 817.8ms | What is the difference between a process and a thr
+17:31:56 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  63: prefill=  29.2ms decode= 806.6ms | How do recommendation systems work?
+17:31:57 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  64: prefill=  30.2ms decode= 810.6ms | What is microservices architecture?
+17:31:58 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  65: prefill=  29.4ms decode= 805.0ms | What are design patterns? Name three common ones.
+17:31:59 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  66: prefill=  30.8ms decode= 796.2ms | Explain RESTful API design principles.
+17:32:00 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  67: prefill=  30.0ms decode= 812.5ms | Explain Big O notation with common examples.
+17:32:01 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  68: prefill=  29.2ms decode= 806.0ms | Explain the attention mechanism in transformers.
+17:32:01 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  69: prefill=  30.6ms decode= 796.3ms | Explain the difference between TCP and UDP.
+17:32:02 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  70: prefill=  30.2ms decode= 801.1ms | How does quicksort work? Walk me through an exampl
+17:32:03 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  71: prefill=  30.1ms decode= 811.5ms | What is transfer learning in deep learning?
+17:32:04 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  72: prefill=  29.9ms decode= 809.0ms | What is a binary search tree?
+17:32:05 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  73: prefill=  29.6ms decode= 807.8ms | How does backpropagation work in neural networks?
+17:32:06 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  74: prefill=  29.8ms decode= 806.1ms | What is the difference between a process and a thr
+17:32:06 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  75: prefill=  29.6ms decode= 810.4ms | Explain the difference between TCP and UDP.
+17:32:07 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  76: prefill=  30.8ms decode= 800.8ms | What is a binary search tree?
+17:32:08 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  77: prefill=  30.5ms decode= 806.8ms | What is dynamic programming? Give me a simple exam
+17:32:09 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  78: prefill=  30.6ms decode= 800.0ms | How does a load balancer distribute traffic?
+17:32:10 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  79: prefill=  30.6ms decode= 808.9ms | How does garbage collection work in Java?
+17:32:11 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  80: prefill=  29.8ms decode= 818.8ms | Explain the difference between SQL and NoSQL datab
+17:32:11 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  81: prefill=  29.1ms decode= 805.4ms | How do recommendation systems work?
+17:32:12 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  82: prefill=  29.8ms decode= 807.9ms | What are design patterns? Name three common ones.
+17:32:13 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  83: prefill=  30.7ms decode= 799.1ms | What is the CAP theorem in distributed systems?
+17:32:14 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  84: prefill=  30.0ms decode= 808.8ms | What are design patterns? Name three common ones.
+17:32:15 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  85: prefill=  29.4ms decode= 806.3ms | What are design patterns? Name three common ones.
+17:32:16 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  86: prefill=  30.7ms decode= 807.4ms | Explain Big O notation with common examples.
+17:32:16 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  87: prefill=  30.7ms decode= 809.5ms | What is transfer learning in deep learning?
+17:32:17 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  88: prefill=  30.7ms decode= 806.3ms | How does garbage collection work in Java?
+17:32:18 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  89: prefill=  30.1ms decode= 809.0ms | Explain the attention mechanism in transformers.
+17:32:19 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  90: prefill=  29.4ms decode= 809.7ms | What is transfer learning in deep learning?
+17:32:20 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  91: prefill=  29.9ms decode= 808.0ms | How do recommendation systems work?
+17:32:21 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  92: prefill=  29.4ms decode= 811.2ms | Explain the difference between TCP and UDP.
+17:32:22 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  93: prefill=  29.7ms decode= 808.0ms | What is microservices architecture?
+17:32:22 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  94: prefill=  29.9ms decode= 810.0ms | How do recommendation systems work?
+17:32:23 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  95: prefill=  29.9ms decode= 811.9ms | What is the CAP theorem in distributed systems?
+17:32:24 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  96: prefill=  29.5ms decode= 811.9ms | What is CI/CD and why is it important?
+17:32:25 [INFO] evaluation.benchmark:     [HIT ](gpu) W0 Req  97: prefill=  30.8ms decode= 811.3ms | What is gradient descent and how does it work?
+17:32:26 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  98: prefill=  31.3ms decode= 816.5ms | What is a binary search tree?
+17:32:27 [INFO] evaluation.benchmark:     [HIT ](gpu) W1 Req  99: prefill=  29.9ms decode= 807.4ms | What is the CAP theorem in distributed systems?
+17:32:27 [INFO] evaluation.benchmark:     Hit rate: 94.7%, Speedup: 2.0x, Evictions: 0, Routing eff: 90.0%
+17:32:27 [INFO] __main__: 
+================================================================================
+17:32:27 [INFO] __main__: RESULTS SUMMARY (REAL INFERENCE)
+17:32:27 [INFO] __main__: ================================================================================
+17:32:27 [INFO] __main__: Policy      Hit Rate  Prefill(HIT)  Prefill(MISS)  Speedup  Evictions  Transfer(ms)
+17:32:27 [INFO] __main__: --------------------------------------------------------------------------------
+17:32:27 [INFO] __main__: lfu           94.7%         30.0ms          58.8ms     2.0x          0          0.0ms
+17:32:27 [INFO] __main__: lru           94.7%         30.0ms          58.5ms     2.0x          0          0.0ms
+17:32:27 [INFO] __main__: ================================================================================
+17:32:27 [INFO] __main__: Benchmark completed in 209.8s
+17:32:27 [INFO] evaluation.benchmark: Results saved to results_3gpu/
+17:32:28 [INFO] evaluation.visualize: All plots saved to results_3gpu/
