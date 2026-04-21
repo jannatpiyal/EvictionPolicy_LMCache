@@ -17,6 +17,7 @@ from config import FrameworkConfig, EvictionPolicyType
 from cache.kv_entry import KVEntry
 from cache.eviction import create_policy
 from worker.inference_worker import InferenceWorker
+from store import FileSystemCentralKVStore, RedisCentralKVStore
 
 logger = logging.getLogger(__name__)
 
@@ -34,11 +35,24 @@ class CacheController:
         self._rr_counter = 0
 
         self.workers: dict[int, InferenceWorker] = {}
+        self.central_store = None
 
     # -----------------------------
     # WORKER CREATION
     # -----------------------------
     def create_workers(self):
+        # Central store client shared by workers (same process).
+        if getattr(self.config.controller, "enable_central_store", False):
+            backend = getattr(self.config.controller, "central_store_backend", "filesystem")
+            if backend == "redis":
+                self.central_store = RedisCentralKVStore(
+                    redis_url=getattr(self.config.controller, "redis_url", "redis://localhost:6379/0"),
+                )
+            else:
+                self.central_store = FileSystemCentralKVStore(
+                    root_dir=getattr(self.config.controller, "central_store_dir", "/tmp/lmcache_central_kv"),
+                )
+
         num_gpus = torch.cuda.device_count()
         num_workers = len(self.config.workers)
 
@@ -55,6 +69,7 @@ class CacheController:
                 model_config=self.config.model,
                 eviction_policy=policy,
                 disk_dir=f"/tmp/kv_cache_worker_{i}",
+                central_store=self.central_store,
             )
             self.workers[worker_config.worker_id] = worker
 
@@ -128,9 +143,10 @@ class CacheController:
         result["worker_id"] = worker_id
         result["request_id"] = request.request_id
 
-        # Update index
-        if not result["cache_hit"]:
-            self.prefix_index[prefix_hash] = worker_id
+        # Update index to improve cache locality: once a worker has the prefix
+        # (local hit or central-store fetched), route future requests there.
+        result_prefix_hash = result.get("prefix_hash", prefix_hash)
+        self.prefix_index[result_prefix_hash] = worker_id
 
         return result
 

@@ -74,6 +74,12 @@ class ControllerConfig:
     enable_cross_tier_promotion: bool = True
     enable_cross_tier_demotion: bool = True
 
+    # Central KV store (shared across workers)
+    enable_central_store: bool = False
+    central_store_backend: str = "filesystem"  # "filesystem" | "redis"
+    central_store_dir: str = "/tmp/lmcache_central_kv"
+    redis_url: str = "redis://localhost:6379/0"
+
 
 @dataclass
 class WorkloadConfig:

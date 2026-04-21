@@ -117,6 +117,7 @@ class TieredCache:
             entry = tier_state.get(prefix_hash)
 
             if entry is not None:
+                entry.last_hit_tier = tier_enum.value
                 entry.record_access()
                 self.eviction_policy.on_access(entry)
                 self.total_hits += 1
@@ -144,6 +145,37 @@ class TieredCache:
             timestamp=start, prefix_hash=prefix_hash, hit=False,
         ))
         return None
+
+    def put_cpu(self, entry: KVEntry) -> bool:
+        """
+        Insert an entry into the CPU tier. Entry tensors must be on CPU.
+
+        This is used for central-store fetches (shared KV) where the payload
+        arrives in CPU memory and should only be promoted to GPU on demand.
+        """
+        # De-dupe: if already exists anywhere, treat as success and update policy.
+        for tier_state in self.tiers.values():
+            existing = tier_state.get(entry.prefix_hash)
+            if existing is not None:
+                existing.record_access()
+                self.eviction_policy.on_access(existing)
+                return True
+
+        cpu_tier = self.tiers[StorageTier.CPU]
+
+        while not cpu_tier.has_space(entry.size_bytes):
+            evicted = self._evict_from_tier(StorageTier.CPU)
+            if not evicted:
+                logger.warning(
+                    f"Cannot fit entry {entry.prefix_hash} ({entry.size_bytes} bytes) in CPU"
+                )
+                return False
+
+        entry.tier = "cpu"
+        entry.worker_id = self.worker_id
+        cpu_tier.add(entry)
+        self.eviction_policy.on_insert(entry)
+        return True
 
     def put(self, entry: KVEntry) -> bool:
         """

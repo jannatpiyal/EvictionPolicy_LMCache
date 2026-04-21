@@ -52,6 +52,7 @@ class KVEntry:
     last_accessed_at: float = field(default_factory=time.time)
     access_count: int = 0
     last_reuse_gap: float = 0.0
+    last_hit_tier: Optional[str] = None  # "gpu" | "cpu" | "disk"
 
     # --- Semantic metadata ---
     embedding: Optional[list] = None

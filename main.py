@@ -54,6 +54,13 @@ def parse_args():
     p.add_argument("--disk-mb", type=float, default=None,
                    help="Disk KV cache capacity in MB per worker")
 
+    p.add_argument("--central-store", choices=["none", "filesystem", "redis"], default="none",
+                   help="Enable a shared central KV store across workers")
+    p.add_argument("--central-dir", type=str, default="/tmp/lmcache_central_kv",
+                   help="Central KV store directory when using filesystem backend")
+    p.add_argument("--redis-url", type=str, default="redis://localhost:6379/0",
+                   help="Redis URL when using redis backend")
+
     p.add_argument("--documents", type=int, default=None,
                    help="Number of long shared documents")
     p.add_argument("--document-length", type=int, default=None,
@@ -147,6 +154,13 @@ def build_config(args) -> FrameworkConfig:
 
     if args.policies is not None:
         config.benchmark.policies_to_evaluate = [POLICY_MAP[p] for p in args.policies]
+
+    # Central KV store
+    if args.central_store and args.central_store != "none":
+        config.controller.enable_central_store = True
+        config.controller.central_store_backend = args.central_store
+        config.controller.central_store_dir = args.central_dir
+        config.controller.redis_url = args.redis_url
 
     config.benchmark.output_dir = args.output
 

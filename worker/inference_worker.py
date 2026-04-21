@@ -21,10 +21,11 @@ from typing import Optional
 import torch
 from transformers import AutoTokenizer, AutoModelForCausalLM
 
-from config import WorkerConfig, ModelConfig
+from config import WorkerConfig, ModelConfig, StorageTier
 from cache.kv_entry import KVEntry
 from cache.tiered_cache import TieredCache
 from cache.eviction import EvictionPolicy
+from store.central_kv_store import CentralKVStore
 
 logger = logging.getLogger(__name__)
 
@@ -36,6 +37,7 @@ class InferenceWorker:
         model_config: ModelConfig,
         eviction_policy: EvictionPolicy,
         disk_dir: str = "/tmp/kv_cache",
+        central_store: Optional[CentralKVStore] = None,
     ):
         self.worker_id = worker_config.worker_id
         self.model_config = model_config
@@ -64,6 +66,7 @@ class InferenceWorker:
             disk_dir=disk_dir,
             device=self.device,
         )
+        self.central_store = central_store
 
         self.requests_processed = 0
         self.total_prefill_ms = 0.0
@@ -113,6 +116,28 @@ class InferenceWorker:
         prefix_hash = KVEntry.compute_prefix_hash(prefix_tokens)
         cached_entry = self.cache.get(prefix_hash)
 
+        central_hit = False
+        if cached_entry is None and self.central_store is not None:
+            # Central-store hit: fetch KV in CPU memory, insert into local CPU tier,
+            # then proceed as a normal cache hit.
+            rec = self.central_store.get(prefix_hash)
+            if rec is not None:
+                central_hit = True
+                kv_tuple = rec.kv_tuple
+                kv_bytes = KVEntry.measure_kv_size(kv_tuple)
+                fetched = KVEntry(
+                    prefix_hash=prefix_hash,
+                    prefix_tokens=prefix_tokens,
+                    prompt_text=system_prompt,
+                    num_tokens=len(prefix_tokens),
+                    past_key_values=kv_tuple,
+                    size_bytes=kv_bytes,
+                    worker_id=self.worker_id,
+                    tier="cpu",
+                )
+                self.cache.put_cpu(fetched)
+                cached_entry = self.cache.get(prefix_hash)
+
         if cached_entry is not None:
             result = self._process_with_cached_kv(
                 cached_entry,
@@ -121,7 +146,8 @@ class InferenceWorker:
                 max_new_tokens,
             )
             result["cache_hit"] = True
-            result["tier_hit"] = cached_entry.tier
+            result["tier_hit"] = cached_entry.last_hit_tier or cached_entry.tier
+            result["central_hit"] = central_hit
 
             miss_time = self._miss_prefill_times.get(prefix_hash)
             if miss_time is not None:
@@ -140,8 +166,23 @@ class InferenceWorker:
             )
             result["cache_hit"] = False
             result["tier_hit"] = None
+            result["central_hit"] = False
             result["savings_ms"] = 0.0
             self._miss_prefill_times[prefix_hash] = result["prefill_ms"]
+
+            # Write-through to central store (best-effort).
+            if self.central_store is not None:
+                try:
+                    # We have a GPU-resident cloned KV stored in local cache; create a CPU copy for sharing.
+                    # This is intentionally explicit to keep CentralKVStore a pure storage layer.
+                    gpu_entry = self.cache.tiers[StorageTier.GPU].get(prefix_hash)
+                    if gpu_entry is not None and gpu_entry.past_key_values is not None:
+                        cpu_kv = tuple(
+                            (k.to("cpu"), v.to("cpu")) for k, v in gpu_entry.past_key_values
+                        )
+                        self.central_store.put(prefix_hash, cpu_kv)
+                except Exception as e:
+                    logger.debug("Central store put failed for %s: %s", prefix_hash, e)
 
         self.total_prefill_ms += result["prefill_ms"]
         self.total_decode_ms += result["decode_ms"]
@@ -149,6 +190,7 @@ class InferenceWorker:
         self.total_itl_ms += result["avg_itl_ms"]
         self.total_generated_tokens += result["generated_tokens"]
 
+        result["prefix_hash"] = prefix_hash
         return result
 
     def _process_with_cached_kv(
