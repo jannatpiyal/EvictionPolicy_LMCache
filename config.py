@@ -80,6 +80,12 @@ class ControllerConfig:
     central_store_dir: str = "/tmp/lmcache_central_kv"
     redis_url: str = "redis://localhost:6379/0"
 
+    # Metadata registry (fault tolerance / replica leases)
+    enable_metadata_registry: bool = False
+    metadata_backend: str = "redis"  # "redis"
+    metadata_redis_url: str = "redis://localhost:6379/0"
+    worker_lease_ttl_s: int = 30
+
 
 @dataclass
 class WorkloadConfig:

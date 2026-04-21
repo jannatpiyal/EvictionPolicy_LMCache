@@ -61,6 +61,13 @@ def parse_args():
     p.add_argument("--redis-url", type=str, default="redis://localhost:6379/0",
                    help="Redis URL when using redis backend")
 
+    p.add_argument("--metadata-registry", choices=["none", "redis"], default="none",
+                   help="Enable metadata registry for fault tolerance (replica leases)")
+    p.add_argument("--metadata-redis-url", type=str, default="redis://localhost:6379/0",
+                   help="Redis URL for metadata registry")
+    p.add_argument("--lease-ttl", type=int, default=30,
+                   help="TTL in seconds for worker heartbeats and replica leases")
+
     p.add_argument("--documents", type=int, default=None,
                    help="Number of long shared documents")
     p.add_argument("--document-length", type=int, default=None,
@@ -161,6 +168,13 @@ def build_config(args) -> FrameworkConfig:
         config.controller.central_store_backend = args.central_store
         config.controller.central_store_dir = args.central_dir
         config.controller.redis_url = args.redis_url
+
+    # Metadata registry (fault tolerance)
+    if args.metadata_registry and args.metadata_registry != "none":
+        config.controller.enable_metadata_registry = True
+        config.controller.metadata_backend = args.metadata_registry
+        config.controller.metadata_redis_url = args.metadata_redis_url
+        config.controller.worker_lease_ttl_s = args.lease_ttl
 
     config.benchmark.output_dir = args.output
 

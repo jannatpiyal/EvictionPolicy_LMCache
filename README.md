@@ -60,6 +60,84 @@ python main.py \
     --requests 100 --gpu-mb 512
 ```
 
+## Multi-Node (Fault Tolerance Prototype)
+
+This repo now includes a simple HTTP-based worker service and router to support
+multi-node experiments with:
+
+- Central KV blob storage (filesystem or Redis)
+- Redis-backed metadata registry (worker heartbeat + per-prefix replica leases)
+- Fault tolerance via lease expiry and rehydration from the central store
+
+### Start Redis
+
+Run Redis in a place reachable by all nodes (VM, service, or head node).
+
+#### Local Redis (No Docker)
+
+macOS (Homebrew):
+
+```bash
+brew update
+brew install redis
+brew services start redis
+redis-cli ping  # expect PONG
+```
+
+Ubuntu/Debian:
+
+```bash
+sudo apt update
+sudo apt install -y redis-server
+sudo systemctl enable redis-server
+sudo systemctl start redis-server
+redis-cli ping  # expect PONG
+```
+
+Redis URL for local use:
+
+- `redis://localhost:6379/0`
+
+If you need other machines to connect to your Redis, you must bind it to a
+non-loopback interface and secure it (firewall + password). Do not expose an
+unauthenticated Redis instance to the internet.
+
+### Start Workers (on each GPU node)
+
+Each worker runs a local HTTP server:
+
+```bash
+python worker/http_service.py \
+  --port 8001 --worker-id 0 \
+  --model meta-llama/Llama-3.1-8B-Instruct \
+  --central-store redis --redis-url redis://<redis-host>:6379/0 \
+  --metadata-redis-url redis://<redis-host>:6379/0 \
+  --lease-ttl 30
+```
+
+Repeat per worker with a unique `--port` and `--worker-id`.
+
+### Start Router (any node)
+
+```bash
+python controller/http_service.py \
+  --port 9000 \
+  --model meta-llama/Llama-3.1-8B-Instruct \
+  --metadata-redis-url redis://<redis-host>:6379/0 \
+  --workers http://<worker0-host>:8001 http://<worker1-host>:8002
+```
+
+### Send A Request
+
+```bash
+python - <<'PY'
+import json, urllib.request
+payload = {"prompt": "You are a helpful assistant.\\n\\nDocument:\\nHello\\n\\nQuestion:\\nWhat is this?\\n\\nAnswer:", "max_new_tokens": 16}
+req = urllib.request.Request("http://localhost:9000/process", data=json.dumps(payload).encode(), headers={"Content-Type":"application/json"})
+print(urllib.request.urlopen(req).read().decode())
+PY
+```
+
 ## Expected Output
 
 ```

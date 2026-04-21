@@ -285,6 +285,12 @@ class TieredCache:
     def contains(self, prefix_hash: str) -> bool:
         return any(ts.get(prefix_hash) is not None for ts in self.tiers.values())
 
+    def list_prefixes(self) -> list[str]:
+        prefixes: list[str] = []
+        for ts in self.tiers.values():
+            prefixes.extend(list(ts.entries.keys()))
+        return prefixes
+
     @property
     def total_entries(self):
         return sum(len(ts.entries) for ts in self.tiers.values())

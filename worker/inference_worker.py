@@ -26,6 +26,7 @@ from cache.kv_entry import KVEntry
 from cache.tiered_cache import TieredCache
 from cache.eviction import EvictionPolicy
 from store.central_kv_store import CentralKVStore
+from metadata.registry import MetadataRegistry
 
 logger = logging.getLogger(__name__)
 
@@ -38,6 +39,10 @@ class InferenceWorker:
         eviction_policy: EvictionPolicy,
         disk_dir: str = "/tmp/kv_cache",
         central_store: Optional[CentralKVStore] = None,
+        metadata_registry: Optional[MetadataRegistry] = None,
+        metadata_worker_id: Optional[str] = None,
+        metadata_worker_addr: Optional[str] = None,
+        lease_ttl_s: int = 30,
     ):
         self.worker_id = worker_config.worker_id
         self.model_config = model_config
@@ -67,6 +72,10 @@ class InferenceWorker:
             device=self.device,
         )
         self.central_store = central_store
+        self.metadata_registry = metadata_registry
+        self.metadata_worker_id = metadata_worker_id or str(self.worker_id)
+        self.metadata_worker_addr = metadata_worker_addr or f"worker-{self.worker_id}"
+        self.lease_ttl_s = int(lease_ttl_s)
 
         self.requests_processed = 0
         self.total_prefill_ms = 0.0
@@ -89,6 +98,17 @@ class InferenceWorker:
         max_new_tokens: int = 50,
     ) -> dict:
         self.requests_processed += 1
+
+        # Best-effort heartbeat/registration (multi-node fault tolerance).
+        if self.metadata_registry is not None:
+            try:
+                self.metadata_registry.register_worker(
+                    worker_id=self.metadata_worker_id,
+                    address=self.metadata_worker_addr,
+                    ttl_s=self.lease_ttl_s,
+                )
+            except Exception:
+                pass
 
         if prompt is not None:
             full_text = prompt
@@ -149,6 +169,16 @@ class InferenceWorker:
             result["tier_hit"] = cached_entry.last_hit_tier or cached_entry.tier
             result["central_hit"] = central_hit
 
+            if self.metadata_registry is not None:
+                try:
+                    self.metadata_registry.claim_replica(
+                        prefix_hash=prefix_hash,
+                        worker_id=self.metadata_worker_id,
+                        ttl_s=self.lease_ttl_s,
+                    )
+                except Exception:
+                    pass
+
             miss_time = self._miss_prefill_times.get(prefix_hash)
             if miss_time is not None:
                 savings = miss_time - result["prefill_ms"]
@@ -169,6 +199,16 @@ class InferenceWorker:
             result["central_hit"] = False
             result["savings_ms"] = 0.0
             self._miss_prefill_times[prefix_hash] = result["prefill_ms"]
+
+            if self.metadata_registry is not None:
+                try:
+                    self.metadata_registry.claim_replica(
+                        prefix_hash=prefix_hash,
+                        worker_id=self.metadata_worker_id,
+                        ttl_s=self.lease_ttl_s,
+                    )
+                except Exception:
+                    pass
 
             # Write-through to central store (best-effort).
             if self.central_store is not None:

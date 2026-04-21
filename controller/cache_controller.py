@@ -18,6 +18,7 @@ from cache.kv_entry import KVEntry
 from cache.eviction import create_policy
 from worker.inference_worker import InferenceWorker
 from store import FileSystemCentralKVStore, RedisCentralKVStore
+from metadata import RedisMetadataRegistry
 
 logger = logging.getLogger(__name__)
 
@@ -36,6 +37,7 @@ class CacheController:
 
         self.workers: dict[int, InferenceWorker] = {}
         self.central_store = None
+        self.metadata_registry = None
 
     # -----------------------------
     # WORKER CREATION
@@ -52,6 +54,12 @@ class CacheController:
                 self.central_store = FileSystemCentralKVStore(
                     root_dir=getattr(self.config.controller, "central_store_dir", "/tmp/lmcache_central_kv"),
                 )
+
+        # Metadata registry (Redis) for fault tolerance / replica leases.
+        if getattr(self.config.controller, "enable_metadata_registry", False):
+            self.metadata_registry = RedisMetadataRegistry(
+                redis_url=getattr(self.config.controller, "metadata_redis_url", "redis://localhost:6379/0"),
+            )
 
         num_gpus = torch.cuda.device_count()
         num_workers = len(self.config.workers)
@@ -70,6 +78,10 @@ class CacheController:
                 eviction_policy=policy,
                 disk_dir=f"/tmp/kv_cache_worker_{i}",
                 central_store=self.central_store,
+                metadata_registry=self.metadata_registry,
+                metadata_worker_id=str(worker_config.worker_id),
+                metadata_worker_addr=f"worker-{worker_config.worker_id}",
+                lease_ttl_s=getattr(self.config.controller, "worker_lease_ttl_s", 30),
             )
             self.workers[worker_config.worker_id] = worker
 
@@ -100,6 +112,19 @@ class CacheController:
     # -----------------------------
     def route_request(self, prefix_hash: str) -> int:
         self.total_requests += 1
+
+        # Prefer live replicas from metadata registry when enabled.
+        if self.metadata_registry is not None:
+            try:
+                replicas = self.metadata_registry.list_live_replicas(prefix_hash)
+                if replicas:
+                    # Pick the first live replica (can be improved to load-aware choice).
+                    wid = int(replicas[0].worker_id)
+                    if wid in self.workers:
+                        self.cache_routed += 1
+                        return wid
+            except Exception:
+                pass
 
         cached_worker_id = self.prefix_index.get(prefix_hash)
         if cached_worker_id is not None:
