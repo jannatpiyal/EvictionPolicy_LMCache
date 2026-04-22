@@ -67,6 +67,8 @@ def parse_args():
                    help="Redis URL for metadata registry")
     p.add_argument("--lease-ttl", type=int, default=30,
                    help="TTL in seconds for worker heartbeats and replica leases")
+    p.add_argument("--pd-disaggregation", action="store_true",
+                   help="Split requests into prefill and decode stages across workers when possible")
 
     p.add_argument("--documents", type=int, default=None,
                    help="Number of long shared documents")
@@ -176,6 +178,9 @@ def build_config(args) -> FrameworkConfig:
         config.controller.metadata_redis_url = args.metadata_redis_url
         config.controller.worker_lease_ttl_s = args.lease_ttl
 
+    if args.pd_disaggregation:
+        config.controller.enable_pd_disaggregation = True
+
     config.benchmark.output_dir = args.output
 
     if config.benchmark.warmup_requests > config.workload.total_requests:
@@ -216,6 +221,7 @@ def log_setup(config: FrameworkConfig) -> None:
     logger.info("Max new tokens: %s", config.workload.max_new_tokens)
     logger.info("Estimated total requests: %s", config.workload.total_requests)
     logger.info("Policies: %s", [p.value for p in config.benchmark.policies_to_evaluate])
+    logger.info("PD disaggregation: %s", config.controller.enable_pd_disaggregation)
     logger.info("=" * 72)
 
 

@@ -15,6 +15,7 @@ import torch
 from config import TierConfig, StorageTier, WorkerConfig
 from cache.kv_entry import KVEntry
 from cache.eviction import EvictionPolicy
+from cache.transfer_scheduler import TransferScheduler
 
 logger = logging.getLogger(__name__)
 
@@ -94,6 +95,7 @@ class TieredCache:
             StorageTier.CPU: TierState(config=worker_config.cpu_tier),
             StorageTier.DISK: TierState(config=worker_config.disk_tier),
         }
+        self.transfer_scheduler = TransferScheduler()
 
         # Metrics
         self.access_log: list[AccessEvent] = []
@@ -125,8 +127,14 @@ class TieredCache:
 
                 transfer_ms = 0.0
 
+                # Kick off disk read before we start making room on GPU so disk
+                # I/O can overlap with eviction bookkeeping and lower-tier work.
+                if tier_enum == StorageTier.DISK:
+                    entry.start_disk_prefetch()
+
                 # Promote to GPU if in lower tier
                 if tier_enum != StorageTier.GPU:
+                    self.transfer_scheduler.queue_promotion(entry)
                     transfer_ms = self._promote_to_gpu(entry, from_tier=tier_enum)
                     self.total_transfer_ms += transfer_ms
 
@@ -163,13 +171,11 @@ class TieredCache:
 
         cpu_tier = self.tiers[StorageTier.CPU]
 
-        while not cpu_tier.has_space(entry.size_bytes):
-            evicted = self._evict_from_tier(StorageTier.CPU)
-            if not evicted:
-                logger.warning(
-                    f"Cannot fit entry {entry.prefix_hash} ({entry.size_bytes} bytes) in CPU"
-                )
-                return False
+        if not self._ensure_space_in_tier(StorageTier.CPU, entry.size_bytes):
+            logger.warning(
+                f"Cannot fit entry {entry.prefix_hash} ({entry.size_bytes} bytes) in CPU"
+            )
+            return False
 
         entry.tier = "cpu"
         entry.worker_id = self.worker_id
@@ -192,18 +198,84 @@ class TieredCache:
 
         gpu_tier = self.tiers[StorageTier.GPU]
 
-        # Make room in GPU
-        while not gpu_tier.has_space(entry.size_bytes):
-            evicted = self._evict_from_tier(StorageTier.GPU)
-            if not evicted:
-                logger.warning(f"Cannot fit entry {entry.prefix_hash} ({entry.size_bytes} bytes) in GPU")
-                return False
+        if not self._ensure_space_in_tier(StorageTier.GPU, entry.size_bytes):
+            logger.warning(f"Cannot fit entry {entry.prefix_hash} ({entry.size_bytes} bytes) in GPU")
+            return False
 
         entry.tier = "gpu"
         entry.worker_id = self.worker_id
         gpu_tier.add(entry)
         self.eviction_policy.on_insert(entry)
         return True
+
+    def _collect_victims(self, tier: StorageTier, required_bytes: int) -> list[KVEntry]:
+        tier_state = self.tiers[tier]
+        candidates = list(tier_state.entries.values())
+        victims: list[KVEntry] = []
+        freed_bytes = 0
+
+        while tier_state.free_bytes + freed_bytes < required_bytes:
+            if not candidates:
+                return []
+
+            victim = self.eviction_policy.select_victim(candidates)
+            if victim is None:
+                return []
+
+            candidates.remove(victim)
+            tier_state.remove(victim.prefix_hash)
+            self.total_evictions += 1
+            self.eviction_policy.on_evict(victim)
+            victims.append(victim)
+            freed_bytes += victim.size_bytes
+
+        return victims
+
+    def _ensure_space_in_tier(self, tier: StorageTier, required_bytes: int) -> bool:
+        tier_state = self.tiers[tier]
+        if tier_state.has_space(required_bytes):
+            return True
+
+        victims = self._collect_victims(tier, required_bytes)
+        if not victims:
+            return False
+
+        tier_idx = self.TIER_ORDER.index(tier)
+        if tier_idx >= len(self.TIER_ORDER) - 1:
+            for victim in victims:
+                victim.free_memory()
+            return tier_state.has_space(required_bytes)
+
+        next_tier = self.TIER_ORDER[tier_idx + 1]
+        next_state = self.tiers[next_tier]
+        total_bytes = sum(victim.size_bytes for victim in victims)
+
+        if not self._ensure_space_in_tier(next_tier, total_bytes):
+            for victim in victims:
+                victim.free_memory()
+            return tier_state.has_space(required_bytes)
+
+        if next_tier == StorageTier.CPU:
+            self.transfer_scheduler.queue_cpu_demotion(victims)
+            transfer_ms = self.transfer_scheduler.flush_cpu_demotions()
+        elif next_tier == StorageTier.DISK:
+            self.transfer_scheduler.queue_disk_spill(victims)
+            transfer_ms = self.transfer_scheduler.flush_disk_spills(self.disk_dir)
+        else:
+            transfer_ms = 0.0
+
+        for victim in victims:
+            next_state.add(victim)
+        self.total_demotions += len(victims)
+        self.total_transfer_ms += transfer_ms
+        logger.debug(
+            "Batch demoted %d entries %s -> %s (%.2fms)",
+            len(victims),
+            tier.value,
+            next_tier.value,
+            transfer_ms,
+        )
+        return tier_state.has_space(required_bytes)
 
     def _evict_from_tier(self, tier: StorageTier) -> bool:
         """
@@ -264,20 +336,19 @@ class TieredCache:
         Promote entry to GPU with REAL tensor transfer.
         Returns transfer time in ms.
         """
+        if from_tier == StorageTier.DISK:
+            entry.start_disk_prefetch()
+
         # Remove from current tier
         self.tiers[from_tier].remove(entry.prefix_hash)
 
         gpu_tier = self.tiers[StorageTier.GPU]
 
-        # Make room
-        while not gpu_tier.has_space(entry.size_bytes):
-            if not self._evict_from_tier(StorageTier.GPU):
-                # Can't promote — put back
-                self.tiers[from_tier].add(entry)
-                return 0.0
+        if not self._ensure_space_in_tier(StorageTier.GPU, entry.size_bytes):
+            self.tiers[from_tier].add(entry)
+            return 0.0
 
-        # REAL transfer to GPU
-        transfer_ms = entry.move_to_gpu(self.device)
+        transfer_ms = self.transfer_scheduler.flush_promotions(self.device)
         gpu_tier.add(entry)
         self.total_promotions += 1
         return transfer_ms

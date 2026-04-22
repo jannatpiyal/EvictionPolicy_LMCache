@@ -8,14 +8,17 @@ Tensors are physically moved between GPU memory, CPU RAM, and disk.
 import os
 import time
 import hashlib
-import pickle
 import logging
+from concurrent.futures import Future, ThreadPoolExecutor
 from dataclasses import dataclass, field
 from typing import Optional
 
 import torch
 
 logger = logging.getLogger(__name__)
+
+_DISK_IO_EXECUTOR = ThreadPoolExecutor(max_workers=max(2, min(8, os.cpu_count() or 4)))
+_TRANSFER_BATCH_SIZE = 4
 
 
 @dataclass
@@ -59,6 +62,7 @@ class KVEntry:
 
     # --- Transfer timing ---
     last_transfer_ms: float = 0.0
+    _disk_load_future: Optional[Future] = field(default=None, init=False, repr=False, compare=False)
 
     @staticmethod
     def compute_prefix_hash(tokens: list[int]) -> str:
@@ -122,6 +126,89 @@ class KVEntry:
         """Deep clone KV tensors into tuple format for storage."""
         return KVEntry._to_tuple(past_key_values)
 
+    @staticmethod
+    def _layer_batches(kv_tuple: tuple, batch_size: int = _TRANSFER_BATCH_SIZE):
+        for i in range(0, len(kv_tuple), batch_size):
+            yield kv_tuple[i:i + batch_size]
+
+    @staticmethod
+    def _batched_cpu_to_gpu(kv_tuple: tuple, device: str) -> tuple:
+        """
+        Move KV tensors from CPU to GPU in batches.
+
+        Uses pinned host memory plus a dedicated CUDA stream so we only
+        synchronize once per batched transfer rather than once per layer.
+        """
+        if not kv_tuple:
+            return kv_tuple
+
+        if not torch.cuda.is_available():
+            return tuple((k.to(device), v.to(device)) for k, v in kv_tuple)
+
+        stream = torch.cuda.Stream(device=device)
+        moved_layers = []
+        with torch.cuda.stream(stream):
+            for batch in KVEntry._layer_batches(kv_tuple):
+                for key, value in batch:
+                    key_src = key.pin_memory() if not key.is_pinned() else key
+                    value_src = value.pin_memory() if not value.is_pinned() else value
+                    moved_layers.append((
+                        key_src.to(device, non_blocking=True),
+                        value_src.to(device, non_blocking=True),
+                    ))
+        stream.synchronize()
+        return tuple(moved_layers)
+
+    @staticmethod
+    def _batched_gpu_to_cpu(kv_tuple: tuple) -> tuple:
+        """
+        Move KV tensors from GPU to CPU in batches using pinned host buffers.
+        """
+        if not kv_tuple:
+            return kv_tuple
+
+        if not torch.cuda.is_available() or not any(k.is_cuda or v.is_cuda for k, v in kv_tuple):
+            return tuple((k.to("cpu"), v.to("cpu")) for k, v in kv_tuple)
+
+        stream_device = next(
+            (tensor.device for key, value in kv_tuple for tensor in (key, value) if tensor.is_cuda),
+            torch.device("cuda:0"),
+        )
+        stream = torch.cuda.Stream(device=stream_device)
+        moved_layers = []
+        with torch.cuda.stream(stream):
+            for batch in KVEntry._layer_batches(kv_tuple):
+                for key, value in batch:
+                    cpu_key = torch.empty_like(key, device="cpu", pin_memory=True)
+                    cpu_value = torch.empty_like(value, device="cpu", pin_memory=True)
+                    cpu_key.copy_(key, non_blocking=True)
+                    cpu_value.copy_(value, non_blocking=True)
+                    moved_layers.append((cpu_key, cpu_value))
+        stream.synchronize()
+        return tuple(moved_layers)
+
+    def start_disk_prefetch(self) -> Optional[Future]:
+        """
+        Start loading a disk-resident KV entry into CPU memory in the background.
+
+        This lets the cache overlap disk I/O with the promotion bookkeeping that
+        happens before the tensors are needed on GPU.
+        """
+        if self.tier != "disk" or self.past_key_values is not None:
+            return None
+        if not self.disk_path or not os.path.exists(self.disk_path):
+            return None
+        if self._disk_load_future is not None and not self._disk_load_future.done():
+            return self._disk_load_future
+
+        path = self.disk_path
+
+        def _load():
+            return torch.load(path, map_location="cpu", weights_only=False)
+
+        self._disk_load_future = _DISK_IO_EXECUTOR.submit(_load)
+        return self._disk_load_future
+
     def record_access(self) -> None:
         now = time.time()
         self.last_reuse_gap = now - self.last_accessed_at
@@ -149,17 +236,12 @@ class KVEntry:
             return 0.0
 
         if self.tier == "disk":
-            # Load from disk first
+            self.start_disk_prefetch()
             self._load_from_disk()
 
         # Transfer CPU -> GPU
         if self.past_key_values is not None:
-            self.past_key_values = tuple(
-                (k.to(device, non_blocking=True), v.to(device, non_blocking=True))
-                for k, v in self.past_key_values
-            )
-            if torch.cuda.is_available():
-                torch.cuda.synchronize()
+            self.past_key_values = self._batched_cpu_to_gpu(self.past_key_values, device)
 
         self.tier = "gpu"
         elapsed_ms = (time.perf_counter() - start) * 1000
@@ -181,10 +263,7 @@ class KVEntry:
         elif self.tier == "gpu":
             # GPU -> CPU
             if self.past_key_values is not None:
-                self.past_key_values = tuple(
-                    (k.to("cpu"), v.to("cpu"))
-                    for k, v in self.past_key_values
-                )
+                self.past_key_values = self._batched_gpu_to_cpu(self.past_key_values)
 
         self.tier = "cpu"
         elapsed_ms = (time.perf_counter() - start) * 1000
@@ -207,10 +286,10 @@ class KVEntry:
 
         if self.past_key_values is not None:
             # Move to CPU first if on GPU
-            cpu_kv = tuple(
-                (k.to("cpu"), v.to("cpu"))
-                for k, v in self.past_key_values
-            )
+            if any(k.is_cuda or v.is_cuda for k, v in self.past_key_values):
+                cpu_kv = self._batched_gpu_to_cpu(self.past_key_values)
+            else:
+                cpu_kv = self.past_key_values
             # Save to disk
             torch.save(cpu_kv, self.disk_path)
             # Free memory
@@ -228,6 +307,19 @@ class KVEntry:
 
     def _load_from_disk(self) -> None:
         """Load KV tensors from disk into CPU memory."""
+        if self.past_key_values is not None:
+            return
+
+        if self._disk_load_future is not None:
+            try:
+                self.past_key_values = self._disk_load_future.result()
+            except Exception as e:
+                logger.warning("Disk prefetch failed for %s: %s", self.prefix_hash, e)
+                self.past_key_values = None
+            finally:
+                self._disk_load_future = None
+            return
+
         if self.disk_path and os.path.exists(self.disk_path):
             self.past_key_values = torch.load(self.disk_path, map_location="cpu", weights_only=False)
         else:
@@ -242,6 +334,12 @@ class KVEntry:
 
     def free_memory(self) -> None:
         """Free all memory held by this entry."""
+        if self._disk_load_future is not None:
+            try:
+                self._disk_load_future.cancel()
+            except Exception:
+                pass
+            self._disk_load_future = None
         if self.past_key_values is not None:
             del self.past_key_values
             self.past_key_values = None
@@ -256,6 +354,7 @@ class KVEntry:
         """
         if self.past_key_values is None:
             if self.tier == "disk":
+                self.start_disk_prefetch()
                 self._load_from_disk()
             if self.past_key_values is None:
                 return None

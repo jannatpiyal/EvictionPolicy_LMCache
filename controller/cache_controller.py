@@ -107,21 +107,14 @@ class CacheController:
         # Legacy
         return worker.tokenize(request.system_prompt)
 
-    # -----------------------------
-    # ROUTING
-    # -----------------------------
-    def route_request(self, prefix_hash: str) -> int:
-        self.total_requests += 1
-
+    def _find_cached_worker(self, prefix_hash: str) -> int | None:
         # Prefer live replicas from metadata registry when enabled.
         if self.metadata_registry is not None:
             try:
                 replicas = self.metadata_registry.list_live_replicas(prefix_hash)
                 if replicas:
-                    # Pick the first live replica (can be improved to load-aware choice).
                     wid = int(replicas[0].worker_id)
                     if wid in self.workers:
-                        self.cache_routed += 1
                         return wid
             except Exception:
                 pass
@@ -130,15 +123,72 @@ class CacheController:
         if cached_worker_id is not None:
             worker = self.workers[cached_worker_id]
             if worker.cache.contains(prefix_hash):
-                self.cache_routed += 1
                 return cached_worker_id
+        return None
 
-        # Round-robin fallback
+    def _next_rr_worker(self) -> int:
         worker_ids = sorted(self.workers.keys())
         worker_id = worker_ids[self._rr_counter % len(worker_ids)]
         self._rr_counter += 1
+        return worker_id
+
+    # -----------------------------
+    # ROUTING
+    # -----------------------------
+    def route_request(self, prefix_hash: str) -> int:
+        self.total_requests += 1
+
+        cached_worker_id = self._find_cached_worker(prefix_hash)
+        if cached_worker_id is not None:
+            self.cache_routed += 1
+            return cached_worker_id
+
+        # Round-robin fallback
+        worker_id = self._next_rr_worker()
         self.rr_routed += 1
         return worker_id
+
+    def _invoke_worker_process(self, worker: InferenceWorker, request) -> dict:
+        if hasattr(request, "prompt") and request.prompt is not None:
+            return worker.process_request(
+                prompt=request.prompt,
+                max_new_tokens=request.max_new_tokens,
+            )
+        return worker.process_request(
+            system_prompt=request.system_prompt,
+            user_query=request.user_query,
+            max_new_tokens=request.max_new_tokens,
+        )
+
+    def _invoke_worker_prefill(self, worker: InferenceWorker, request) -> dict:
+        if hasattr(request, "prompt") and request.prompt is not None:
+            return worker.prepare_prefix_kv(prompt=request.prompt)
+        return worker.prepare_prefix_kv(
+            system_prompt=request.system_prompt,
+            user_query=request.user_query,
+        )
+
+    def _invoke_worker_decode(
+        self,
+        worker: InferenceWorker,
+        request,
+        prefix_hash: str,
+        require_cached_prefix: bool,
+    ) -> dict:
+        if hasattr(request, "prompt") and request.prompt is not None:
+            return worker.decode_request(
+                prompt=request.prompt,
+                max_new_tokens=request.max_new_tokens,
+                prefix_hash=prefix_hash,
+                require_cached_prefix=require_cached_prefix,
+            )
+        return worker.decode_request(
+            system_prompt=request.system_prompt,
+            user_query=request.user_query,
+            max_new_tokens=request.max_new_tokens,
+            prefix_hash=prefix_hash,
+            require_cached_prefix=require_cached_prefix,
+        )
 
     # -----------------------------
     # MAIN PROCESS
@@ -148,22 +198,57 @@ class CacheController:
         prefix_tokens = self._extract_prefix_tokens(request)
         prefix_hash = KVEntry.compute_prefix_hash(prefix_tokens)
 
+        if getattr(self.config.controller, "enable_pd_disaggregation", False):
+            self.total_requests += 1
+            cached_worker_id = self._find_cached_worker(prefix_hash)
+            if cached_worker_id is not None:
+                self.cache_routed += 1
+                worker = self.workers[cached_worker_id]
+                result = self._invoke_worker_decode(
+                    worker,
+                    request,
+                    prefix_hash=prefix_hash,
+                    require_cached_prefix=True,
+                )
+                result["worker_id"] = cached_worker_id
+                result["request_id"] = request.request_id
+                self.prefix_index[result.get("prefix_hash", prefix_hash)] = cached_worker_id
+                return result
+
+            prefill_worker_id = self._next_rr_worker()
+            self.rr_routed += 1
+            prefill_worker = self.workers[prefill_worker_id]
+            prefill_result = self._invoke_worker_prefill(prefill_worker, request)
+            decode_prefix_hash = prefill_result.get("prefix_hash", prefix_hash)
+
+            shared_kv_ready = bool(
+                prefill_result.get("stored_in_central_store")
+                or prefill_result.get("central_hit")
+            )
+            if shared_kv_ready and len(self.workers) > 1:
+                decode_worker_id = self._next_rr_worker()
+            else:
+                decode_worker_id = prefill_worker_id
+
+            decode_worker = self.workers[decode_worker_id]
+            result = self._invoke_worker_decode(
+                decode_worker,
+                request,
+                prefix_hash=decode_prefix_hash,
+                require_cached_prefix=True,
+            )
+            result["worker_id"] = decode_worker_id
+            result["prefill_worker_id"] = prefill_worker_id
+            result["request_id"] = request.request_id
+            self.prefix_index[result.get("prefix_hash", prefix_hash)] = decode_worker_id
+            return result
+
         # Route
         worker_id = self.route_request(prefix_hash)
         worker = self.workers[worker_id]
 
         # Execute
-        if hasattr(request, "prompt") and request.prompt is not None:
-            result = worker.process_request(
-                prompt=request.prompt,
-                max_new_tokens=request.max_new_tokens,
-            )
-        else:
-            result = worker.process_request(
-                system_prompt=request.system_prompt,
-                user_query=request.user_query,
-                max_new_tokens=request.max_new_tokens,
-            )
+        result = self._invoke_worker_process(worker, request)
 
         result["worker_id"] = worker_id
         result["request_id"] = request.request_id

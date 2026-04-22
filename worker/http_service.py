@@ -35,6 +35,27 @@ class _WorkerHandler(BaseHTTPRequestHandler):
 
     def do_POST(self):  # noqa: N802
         try:
+            if self.path == "/prefill":
+                req = self._read_json()
+                res = self.server.worker.prepare_prefix_kv(
+                    system_prompt=req.get("system_prompt"),
+                    user_query=req.get("user_query"),
+                    prompt=req.get("prompt"),
+                )
+                self._write_json(200, {"ok": True, "result": res})
+                return
+            if self.path == "/decode":
+                req = self._read_json()
+                res = self.server.worker.decode_request(
+                    system_prompt=req.get("system_prompt"),
+                    user_query=req.get("user_query"),
+                    prompt=req.get("prompt"),
+                    max_new_tokens=int(req.get("max_new_tokens", 50)),
+                    prefix_hash=req.get("prefix_hash"),
+                    require_cached_prefix=bool(req.get("require_cached_prefix", True)),
+                )
+                self._write_json(200, {"ok": True, "result": res})
+                return
             if self.path == "/process":
                 req = self._read_json()
                 res = self.server.worker.process_request(
@@ -183,4 +204,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

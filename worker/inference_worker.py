@@ -90,26 +90,36 @@ class InferenceWorker:
     def tokenize(self, text: str) -> list[int]:
         return self.tokenizer.encode(text, add_special_tokens=True)
 
-    def process_request(
+    def _register_worker_if_needed(self) -> None:
+        if self.metadata_registry is None:
+            return
+        try:
+            self.metadata_registry.register_worker(
+                worker_id=self.metadata_worker_id,
+                address=self.metadata_worker_addr,
+                ttl_s=self.lease_ttl_s,
+            )
+        except Exception:
+            pass
+
+    def _claim_replica_if_needed(self, prefix_hash: str) -> None:
+        if self.metadata_registry is None:
+            return
+        try:
+            self.metadata_registry.claim_replica(
+                prefix_hash=prefix_hash,
+                worker_id=self.metadata_worker_id,
+                ttl_s=self.lease_ttl_s,
+            )
+        except Exception:
+            pass
+
+    def _normalize_request(
         self,
         system_prompt: Optional[str] = None,
         user_query: Optional[str] = None,
         prompt: Optional[str] = None,
-        max_new_tokens: int = 50,
     ) -> dict:
-        self.requests_processed += 1
-
-        # Best-effort heartbeat/registration (multi-node fault tolerance).
-        if self.metadata_registry is not None:
-            try:
-                self.metadata_registry.register_worker(
-                    worker_id=self.metadata_worker_id,
-                    address=self.metadata_worker_addr,
-                    ttl_s=self.lease_ttl_s,
-                )
-            except Exception:
-                pass
-
         if prompt is not None:
             full_text = prompt
             if "Question:" in prompt:
@@ -134,95 +144,200 @@ class InferenceWorker:
             new_tokens = [self.tokenizer.eos_token_id]
 
         prefix_hash = KVEntry.compute_prefix_hash(prefix_tokens)
+        return {
+            "system_prompt": system_prompt,
+            "user_query": user_query,
+            "full_text": full_text,
+            "prefix_tokens": prefix_tokens,
+            "full_tokens": full_tokens,
+            "prefix_len": prefix_len,
+            "new_tokens": new_tokens,
+            "prefix_hash": prefix_hash,
+        }
+
+    def _load_entry_from_central_store(
+        self,
+        prefix_hash: str,
+        prefix_tokens: list[int],
+        prompt_text: str,
+    ) -> tuple[Optional[KVEntry], bool]:
         cached_entry = self.cache.get(prefix_hash)
-
-        central_hit = False
-        if cached_entry is None and self.central_store is not None:
-            # Central-store hit: fetch KV in CPU memory, insert into local CPU tier,
-            # then proceed as a normal cache hit.
-            rec = self.central_store.get(prefix_hash)
-            if rec is not None:
-                central_hit = True
-                kv_tuple = rec.kv_tuple
-                kv_bytes = KVEntry.measure_kv_size(kv_tuple)
-                fetched = KVEntry(
-                    prefix_hash=prefix_hash,
-                    prefix_tokens=prefix_tokens,
-                    prompt_text=system_prompt,
-                    num_tokens=len(prefix_tokens),
-                    past_key_values=kv_tuple,
-                    size_bytes=kv_bytes,
-                    worker_id=self.worker_id,
-                    tier="cpu",
-                )
-                self.cache.put_cpu(fetched)
-                cached_entry = self.cache.get(prefix_hash)
-
         if cached_entry is not None:
-            result = self._process_with_cached_kv(
-                cached_entry,
-                new_tokens,
-                prefix_len,
-                max_new_tokens,
-            )
-            result["cache_hit"] = True
-            result["tier_hit"] = cached_entry.last_hit_tier or cached_entry.tier
-            result["central_hit"] = central_hit
+            return cached_entry, False
 
-            if self.metadata_registry is not None:
-                try:
-                    self.metadata_registry.claim_replica(
-                        prefix_hash=prefix_hash,
-                        worker_id=self.metadata_worker_id,
-                        ttl_s=self.lease_ttl_s,
-                    )
-                except Exception:
-                    pass
+        if self.central_store is None:
+            return None, False
 
-            miss_time = self._miss_prefill_times.get(prefix_hash)
-            if miss_time is not None:
-                savings = miss_time - result["prefill_ms"]
-                result["savings_ms"] = savings
-                self.total_cache_saved_ms += savings
-            else:
-                result["savings_ms"] = 0.0
-        else:
+        rec = self.central_store.get(prefix_hash)
+        if rec is None:
+            return None, False
+
+        kv_tuple = rec.kv_tuple
+        kv_bytes = KVEntry.measure_kv_size(kv_tuple)
+        fetched = KVEntry(
+            prefix_hash=prefix_hash,
+            prefix_tokens=prefix_tokens,
+            prompt_text=prompt_text,
+            num_tokens=len(prefix_tokens),
+            past_key_values=kv_tuple,
+            size_bytes=kv_bytes,
+            worker_id=self.worker_id,
+            tier="cpu",
+        )
+        self.cache.put_cpu(fetched)
+        return self.cache.get(prefix_hash), True
+
+    def _store_entry_in_central_store(self, entry: KVEntry) -> bool:
+        if self.central_store is None or entry.past_key_values is None:
+            return False
+
+        try:
+            cpu_kv = tuple((k.to("cpu"), v.to("cpu")) for k, v in entry.past_key_values)
+            self.central_store.put(entry.prefix_hash, cpu_kv)
+            return True
+        except Exception as e:
+            logger.debug("Central store put failed for %s: %s", entry.prefix_hash, e)
+            return False
+
+    def prepare_prefix_kv(
+        self,
+        system_prompt: Optional[str] = None,
+        user_query: Optional[str] = None,
+        prompt: Optional[str] = None,
+    ) -> dict:
+        """
+        Prefill-only stage for PD disaggregation.
+
+        Computes the prefix KV, caches it locally, and best-effort writes a CPU
+        copy to the shared central store so another worker can decode from it.
+        """
+        self._register_worker_if_needed()
+        req = self._normalize_request(system_prompt=system_prompt, user_query=user_query, prompt=prompt)
+
+        prefix_hash = req["prefix_hash"]
+        prefix_tokens = req["prefix_tokens"]
+        prompt_text = req["system_prompt"]
+
+        cached_entry, central_hit = self._load_entry_from_central_store(
+            prefix_hash=prefix_hash,
+            prefix_tokens=prefix_tokens,
+            prompt_text=prompt_text,
+        )
+        if cached_entry is not None:
+            self._claim_replica_if_needed(prefix_hash)
+            return {
+                "ok": True,
+                "prefix_hash": prefix_hash,
+                "prefix_len": req["prefix_len"],
+                "num_prefix_tokens": len(prefix_tokens),
+                "cache_hit": True,
+                "central_hit": central_hit,
+                "worker_id": self.worker_id,
+            }
+
+        prefix_input_ids = torch.tensor([prefix_tokens], device=self.device)
+
+        torch.cuda.synchronize()
+        prefix_start = time.perf_counter()
+        with torch.no_grad():
+            prefix_out = self.model(input_ids=prefix_input_ids, use_cache=True)
+        torch.cuda.synchronize()
+        prefix_ms = (time.perf_counter() - prefix_start) * 1000
+
+        cloned_kv = KVEntry.clone_kv(prefix_out.past_key_values)
+        kv_bytes = KVEntry.measure_kv_size(cloned_kv)
+        entry = KVEntry(
+            prefix_hash=prefix_hash,
+            prefix_tokens=prefix_tokens,
+            prompt_text=prompt_text,
+            num_tokens=len(prefix_tokens),
+            past_key_values=cloned_kv,
+            size_bytes=kv_bytes,
+            worker_id=self.worker_id,
+            tier="gpu",
+        )
+        self.cache.put(entry)
+        stored_in_central = self._store_entry_in_central_store(entry)
+        self._claim_replica_if_needed(prefix_hash)
+
+        return {
+            "ok": True,
+            "prefix_hash": prefix_hash,
+            "prefix_len": req["prefix_len"],
+            "num_prefix_tokens": len(prefix_tokens),
+            "prefix_only_ms": prefix_ms,
+            "kv_cached_mb": kv_bytes / 1024 / 1024,
+            "stored_in_central_store": stored_in_central,
+            "cache_hit": False,
+            "central_hit": False,
+            "worker_id": self.worker_id,
+        }
+
+    def decode_request(
+        self,
+        system_prompt: Optional[str] = None,
+        user_query: Optional[str] = None,
+        prompt: Optional[str] = None,
+        max_new_tokens: int = 50,
+        prefix_hash: Optional[str] = None,
+        require_cached_prefix: bool = False,
+    ) -> dict:
+        """
+        Decode-side stage for PD disaggregation.
+
+        Requires a previously-prefilled prefix, either in the local cache or in
+        the central store. If `require_cached_prefix` is False, this method can
+        fall back to full local processing to preserve backward compatibility.
+        """
+        self.requests_processed += 1
+        self._register_worker_if_needed()
+        req = self._normalize_request(system_prompt=system_prompt, user_query=user_query, prompt=prompt)
+
+        effective_prefix_hash = prefix_hash or req["prefix_hash"]
+        cached_entry, central_hit = self._load_entry_from_central_store(
+            prefix_hash=effective_prefix_hash,
+            prefix_tokens=req["prefix_tokens"],
+            prompt_text=req["system_prompt"],
+        )
+
+        if cached_entry is None:
+            if require_cached_prefix:
+                raise KeyError(f"No cached prefix available for {effective_prefix_hash}")
             result = self._process_full_and_cache(
-                prefix_tokens,
-                new_tokens,
-                prefix_hash,
-                system_prompt,
+                req["prefix_tokens"],
+                req["new_tokens"],
+                effective_prefix_hash,
+                req["system_prompt"],
                 max_new_tokens,
             )
             result["cache_hit"] = False
             result["tier_hit"] = None
             result["central_hit"] = False
             result["savings_ms"] = 0.0
-            self._miss_prefill_times[prefix_hash] = result["prefill_ms"]
+            self._miss_prefill_times[effective_prefix_hash] = result["prefill_ms"]
+            self._claim_replica_if_needed(effective_prefix_hash)
+            gpu_entry = self.cache.tiers[StorageTier.GPU].get(effective_prefix_hash)
+            if gpu_entry is not None:
+                self._store_entry_in_central_store(gpu_entry)
+        else:
+            result = self._process_with_cached_kv(
+                cached_entry,
+                req["new_tokens"],
+                req["prefix_len"],
+                max_new_tokens,
+            )
+            result["cache_hit"] = True
+            result["tier_hit"] = cached_entry.last_hit_tier or cached_entry.tier
+            result["central_hit"] = central_hit
+            self._claim_replica_if_needed(effective_prefix_hash)
 
-            if self.metadata_registry is not None:
-                try:
-                    self.metadata_registry.claim_replica(
-                        prefix_hash=prefix_hash,
-                        worker_id=self.metadata_worker_id,
-                        ttl_s=self.lease_ttl_s,
-                    )
-                except Exception:
-                    pass
-
-            # Write-through to central store (best-effort).
-            if self.central_store is not None:
-                try:
-                    # We have a GPU-resident cloned KV stored in local cache; create a CPU copy for sharing.
-                    # This is intentionally explicit to keep CentralKVStore a pure storage layer.
-                    gpu_entry = self.cache.tiers[StorageTier.GPU].get(prefix_hash)
-                    if gpu_entry is not None and gpu_entry.past_key_values is not None:
-                        cpu_kv = tuple(
-                            (k.to("cpu"), v.to("cpu")) for k, v in gpu_entry.past_key_values
-                        )
-                        self.central_store.put(prefix_hash, cpu_kv)
-                except Exception as e:
-                    logger.debug("Central store put failed for %s: %s", prefix_hash, e)
+            miss_time = self._miss_prefill_times.get(effective_prefix_hash)
+            if miss_time is not None:
+                savings = miss_time - result["prefill_ms"]
+                result["savings_ms"] = savings
+                self.total_cache_saved_ms += savings
+            else:
+                result["savings_ms"] = 0.0
 
         self.total_prefill_ms += result["prefill_ms"]
         self.total_decode_ms += result["decode_ms"]
@@ -230,8 +345,23 @@ class InferenceWorker:
         self.total_itl_ms += result["avg_itl_ms"]
         self.total_generated_tokens += result["generated_tokens"]
 
-        result["prefix_hash"] = prefix_hash
+        result["prefix_hash"] = effective_prefix_hash
         return result
+
+    def process_request(
+        self,
+        system_prompt: Optional[str] = None,
+        user_query: Optional[str] = None,
+        prompt: Optional[str] = None,
+        max_new_tokens: int = 50,
+    ) -> dict:
+        return self.decode_request(
+            system_prompt=system_prompt,
+            user_query=user_query,
+            prompt=prompt,
+            max_new_tokens=max_new_tokens,
+            require_cached_prefix=False,
+        )
 
     def _process_with_cached_kv(
         self,

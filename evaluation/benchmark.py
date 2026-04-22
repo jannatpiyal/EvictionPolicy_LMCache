@@ -18,7 +18,7 @@ import os
 import time
 import json
 import logging
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 
 import numpy as np
 import torch
@@ -243,7 +243,8 @@ class BenchmarkHarness:
         return results
 
     def _run_multi_worker_trial(self, policy_type, workload, trial_id):
-        controller_config = ControllerConfig(
+        controller_config = replace(
+            self.config.controller,
             num_workers=len(self.config.workers),
             eviction_policy=policy_type,
         )

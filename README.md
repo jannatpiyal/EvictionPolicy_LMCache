@@ -138,6 +138,17 @@ print(urllib.request.urlopen(req).read().decode())
 PY
 ```
 
+### Run The PD Smoke Test
+
+This lightweight smoke test boots two worker HTTP servers plus the router using
+test doubles and validates the `/prefill -> /decode` handoff path.
+
+```bash
+./run_pd_smoke_test.sh
+```
+
+It requires `python3` and `torch` in the current environment.
+
 ## Expected Output
 
 ```

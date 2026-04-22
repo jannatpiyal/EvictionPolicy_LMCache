@@ -82,21 +82,74 @@ class _RouterHandler(BaseHTTPRequestHandler):
             except Exception:
                 worker_url = None
 
-            if worker_url is None:
-                # No live replicas: pick a random worker (rehydration happens at worker).
-                worker_url = random.choice(self.server.worker_urls)
+            payload = {
+                "prompt": prompt,
+                "system_prompt": system_prompt,
+                "user_query": user_query,
+                "max_new_tokens": max_new_tokens,
+                "prefix_hash": prefix_hash,
+            }
 
-            res = _post_json(
-                worker_url,
-                "/process",
+            if worker_url is not None:
+                # Hot path: a worker already advertises this prefix, so decode there.
+                res = _post_json(
+                    worker_url,
+                    "/decode",
+                    {**payload, "require_cached_prefix": True},
+                )
+                self._write_json(
+                    200,
+                    {
+                        "ok": True,
+                        "mode": "decode_only",
+                        "worker": worker_url,
+                        "result": res,
+                    },
+                )
+                return
+
+            # Cold path: run explicit prefill on one worker, then decode on another.
+            prefill_worker = random.choice(self.server.worker_urls)
+            prefill_res = _post_json(
+                prefill_worker,
+                "/prefill",
                 {
                     "prompt": prompt,
                     "system_prompt": system_prompt,
                     "user_query": user_query,
-                    "max_new_tokens": max_new_tokens,
                 },
             )
-            self._write_json(200, {"ok": True, "worker": worker_url, "result": res})
+            prefill_result = prefill_res.get("result", {})
+            decode_prefix_hash = prefill_result.get("prefix_hash", prefix_hash)
+
+            shared_kv_ready = bool(
+                prefill_result.get("stored_in_central_store")
+                or prefill_result.get("central_hit")
+            )
+            if shared_kv_ready:
+                decode_candidates = [url for url in self.server.worker_urls if url != prefill_worker]
+                if not decode_candidates:
+                    decode_candidates = [prefill_worker]
+                decode_worker = random.choice(decode_candidates)
+            else:
+                decode_worker = prefill_worker
+
+            decode_res = _post_json(
+                decode_worker,
+                "/decode",
+                {**payload, "prefix_hash": decode_prefix_hash, "require_cached_prefix": True},
+            )
+            self._write_json(
+                200,
+                {
+                    "ok": True,
+                    "mode": "pd_disaggregated",
+                    "prefill_worker": prefill_worker,
+                    "decode_worker": decode_worker,
+                    "prefill": prefill_res,
+                    "result": decode_res,
+                },
+            )
         except Exception as e:
             logger.exception("Router handler error")
             self._write_json(500, {"ok": False, "error": str(e)})
@@ -138,4 +191,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

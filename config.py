@@ -73,6 +73,7 @@ class ControllerConfig:
     pin_warmup_prefixes: bool = False
     enable_cross_tier_promotion: bool = True
     enable_cross_tier_demotion: bool = True
+    enable_pd_disaggregation: bool = False
 
     # Central KV store (shared across workers)
     enable_central_store: bool = False
