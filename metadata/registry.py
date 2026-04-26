@@ -41,6 +41,10 @@ class MetadataRegistry(ABC):
     def list_live_replicas(self, prefix_hash: str) -> list[WorkerInfo]:
         raise NotImplementedError
 
+    @abstractmethod
+    def clear(self) -> None:
+        raise NotImplementedError
+
 
 class RedisMetadataRegistry(MetadataRegistry):
     """
@@ -106,6 +110,17 @@ class RedisMetadataRegistry(MetadataRegistry):
             live.append(WorkerInfo(worker_id=wid, address=addr.decode("utf-8")))
         return live
 
+    def clear(self) -> None:
+        r = self._redis()
+        cursor = 0
+        pattern = f"{self.key_prefix}*"
+        while True:
+            cursor, keys = r.scan(cursor=cursor, match=pattern, count=1000)
+            if keys:
+                r.delete(*keys)
+            if cursor == 0:
+                break
+
 
 class InMemoryMetadataRegistry(MetadataRegistry):
     """
@@ -143,3 +158,9 @@ class InMemoryMetadataRegistry(MetadataRegistry):
                 continue
             live.append(WorkerInfo(worker_id=wid, address=addr))
         return live
+
+    def clear(self) -> None:
+        self._worker_addr.clear()
+        self._worker_hb_exp.clear()
+        self._replicas.clear()
+        self._lease_exp.clear()

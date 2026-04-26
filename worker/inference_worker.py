@@ -171,17 +171,54 @@ class InferenceWorker:
     ) -> tuple[Optional[KVEntry], bool]:
         cached_entry = self.cache.get(prefix_hash)
         if cached_entry is not None:
+            logger.info(
+                "Central-load shortcut worker=%s prefix=%s source=local-cache tier=%s",
+                self.worker_id,
+                prefix_hash[:8],
+                cached_entry.last_hit_tier or cached_entry.tier,
+            )
             return cached_entry, False
 
         if self.central_store is None:
+            logger.info(
+                "Central-load miss worker=%s prefix=%s reason=no-central-store",
+                self.worker_id,
+                prefix_hash[:8],
+            )
             return None, False
 
+        contains = False
+        try:
+            contains = self.central_store.contains(prefix_hash)
+        except Exception as e:
+            logger.warning(
+                "Central-load contains-check failed worker=%s prefix=%s error=%s",
+                self.worker_id,
+                prefix_hash[:8],
+                e,
+            )
         rec = self.central_store.get(prefix_hash)
         if rec is None:
+            logger.info(
+                "Central-load miss worker=%s prefix=%s contains=%s rec=None",
+                self.worker_id,
+                prefix_hash[:8],
+                contains,
+            )
             return None, False
 
         kv_payload = rec.kv_tuple if rec.kv_tuple is not None else rec.kv_chunks
         kv_bytes = KVEntry.measure_kv_size(kv_payload)
+        chunk_count = len(rec.kv_chunks) if rec.kv_chunks is not None else 1
+        logger.info(
+            "Central-load hit worker=%s prefix=%s contains=%s chunks=%s size_mb=%.1f chunk_tokens=%s",
+            self.worker_id,
+            prefix_hash[:8],
+            contains,
+            chunk_count,
+            kv_bytes / 1024 / 1024,
+            rec.chunk_size_tokens,
+        )
         fetched = KVEntry(
             prefix_hash=prefix_hash,
             prefix_tokens=prefix_tokens,
@@ -198,7 +235,17 @@ class InferenceWorker:
             pipeline_stage_layers=self.model_config.layerwise_pipeline_stage_layers,
         )
         self.cache.put_cpu(fetched)
-        return self.cache.get(prefix_hash), True
+        contains_after_put = self.cache.contains(prefix_hash)
+        materialized = self.cache.get(prefix_hash)
+        logger.info(
+            "Central-load materialize worker=%s prefix=%s contains_after_put=%s materialized=%s tier=%s",
+            self.worker_id,
+            prefix_hash[:8],
+            contains_after_put,
+            materialized is not None,
+            (materialized.last_hit_tier or materialized.tier) if materialized is not None else None,
+        )
+        return materialized, True
 
     def _store_entry_in_central_store(self, entry: KVEntry) -> bool:
         if self.central_store is None:
@@ -218,6 +265,13 @@ class InferenceWorker:
                 entry.prefix_hash,
                 cpu_kv,
                 chunk_size_tokens=self.model_config.kv_chunk_size_tokens,
+            )
+            logger.info(
+                "Central-store put worker=%s prefix=%s ok=True size_mb=%.1f chunk_tokens=%s",
+                self.worker_id,
+                entry.prefix_hash[:8],
+                KVEntry.measure_kv_size(cpu_kv) / 1024 / 1024,
+                self.model_config.kv_chunk_size_tokens,
             )
             return True
         except Exception as e:
@@ -342,16 +396,31 @@ class InferenceWorker:
         self._register_worker_if_needed()
         req = self._normalize_request(system_prompt=system_prompt, user_query=user_query, prompt=prompt)
 
-        effective_prefix_hash = prefix_hash or req["prefix_hash"]
-        cached_entry, central_hit = self._load_entry_from_central_store(
-            prefix_hash=effective_prefix_hash,
-            prefix_tokens=req["prefix_tokens"],
-            prompt_text=req["system_prompt"],
-        )
+        requested_prefix_hash = prefix_hash or req["prefix_hash"]
+        candidate_prefix_hashes: list[str] = []
+        for candidate in (requested_prefix_hash, req["prefix_hash"]):
+            if candidate and candidate not in candidate_prefix_hashes:
+                candidate_prefix_hashes.append(candidate)
+
+        cached_entry = None
+        central_hit = False
+        effective_prefix_hash = requested_prefix_hash
+        for candidate_hash in candidate_prefix_hashes:
+            cached_entry, central_hit = self._load_entry_from_central_store(
+                prefix_hash=candidate_hash,
+                prefix_tokens=req["prefix_tokens"],
+                prompt_text=req["system_prompt"],
+            )
+            if cached_entry is not None:
+                effective_prefix_hash = candidate_hash
+                break
 
         if cached_entry is None:
             if require_cached_prefix:
-                raise KeyError(f"No cached prefix available for {effective_prefix_hash}")
+                raise KeyError(
+                    "No cached prefix available for "
+                    f"{requested_prefix_hash}; tried {candidate_prefix_hashes}"
+                )
             result = self._process_full_and_cache(
                 req["prefix_tokens"],
                 req["new_tokens"],

@@ -127,6 +127,8 @@ class BenchmarkResults:
 class BenchmarkHarness:
     def __init__(self, config: FrameworkConfig):
         self.config = config
+        self._shared_controller = None
+        self._shared_single_worker = None
 
     def _build_config_summary(self, num_workers: int) -> dict:
         summary = {
@@ -210,6 +212,31 @@ class BenchmarkHarness:
         results.workload_stats = workload_gen.get_reuse_stats(workload)
         logger.info("Workload: %s", results.workload_stats)
 
+        if num_workers > 1:
+            initial_policy = self.config.benchmark.policies_to_evaluate[0]
+            controller_config = replace(
+                self.config.controller,
+                num_workers=len(self.config.workers),
+                eviction_policy=initial_policy,
+            )
+            shared_config = FrameworkConfig(
+                model=self.config.model,
+                workers=self.config.workers,
+                controller=controller_config,
+                workload=self.config.workload,
+                benchmark=self.config.benchmark,
+            )
+            self._shared_controller = CacheController(shared_config)
+            self._shared_controller.create_workers()
+        else:
+            initial_policy = self.config.benchmark.policies_to_evaluate[0]
+            self._shared_single_worker = InferenceWorker(
+                worker_config=self.config.workers[0],
+                model_config=self.config.model,
+                eviction_policy=create_policy(initial_policy),
+                disk_dir="/tmp/kv_cache_trial_shared",
+            )
+
         for policy_type in self.config.benchmark.policies_to_evaluate:
             logger.info(f"\n{'='*60}")
             logger.info(f"POLICY: {policy_type.value} ({num_workers} worker(s))")
@@ -243,21 +270,11 @@ class BenchmarkHarness:
         return results
 
     def _run_multi_worker_trial(self, policy_type, workload, trial_id):
-        controller_config = replace(
-            self.config.controller,
-            num_workers=len(self.config.workers),
-            eviction_policy=policy_type,
-        )
-        trial_config = FrameworkConfig(
-            model=self.config.model,
-            workers=self.config.workers,
-            controller=controller_config,
-            workload=self.config.workload,
-            benchmark=self.config.benchmark,
-        )
-
-        controller = CacheController(trial_config)
-        controller.create_workers()
+        controller = self._shared_controller
+        if controller is None:
+            raise RuntimeError("Shared controller was not initialized")
+        controller.set_policy(policy_type)
+        controller.clear_shared_state()
 
         warmup_n = self.config.benchmark.warmup_requests
         request_details = []
@@ -308,13 +325,11 @@ class BenchmarkHarness:
         return trial_result
 
     def _run_single_worker_trial(self, policy_type, workload, trial_id):
-        policy = create_policy(policy_type)
-        worker = InferenceWorker(
-            worker_config=self.config.workers[0],
-            model_config=self.config.model,
-            eviction_policy=policy,
-            disk_dir=f"/tmp/kv_cache_trial_{trial_id}",
-        )
+        worker = self._shared_single_worker
+        if worker is None:
+            raise RuntimeError("Shared worker was not initialized")
+        worker.cache.eviction_policy = create_policy(policy_type)
+        worker.reset()
 
         warmup_n = self.config.benchmark.warmup_requests
         request_details = []

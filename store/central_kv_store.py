@@ -49,6 +49,10 @@ class CentralKVStore(ABC):
     def delete(self, prefix_hash: str) -> None:
         raise NotImplementedError
 
+    @abstractmethod
+    def clear(self) -> None:
+        raise NotImplementedError
+
 
 class FileSystemCentralKVStore(CentralKVStore):
     """
@@ -238,11 +242,20 @@ class FileSystemCentralKVStore(CentralKVStore):
             except Exception:
                 pass
 
+    def clear(self) -> None:
+        for name in list(os.listdir(self.root_dir)):
+            path = os.path.join(self.root_dir, name)
+            if not os.path.isdir(path):
+                continue
+            self.delete(name)
+
     @staticmethod
     def _map_tensor_file(path: str) -> dict[str, Any]:
         fd = os.open(path, os.O_RDONLY)
         try:
-            region = mmap.mmap(fd, 0, access=mmap.ACCESS_READ)
+            # Use a private copy-on-write mapping so torch.frombuffer gets a
+            # writable view without mutating the underlying shared chunk file.
+            region = mmap.mmap(fd, 0, access=mmap.ACCESS_COPY)
         finally:
             os.close(fd)
         return {"mmap": region}
@@ -370,3 +383,14 @@ class RedisCentralKVStore(CentralKVStore):
                 pass
         if keys:
             r.delete(*keys)
+
+    def clear(self) -> None:
+        r = self._redis()
+        cursor = 0
+        pattern = f"{self.key_prefix}*"
+        while True:
+            cursor, keys = r.scan(cursor=cursor, match=pattern, count=1000)
+            if keys:
+                r.delete(*keys)
+            if cursor == 0:
+                break

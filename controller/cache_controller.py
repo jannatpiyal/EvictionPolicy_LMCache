@@ -88,6 +88,12 @@ class CacheController:
             )
             self.workers[worker_config.worker_id] = worker
 
+    def clear_shared_state(self):
+        if self.central_store is not None:
+            self.central_store.clear()
+        if self.metadata_registry is not None:
+            self.metadata_registry.clear()
+
     # -----------------------------
     # PREFIX EXTRACTION (KEY CHANGE)
     # -----------------------------
@@ -118,7 +124,17 @@ class CacheController:
                 if replicas:
                     wid = int(replicas[0].worker_id)
                     if wid in self.workers:
-                        return wid
+                        worker = self.workers[wid]
+                        if worker.cache.contains(prefix_hash):
+                            return wid
+                        if self.central_store is not None and self.central_store.contains(prefix_hash):
+                            return wid
+                        logger.warning(
+                            "Ignoring stale replica metadata for prefix=%s on worker=%s",
+                            prefix_hash[:8],
+                            wid,
+                        )
+                    return None
             except Exception:
                 pass
 
@@ -126,6 +142,8 @@ class CacheController:
         if cached_worker_id is not None:
             worker = self.workers[cached_worker_id]
             if worker.cache.contains(prefix_hash):
+                return cached_worker_id
+            if self.central_store is not None and self.central_store.contains(prefix_hash):
                 return cached_worker_id
         return None
 
@@ -207,22 +225,37 @@ class CacheController:
             if cached_worker_id is not None:
                 self.cache_routed += 1
                 worker = self.workers[cached_worker_id]
-                result = self._invoke_worker_decode(
-                    worker,
-                    request,
-                    prefix_hash=prefix_hash,
-                    require_cached_prefix=True,
-                )
-                result["worker_id"] = cached_worker_id
-                result["request_id"] = request.request_id
-                self.prefix_index[result.get("prefix_hash", prefix_hash)] = cached_worker_id
-                return result
+                try:
+                    result = self._invoke_worker_decode(
+                        worker,
+                        request,
+                        prefix_hash=prefix_hash,
+                        require_cached_prefix=True,
+                    )
+                    result["worker_id"] = cached_worker_id
+                    result["request_id"] = request.request_id
+                    self.prefix_index[result.get("prefix_hash", prefix_hash)] = cached_worker_id
+                    return result
+                except KeyError:
+                    logger.warning(
+                        "Hot-route decode miss for prefix=%s on worker=%s; falling back to prefill",
+                        prefix_hash[:8],
+                        cached_worker_id,
+                    )
+                    self.prefix_index.pop(prefix_hash, None)
 
             prefill_worker_id = self._next_rr_worker()
             self.rr_routed += 1
             prefill_worker = self.workers[prefill_worker_id]
             prefill_result = self._invoke_worker_prefill(prefill_worker, request)
             decode_prefix_hash = prefill_result.get("prefix_hash", prefix_hash)
+            if decode_prefix_hash != prefix_hash:
+                logger.warning(
+                    "Controller/worker prefix hash mismatch: controller=%s worker=%s req=%s",
+                    prefix_hash[:8],
+                    decode_prefix_hash[:8],
+                    getattr(request, "request_id", "unknown"),
+                )
 
             shared_kv_ready = bool(
                 prefill_result.get("stored_in_central_store")
@@ -232,6 +265,17 @@ class CacheController:
                 decode_worker_id = self._next_rr_worker()
             else:
                 decode_worker_id = prefill_worker_id
+
+            logger.info(
+                "PD dispatch req=%s prefix=%s prefill_worker=%s decode_worker=%s shared_kv_ready=%s stored_in_central=%s central_hit=%s",
+                getattr(request, "request_id", "unknown"),
+                decode_prefix_hash[:8],
+                prefill_worker_id,
+                decode_worker_id,
+                shared_kv_ready,
+                prefill_result.get("stored_in_central_store"),
+                prefill_result.get("central_hit"),
+            )
 
             decode_worker = self.workers[decode_worker_id]
             result = self._invoke_worker_decode(

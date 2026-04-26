@@ -175,6 +175,13 @@ class TieredCache:
         manifest = self.prefix_manifests.pop(prefix_hash, None)
         if manifest is None:
             return
+        logger.warning(
+            "Drop prefix worker=%s prefix=%s chunks=%s free_memory=%s",
+            self.worker_id,
+            prefix_hash[:8],
+            len(manifest.chunk_keys),
+            free_memory,
+        )
         for chunk_key in manifest.chunk_keys:
             self.dynamic_offload.unregister_gpu_chunk(chunk_key)
             for tier_state in self.tiers.values():
@@ -209,6 +216,15 @@ class TieredCache:
             return 0.0
 
         total_bytes = sum(entry.size_bytes for entry in chunks_to_promote)
+        logger.info(
+            "Promote chunks worker=%s prefixes=%s chunks=%s total_mb=%.1f tiers=%s gpu_free_mb=%.1f",
+            self.worker_id,
+            sorted({entry.root_prefix_hash()[:8] for entry in chunks_to_promote}),
+            len(chunks_to_promote),
+            total_bytes / 1024 / 1024,
+            {tier.value: len(entries) for tier, entries in entries_by_tier.items()},
+            self.tiers[StorageTier.GPU].free_bytes / 1024 / 1024,
+        )
         for tier_enum, entries in entries_by_tier.items():
             if tier_enum == StorageTier.DISK:
                 for entry in entries:
@@ -217,6 +233,13 @@ class TieredCache:
                 self.tiers[tier_enum].remove(entry.cache_key())
 
         if not self._ensure_space_in_tier(StorageTier.GPU, total_bytes):
+            logger.warning(
+                "Promote chunks failed worker=%s prefixes=%s need_mb=%.1f gpu_free_mb=%.1f",
+                self.worker_id,
+                sorted({entry.root_prefix_hash()[:8] for entry in chunks_to_promote}),
+                total_bytes / 1024 / 1024,
+                self.tiers[StorageTier.GPU].free_bytes / 1024 / 1024,
+            )
             for tier_enum, entries in entries_by_tier.items():
                 for entry in entries:
                     self.tiers[tier_enum].add(entry)
@@ -299,12 +322,30 @@ class TieredCache:
 
         manifest = self.prefix_manifests.get(prefix_hash)
         if manifest is not None:
+            logger.info(
+                "Cache get begin worker=%s prefix=%s chunks=%s gpu=%s cpu=%s disk=%s",
+                self.worker_id,
+                prefix_hash[:8],
+                len(manifest.chunk_keys),
+                len(self.tiers[StorageTier.GPU].entries),
+                len(self.tiers[StorageTier.CPU].entries),
+                len(self.tiers[StorageTier.DISK].entries),
+            )
             chunk_locations: list[tuple[StorageTier, KVEntry]] = []
             highest_tier = StorageTier.GPU
             tier_rank = {StorageTier.GPU: 0, StorageTier.CPU: 1, StorageTier.DISK: 2}
             for chunk_key in manifest.chunk_keys:
                 tier_enum, entry = self._find_chunk(chunk_key)
                 if entry is None or tier_enum is None:
+                    logger.warning(
+                        "Cache get missing chunk worker=%s prefix=%s chunk=%s gpu=%s cpu=%s disk=%s",
+                        self.worker_id,
+                        prefix_hash[:8],
+                        chunk_key,
+                        chunk_key in self.tiers[StorageTier.GPU].entries,
+                        chunk_key in self.tiers[StorageTier.CPU].entries,
+                        chunk_key in self.tiers[StorageTier.DISK].entries,
+                    )
                     self._drop_prefix(prefix_hash, free_memory=True)
                     manifest = None
                     break
@@ -333,6 +374,14 @@ class TieredCache:
                 for chunk_key in manifest.chunk_keys:
                     entry = self.tiers[StorageTier.GPU].get(chunk_key)
                     if entry is None:
+                        logger.warning(
+                            "Cache get post-promote missing worker=%s prefix=%s chunk=%s transfer_ms=%.1f gpu_entries=%s",
+                            self.worker_id,
+                            prefix_hash[:8],
+                            chunk_key,
+                            transfer_ms,
+                            len(self.tiers[StorageTier.GPU].entries),
+                        )
                         self._drop_prefix(prefix_hash, free_memory=True)
                         gpu_chunks = []
                         break
@@ -346,6 +395,14 @@ class TieredCache:
                         tier=highest_tier.value,
                         transfer_ms=transfer_ms,
                     ))
+                    logger.info(
+                        "Cache get success worker=%s prefix=%s chunks=%s highest_tier=%s transfer_ms=%.1f",
+                        self.worker_id,
+                        prefix_hash[:8],
+                        len(gpu_chunks),
+                        highest_tier.value,
+                        transfer_ms,
+                    )
                     return aggregate
 
         # Miss
@@ -416,9 +473,8 @@ class TieredCache:
         tier_state = self.tiers[tier]
         candidates = list(tier_state.entries.values())
         victims: list[KVEntry] = []
-        freed_bytes = 0
 
-        while tier_state.free_bytes + freed_bytes < required_bytes:
+        while tier_state.free_bytes < required_bytes:
             if not candidates:
                 return []
 
@@ -431,7 +487,6 @@ class TieredCache:
             self.total_evictions += 1
             self.eviction_policy.on_evict(victim)
             victims.append(victim)
-            freed_bytes += victim.size_bytes
 
         return victims
 

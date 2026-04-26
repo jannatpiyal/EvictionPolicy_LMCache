@@ -41,6 +41,27 @@ class TestKVEntryPipeline(unittest.TestCase):
         self.assertTrue(torch.allclose(loaded_key, torch.zeros((1, 2), dtype=torch.float32)))
         self.assertTrue(torch.allclose(loaded_value, torch.ones((1, 2), dtype=torch.float32)))
 
+    def test_dynamic_cache_normalization(self):
+        try:
+            import torch
+            from transformers import DynamicCache
+        except Exception:
+            self.skipTest("torch/transformers not available")
+
+        from cache.kv_entry import KVEntry
+
+        cache = DynamicCache()
+        key = torch.zeros((1, 2, 3, 4), dtype=torch.float32)
+        value = torch.ones((1, 2, 3, 4), dtype=torch.float32)
+        cache.update(key, value, layer_idx=0)
+
+        captured = KVEntry.capture_kv(cache)
+        self.assertEqual(len(captured), 1)
+        cap_key, cap_value = captured[0]
+        self.assertTrue(torch.equal(cap_key, key))
+        self.assertTrue(torch.equal(cap_value, value))
+        self.assertEqual(KVEntry.measure_kv_size(cache), key.numel() * key.element_size() + value.numel() * value.element_size())
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -88,26 +88,72 @@ class KVEntry:
         return self.parent_prefix_hash or self.prefix_hash
 
     @staticmethod
+    def _iter_kv_layers(past_key_values):
+        """
+        Normalize different Hugging Face cache containers into an iterator of
+        `(key, value)` pairs.
+
+        Newer transformers versions may return `DynamicCache` instead of the
+        older tuple-of-tuples format. Prefer the official legacy conversion path
+        when it exists, then fall back to common cache internals.
+        """
+        if past_key_values is None:
+            return ()
+
+        if isinstance(past_key_values, tuple):
+            return past_key_values
+
+        to_legacy = getattr(past_key_values, "to_legacy_cache", None)
+        if callable(to_legacy):
+            legacy = to_legacy()
+            if isinstance(legacy, tuple):
+                return legacy
+
+        key_cache = getattr(past_key_values, "key_cache", None)
+        value_cache = getattr(past_key_values, "value_cache", None)
+        if key_cache is not None and value_cache is not None:
+            return tuple(zip(key_cache, value_cache))
+
+        layers = getattr(past_key_values, "layers", None)
+        if layers is not None:
+            normalized = []
+            for layer in layers:
+                if isinstance(layer, tuple) and len(layer) >= 2:
+                    normalized.append((layer[0], layer[1]))
+                    continue
+                layer_keys = getattr(layer, "keys", None)
+                layer_values = getattr(layer, "values", None)
+                if layer_keys is not None and layer_values is not None:
+                    normalized.append((layer_keys, layer_values))
+                    continue
+                raise TypeError(f"Unsupported cache layer type: {type(layer)}")
+            return tuple(normalized)
+
+        try:
+            normalized = []
+            for layer in past_key_values:
+                if isinstance(layer, tuple) and len(layer) >= 2:
+                    normalized.append((layer[0], layer[1]))
+                else:
+                    raise TypeError(f"Unsupported cache entry type: {type(layer)}")
+            return tuple(normalized)
+        except TypeError:
+            raise
+        except Exception as e:
+            raise TypeError(f"Unsupported cache container type: {type(past_key_values)}") from e
+
+    @staticmethod
     def _to_tuple(past_key_values, clone: bool = True) -> tuple:
         """Convert past_key_values to tuple format, whether DynamicCache or tuple."""
-        # If it's already a tuple of tuples, return as-is
-        if isinstance(past_key_values, tuple):
-            if not clone:
-                return past_key_values
-            return past_key_values
-        # DynamicCache or similar Cache object — extract tensors
         try:
-            # DynamicCache stores key_cache and value_cache as lists
-            if hasattr(past_key_values, 'key_cache') and hasattr(past_key_values, 'value_cache'):
-                return tuple(
-                    (k.clone(), v.clone()) if clone else (k, v)
-                    for k, v in zip(past_key_values.key_cache, past_key_values.value_cache)
-                )
-            # Fallback: try iterating
-            return tuple(((k.clone(), v.clone()) if clone else (k, v)) for k, v in past_key_values)
+            layers = KVEntry._iter_kv_layers(past_key_values)
+            return tuple(
+                (k.clone(), v.clone()) if clone else (k, v)
+                for k, v in layers
+            )
         except Exception as e:
             logger.warning(f"Cannot convert past_key_values of type {type(past_key_values)}: {e}")
-            return past_key_values
+            raise
 
     @staticmethod
     def _to_cache(kv_tuple, device=None):
@@ -135,14 +181,9 @@ class KVEntry:
             for chunk in past_key_values:
                 total += KVEntry.measure_kv_size(chunk)
             return total
-        if hasattr(past_key_values, 'key_cache') and hasattr(past_key_values, 'value_cache'):
-            for k, v in zip(past_key_values.key_cache, past_key_values.value_cache):
-                total += k.nelement() * k.element_size()
-                total += v.nelement() * v.element_size()
-        else:
-            for key, value in past_key_values:
-                total += key.nelement() * key.element_size()
-                total += value.nelement() * value.element_size()
+        for key, value in KVEntry._iter_kv_layers(past_key_values):
+            total += key.nelement() * key.element_size()
+            total += value.nelement() * value.element_size()
         return total
 
     @staticmethod
