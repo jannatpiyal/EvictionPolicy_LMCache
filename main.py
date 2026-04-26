@@ -53,6 +53,16 @@ def parse_args():
                    help="CPU KV cache capacity in MB per worker")
     p.add_argument("--disk-mb", type=float, default=None,
                    help="Disk KV cache capacity in MB per worker")
+    p.add_argument("--kv-chunk-size", type=int, default=None,
+                   help="Token chunk size for LMCache-style shared-store KV chunking")
+    p.add_argument("--layerwise-kv-pipeline", action="store_true",
+                   help="Enable staged layer-wise KV transfer pipelining during CPU/GPU movement")
+    p.add_argument("--pipeline-stage-layers", type=int, default=None,
+                   help="How many layers to move per pipeline stage when layer-wise transfer is enabled")
+    p.add_argument("--dynamic-offload", action="store_true",
+                   help="Enable chunk-level dynamic GPU->CPU offloading with a duplication window")
+    p.add_argument("--dynamic-offload-window-factor", type=float, default=None,
+                   help="How much GPU allocation demand to pre-duplicate to CPU before reclaiming GPU chunks")
 
     p.add_argument("--central-store", choices=["none", "filesystem", "redis"], default="none",
                    help="Enable a shared central KV store across workers")
@@ -69,6 +79,8 @@ def parse_args():
                    help="TTL in seconds for worker heartbeats and replica leases")
     p.add_argument("--pd-disaggregation", action="store_true",
                    help="Split requests into prefill and decode stages across workers when possible")
+    p.add_argument("--log-evictions", action="store_true",
+                   help="Emit detailed eviction and tier-movement logs during the run")
 
     p.add_argument("--documents", type=int, default=None,
                    help="Number of long shared documents")
@@ -84,8 +96,12 @@ def parse_args():
                    help="Traffic pattern")
     p.add_argument("--interarrival", type=float, default=None,
                    help="Mean interarrival time in seconds")
+    p.add_argument("--repeat-mode", choices=["tile", "random", "interleave"], default=None,
+                   help="How reused documents are ordered across rounds")
     p.add_argument("--question-style", choices=["document_qa", "summarization", "mixed"], default=None,
                    help="Question style for generated requests")
+    p.add_argument("--questions-per-document", type=int, default=None,
+                   help="How many unique questions each document can serve across rounds")
     p.add_argument("--max-tokens", type=int, default=100,
                    help="Max new tokens per request")
 
@@ -121,6 +137,12 @@ def build_config(args) -> FrameworkConfig:
     if args.model:
         config.model.model_path = args.model
     config.model.max_new_tokens = args.max_tokens
+    if args.kv_chunk_size is not None:
+        config.model.kv_chunk_size_tokens = args.kv_chunk_size
+    if args.layerwise_kv_pipeline:
+        config.model.enable_layerwise_kv_pipeline = True
+    if args.pipeline_stage_layers is not None:
+        config.model.layerwise_pipeline_stage_layers = args.pipeline_stage_layers
 
     if args.quick:
         config.workload.num_documents = 4
@@ -153,8 +175,12 @@ def build_config(args) -> FrameworkConfig:
         config.workload.arrival_mode = args.arrival_mode
     if args.interarrival is not None:
         config.workload.interarrival_mean_sec = args.interarrival
+    if args.repeat_mode is not None:
+        config.workload.repeat_mode = args.repeat_mode
     if args.question_style is not None:
         config.workload.question_style = args.question_style
+    if args.questions_per_document is not None:
+        config.workload.num_questions_per_document = args.questions_per_document
     if args.requests is not None:
         config.workload.num_requests = args.requests
 
@@ -180,6 +206,12 @@ def build_config(args) -> FrameworkConfig:
 
     if args.pd_disaggregation:
         config.controller.enable_pd_disaggregation = True
+    if args.log_evictions:
+        config.controller.log_evictions = True
+    if args.dynamic_offload:
+        config.controller.enable_dynamic_offload = True
+    if args.dynamic_offload_window_factor is not None:
+        config.controller.dynamic_offload_window_factor = args.dynamic_offload_window_factor
 
     config.benchmark.output_dir = args.output
 
@@ -218,6 +250,15 @@ def log_setup(config: FrameworkConfig) -> None:
     logger.info("Initial concurrency: %s", config.workload.initial_concurrency)
     logger.info("Arrival mode: %s", config.workload.arrival_mode)
     logger.info("Interarrival mean: %.3fs", config.workload.interarrival_mean_sec)
+    logger.info("Repeat mode: %s", config.workload.repeat_mode)
+    logger.info("Questions per document: %s", config.workload.num_questions_per_document)
+    logger.info("KV chunk size: %s tokens", config.model.kv_chunk_size_tokens)
+    logger.info("Layer-wise KV pipeline: %s", config.model.enable_layerwise_kv_pipeline)
+    if config.model.enable_layerwise_kv_pipeline:
+        logger.info("Pipeline stage layers: %s", config.model.layerwise_pipeline_stage_layers)
+    logger.info("Dynamic offload: %s", config.controller.enable_dynamic_offload)
+    if config.controller.enable_dynamic_offload:
+        logger.info("Dynamic offload window factor: %.2f", config.controller.dynamic_offload_window_factor)
     logger.info("Max new tokens: %s", config.workload.max_new_tokens)
     logger.info("Estimated total requests: %s", config.workload.total_requests)
     logger.info("Policies: %s", [p.value for p in config.benchmark.policies_to_evaluate])

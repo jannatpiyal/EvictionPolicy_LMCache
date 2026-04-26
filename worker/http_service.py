@@ -83,17 +83,22 @@ class _WorkerHandler(BaseHTTPRequestHandler):
                     self._write_json(404, {"ok": False, "error": "not found"})
                     return
                 from cache.kv_entry import KVEntry
-                kv_tuple = rec.kv_tuple
-                kv_bytes = KVEntry.measure_kv_size(kv_tuple)
+                kv_payload = rec.kv_tuple if rec.kv_tuple is not None else rec.kv_chunks
+                kv_bytes = KVEntry.measure_kv_size(kv_payload)
                 entry = KVEntry(
                     prefix_hash=prefix_hash,
                     prefix_tokens=[],
                     prompt_text="",
                     num_tokens=0,
-                    past_key_values=kv_tuple,
+                    past_key_values=rec.kv_tuple,
+                    kv_chunks=rec.kv_chunks,
                     size_bytes=kv_bytes,
                     worker_id=self.server.worker.worker_id,
                     tier="cpu",
+                    chunk_size_tokens=rec.chunk_size_tokens,
+                    mapped_regions=list(rec.mapped_regions),
+                    enable_layerwise_pipeline=self.server.worker.model_config.enable_layerwise_kv_pipeline,
+                    pipeline_stage_layers=self.server.worker.model_config.layerwise_pipeline_stage_layers,
                 )
                 self.server.worker.cache.put_cpu(entry)
                 if self.server.worker.metadata_registry is not None:
@@ -190,6 +195,7 @@ def main():
         metadata_worker_id=str(args.worker_id),
         metadata_worker_addr=f"http://{args.host}:{args.port}",
         lease_ttl_s=args.lease_ttl,
+        log_evictions=getattr(cfg.controller, "log_evictions", False),
     )
 
     # Start background renewal thread for true fault tolerance.

@@ -1,23 +1,33 @@
 #!/usr/bin/env bash
+#SBATCH --job-name=smoke_test_pd_http
+#SBATCH --qos=blanca-clearlab1
+#SBATCH --account=blanca-clearlab1
+#SBATCH --nodelist=bgpu-g4-u30
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --time=00:05:00
+#SBATCH --output=outputs/%j.out
+#SBATCH --error=outputs/%j.err
+
 
 set -euo pipefail
 
-ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-cd "$ROOT_DIR"
+mkdir -p outputs
 
-if ! command -v python3 >/dev/null 2>&1; then
-  echo "error: python3 is required to run the PD smoke test" >&2
-  exit 1
-fi
+echo "job id: ${SLURM_JOB_ID:-unknown}"
+echo "host: $(hostname)"
+echo "start: $(date)"
+echo "pwd: $(pwd)"
+
+source /scratch/alpine/jana7431/Intune/jana7431-gpt/bin/activate
 
 python3 - <<'PY'
-import importlib.util
 import sys
-
-if importlib.util.find_spec("torch") is None:
-    print("error: torch is required for tests.test_pd_http_smoke", file=sys.stderr)
-    sys.exit(1)
+import torch
+print("python:", sys.executable)
+print("torch:", torch.__version__)
 PY
 
 echo "Running PD HTTP smoke test..."
-python3 -m unittest tests.test_pd_http_smoke
+python3 -m unittest -v tests.test_pd_http_smoke
+echo "end: $(date)"

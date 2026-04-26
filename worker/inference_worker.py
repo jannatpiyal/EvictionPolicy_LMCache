@@ -25,6 +25,7 @@ from config import WorkerConfig, ModelConfig, StorageTier
 from cache.kv_entry import KVEntry
 from cache.tiered_cache import TieredCache
 from cache.eviction import EvictionPolicy
+from cache.decode_chunk_buffer import DecodeChunkBuffer
 from store.central_kv_store import CentralKVStore
 from metadata.registry import MetadataRegistry
 
@@ -43,6 +44,9 @@ class InferenceWorker:
         metadata_worker_id: Optional[str] = None,
         metadata_worker_addr: Optional[str] = None,
         lease_ttl_s: int = 30,
+        log_evictions: bool = False,
+        enable_dynamic_offload: bool = False,
+        dynamic_offload_window_factor: float = 1.0,
     ):
         self.worker_id = worker_config.worker_id
         self.model_config = model_config
@@ -70,6 +74,9 @@ class InferenceWorker:
             eviction_policy=eviction_policy,
             disk_dir=disk_dir,
             device=self.device,
+            log_evictions=log_evictions,
+            enable_dynamic_offload=enable_dynamic_offload,
+            dynamic_offload_window_factor=dynamic_offload_window_factor,
         )
         self.central_store = central_store
         self.metadata_registry = metadata_registry
@@ -84,6 +91,7 @@ class InferenceWorker:
         self.total_ttft_ms = 0.0
         self.total_itl_ms = 0.0
         self.total_generated_tokens = 0
+        self.total_decode_store_flushes = 0
 
         self._miss_prefill_times: dict[str, float] = {}
 
@@ -172,31 +180,69 @@ class InferenceWorker:
         if rec is None:
             return None, False
 
-        kv_tuple = rec.kv_tuple
-        kv_bytes = KVEntry.measure_kv_size(kv_tuple)
+        kv_payload = rec.kv_tuple if rec.kv_tuple is not None else rec.kv_chunks
+        kv_bytes = KVEntry.measure_kv_size(kv_payload)
         fetched = KVEntry(
             prefix_hash=prefix_hash,
             prefix_tokens=prefix_tokens,
             prompt_text=prompt_text,
             num_tokens=len(prefix_tokens),
-            past_key_values=kv_tuple,
+            past_key_values=rec.kv_tuple,
+            kv_chunks=rec.kv_chunks,
             size_bytes=kv_bytes,
             worker_id=self.worker_id,
             tier="cpu",
+            chunk_size_tokens=rec.chunk_size_tokens,
+            mapped_regions=list(rec.mapped_regions),
+            enable_layerwise_pipeline=self.model_config.enable_layerwise_kv_pipeline,
+            pipeline_stage_layers=self.model_config.layerwise_pipeline_stage_layers,
         )
         self.cache.put_cpu(fetched)
         return self.cache.get(prefix_hash), True
 
     def _store_entry_in_central_store(self, entry: KVEntry) -> bool:
-        if self.central_store is None or entry.past_key_values is None:
+        if self.central_store is None:
             return False
 
         try:
-            cpu_kv = tuple((k.to("cpu"), v.to("cpu")) for k, v in entry.past_key_values)
-            self.central_store.put(entry.prefix_hash, cpu_kv)
+            if entry.past_key_values is not None:
+                if any(k.is_cuda or v.is_cuda for k, v in entry.past_key_values):
+                    cpu_kv = KVEntry._batched_gpu_to_cpu(entry.past_key_values)
+                else:
+                    cpu_kv = entry.past_key_values
+            elif entry.kv_chunks is not None:
+                cpu_kv = KVEntry.merge_kv_chunks(entry.kv_chunks)
+            else:
+                return False
+            self.central_store.put(
+                entry.prefix_hash,
+                cpu_kv,
+                chunk_size_tokens=self.model_config.kv_chunk_size_tokens,
+            )
             return True
         except Exception as e:
-            logger.debug("Central store put failed for %s: %s", entry.prefix_hash, e)
+            logger.warning("Central store put failed for %s: %s", entry.prefix_hash, e)
+            return False
+
+    def _store_kv_snapshot(self, prefix_tokens: list[int], kv_state) -> bool:
+        if self.central_store is None or not prefix_tokens:
+            return False
+
+        prefix_hash = KVEntry.compute_prefix_hash(prefix_tokens)
+        try:
+            captured_kv = KVEntry.capture_kv(kv_state)
+            if any(k.is_cuda or v.is_cuda for k, v in captured_kv):
+                cpu_kv = KVEntry._batched_gpu_to_cpu(captured_kv)
+            else:
+                cpu_kv = captured_kv
+            self.central_store.put(
+                prefix_hash,
+                cpu_kv,
+                chunk_size_tokens=self.model_config.kv_chunk_size_tokens,
+            )
+            return True
+        except Exception as e:
+            logger.warning("Central store snapshot put failed for %s: %s", prefix_hash, e)
             return False
 
     def prepare_prefix_kv(
@@ -244,17 +290,20 @@ class InferenceWorker:
         torch.cuda.synchronize()
         prefix_ms = (time.perf_counter() - prefix_start) * 1000
 
-        cloned_kv = KVEntry.clone_kv(prefix_out.past_key_values)
-        kv_bytes = KVEntry.measure_kv_size(cloned_kv)
+        captured_kv = KVEntry.capture_kv(prefix_out.past_key_values)
+        kv_bytes = KVEntry.measure_kv_size(captured_kv)
         entry = KVEntry(
             prefix_hash=prefix_hash,
             prefix_tokens=prefix_tokens,
             prompt_text=prompt_text,
             num_tokens=len(prefix_tokens),
-            past_key_values=cloned_kv,
+            past_key_values=captured_kv,
             size_bytes=kv_bytes,
             worker_id=self.worker_id,
             tier="gpu",
+            chunk_size_tokens=self.model_config.kv_chunk_size_tokens,
+            enable_layerwise_pipeline=self.model_config.enable_layerwise_kv_pipeline,
+            pipeline_stage_layers=self.model_config.layerwise_pipeline_stage_layers,
         )
         self.cache.put(entry)
         stored_in_central = self._store_entry_in_central_store(entry)
@@ -403,6 +452,7 @@ class InferenceWorker:
             outputs.logits,
             max_new_tokens,
             prefix_len + len(new_tokens),
+            cache_base_tokens=entry.prefix_tokens + new_tokens,
         )
         torch.cuda.synchronize()
         decode_ms = (time.perf_counter() - decode_start) * 1000
@@ -435,18 +485,21 @@ class InferenceWorker:
         torch.cuda.synchronize()
         prefix_ms = (time.perf_counter() - prefix_start) * 1000
 
-        cloned_kv = KVEntry.clone_kv(prefix_out.past_key_values)
-        kv_bytes = KVEntry.measure_kv_size(cloned_kv)
+        captured_kv = KVEntry.capture_kv(prefix_out.past_key_values)
+        kv_bytes = KVEntry.measure_kv_size(captured_kv)
 
         entry = KVEntry(
             prefix_hash=prefix_hash,
             prefix_tokens=prefix_tokens,
             prompt_text=prompt_text,
             num_tokens=len(prefix_tokens),
-            past_key_values=cloned_kv,
+            past_key_values=captured_kv,
             size_bytes=kv_bytes,
             worker_id=self.worker_id,
             tier="gpu",
+            chunk_size_tokens=self.model_config.kv_chunk_size_tokens,
+            enable_layerwise_pipeline=self.model_config.enable_layerwise_kv_pipeline,
+            pipeline_stage_layers=self.model_config.layerwise_pipeline_stage_layers,
         )
         self.cache.put(entry)
 
@@ -477,6 +530,7 @@ class InferenceWorker:
             outputs.logits,
             max_new_tokens,
             len(prefix_tokens) + len(new_tokens),
+            cache_base_tokens=prefix_tokens + new_tokens,
         )
         torch.cuda.synchronize()
         decode_ms = (time.perf_counter() - decode_start) * 1000
@@ -510,6 +564,7 @@ class InferenceWorker:
             outputs.logits,
             max_new_tokens,
             len(tokens),
+            cache_base_tokens=tokens,
         )
         torch.cuda.synchronize()
         decode_ms = (time.perf_counter() - decode_start) * 1000
@@ -525,11 +580,20 @@ class InferenceWorker:
             "output_tokens_per_s": gen["output_tokens_per_s"],
         }
 
-    def _generate_with_timing(self, past_kv, logits, max_tokens: int, current_pos: int) -> dict:
+    def _generate_with_timing(
+        self,
+        past_kv,
+        logits,
+        max_tokens: int,
+        current_pos: int,
+        cache_base_tokens: Optional[list[int]] = None,
+    ) -> dict:
         generated = []
         first_token_ms = 0.0
         inter_token_ms = []
         token_starts = []
+        decode_chunk_buffer = DecodeChunkBuffer(self.model_config.kv_chunk_size_tokens)
+        decode_store_flushes = 0
 
         for i in range(max_tokens):
             step_start = time.perf_counter()
@@ -563,15 +627,27 @@ class InferenceWorker:
             logits = out.logits
             token_starts.append(step_ms)
 
+            if cache_base_tokens and self.central_store is not None and decode_chunk_buffer.should_flush(len(generated)):
+                if self._store_kv_snapshot(cache_base_tokens + generated, past_kv):
+                    decode_store_flushes += 1
+                decode_chunk_buffer.mark_flushed(len(generated))
+
         avg_itl_ms = float(sum(inter_token_ms) / len(inter_token_ms)) if inter_token_ms else 0.0
         total_decode_ms = float(sum(token_starts))
         output_tokens_per_s = (len(generated) / (total_decode_ms / 1000.0)) if total_decode_ms > 0 else 0.0
+
+        if cache_base_tokens and self.central_store is not None and generated and decode_chunk_buffer.has_pending(len(generated)):
+            if self._store_kv_snapshot(cache_base_tokens + generated, past_kv):
+                decode_store_flushes += 1
+            decode_chunk_buffer.mark_flushed(len(generated))
+        self.total_decode_store_flushes += decode_store_flushes
 
         return {
             "tokens": generated,
             "first_token_ms": first_token_ms,
             "avg_itl_ms": avg_itl_ms,
             "output_tokens_per_s": output_tokens_per_s,
+            "decode_store_flushes": decode_store_flushes,
         }
 
     def get_stats(self) -> dict:
@@ -588,6 +664,7 @@ class InferenceWorker:
             "total_itl_ms": self.total_itl_ms,
             "avg_itl_ms": self.total_itl_ms / n,
             "total_generated_tokens": self.total_generated_tokens,
+            "total_decode_store_flushes": self.total_decode_store_flushes,
             "model": self.model_config.model_path,
             "gpu_memory_gb": torch.cuda.memory_allocated() / 1024**3 if torch.cuda.is_available() else 0,
         }
@@ -601,4 +678,5 @@ class InferenceWorker:
         self.total_ttft_ms = 0.0
         self.total_itl_ms = 0.0
         self.total_generated_tokens = 0
+        self.total_decode_store_flushes = 0
         self._miss_prefill_times.clear()

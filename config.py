@@ -57,6 +57,9 @@ class ModelConfig:
 
     # Optional but useful for long-context experiments
     max_context_tokens: int = 20000
+    kv_chunk_size_tokens: int = 256
+    enable_layerwise_kv_pipeline: bool = False
+    layerwise_pipeline_stage_layers: int = 1
 
 
 @dataclass
@@ -86,6 +89,9 @@ class ControllerConfig:
     metadata_backend: str = "redis"  # "redis"
     metadata_redis_url: str = "redis://localhost:6379/0"
     worker_lease_ttl_s: int = 30
+    log_evictions: bool = False
+    enable_dynamic_offload: bool = False
+    dynamic_offload_window_factor: float = 1.0
 
 
 @dataclass
@@ -110,6 +116,7 @@ class WorkloadConfig:
     initial_concurrency: int = 40
     arrival_mode: str = "bursty"        # "bursty" or "poisson"
     interarrival_mean_sec: float = 0.2
+    repeat_mode: str = "tile"           # "tile", "random", "interleave"
 
     # Prompt composition
     include_system_instruction: bool = True

@@ -82,6 +82,9 @@ class CacheController:
                 metadata_worker_id=str(worker_config.worker_id),
                 metadata_worker_addr=f"worker-{worker_config.worker_id}",
                 lease_ttl_s=getattr(self.config.controller, "worker_lease_ttl_s", 30),
+                log_evictions=getattr(self.config.controller, "log_evictions", False),
+                enable_dynamic_offload=getattr(self.config.controller, "enable_dynamic_offload", False),
+                dynamic_offload_window_factor=getattr(self.config.controller, "dynamic_offload_window_factor", 1.0),
             )
             self.workers[worker_config.worker_id] = worker
 
